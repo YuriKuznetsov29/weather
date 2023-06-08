@@ -1,0 +1,67 @@
+@import "../../styles/variables.scss";
+@import "../../styles/loading.scss";
+
+.precipitation {
+    font-size: 16px;
+}
+
+.precipitation__wrapper {
+    display: flex;
+    justify-content: space-between;
+    max-width: 100%;
+}
+
+.precipitation__titleWrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: $subtitle-color;
+}
+
+.precipitationTitle {
+    margin-bottom: 20px;
+    font-size: 30px;
+    color: #000;
+}
+
+.precipitation__quantity_title {
+    margin-bottom: 12px;
+}
+
+.precipitation__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+    // color: rgba(8, 0, 255, 1);
+}
+
+.precipitation__probability {
+    display: flex;
+}
+
+.precipitation__quantity_drop {
+    margin: 15px 0;
+    // color: #fff;
+    // background-color: #fff;
+}
+
+.precipitation__time {
+    margin-top: 10px;
+}
+
+@media (max-width: 1200px) {
+    .precipitation {
+        font-size: 14px;
+    }
+
+    .precipitation__wrapper {
+        overflow-x: scroll;
+    }
+}
+
+@media (max-width: 450px) {
+    .precipitationTitle {
+        font-size: 20px;
+    }
+}

@@ -1,0 +1,47 @@
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -1000;
+    background-color: #ebebeb;
+}
+
+.backgroundImageWrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    // width: 100vw;
+    height: 500px;
+    // max-width: 100%;
+    // min-height: 100%;
+    z-index: -500;
+    &:before {
+        background: linear-gradient(0deg, hsla(0, 0%, 6%, 0), #111);
+        content: "";
+        height: 120px;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+}
+
+.backgroundImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 500px;
+    // min-width: 100%;
+    // min-height: 100%;
+    z-index: -500;
+    // background: url("./backgrounds/background0.jpg") 50% no-repeat;
+    // background-image: url("../../../public/images/backgrounds/background0.jpg");
+    background-size: cover;
+}
+
+.headerWrapper {
+    height: 400px;
+}

@@ -1,0 +1,79 @@
+@import "../../styles/variables.scss";
+@import "../../styles/loading.scss";
+
+.currentWeather {
+    margin: 100px 0;
+}
+
+.currentWeather__wrapper {
+    display: flex;
+    justify-content: space-between;
+    color: #000;
+    font-size: 20px;
+}
+
+.currentWeather__data_temp {
+    font-size: 150px;
+}
+
+.currentWeather__code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.currentWeather__codeValue {
+    margin: 10px 0;
+}
+
+.code_icon {
+    margin: 20px;
+    font-size: 150px;
+}
+
+.currentWeather__nowTitle {
+    margin-top: 30px;
+    font-size: 30px;
+    color: #000;
+}
+
+.currentWeather__values {
+    text-align: left;
+}
+
+.currentWeather__data_name,
+.currentWeather__data_value {
+    margin: 10px 0;
+}
+
+.currentWeather__data_name {
+    color: $subtitle-color;
+}
+
+@media (max-width: 650px) {
+    .currentWeather {
+        margin: 20px 0;
+    }
+    .currentWeather__data_temp,
+    .code_icon {
+        font-size: 100px;
+    }
+}
+
+@media (max-width: 450px) {
+    .currentWeather__wrapper {
+        font-size: 14px;
+    }
+    .currentWeather__data_temp,
+    .code_icon {
+        font-size: 70px;
+    }
+
+    .code_icon {
+        margin: 8px;
+    }
+
+    .currentWeather__nowTitle {
+        font-size: 20px;
+    }
+}
