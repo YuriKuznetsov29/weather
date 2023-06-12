@@ -55,10 +55,12 @@ export interface WeatherData {
     uvIndex: number
     precipProb: number
     visibility: number
+    lon: number
 }
 
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
+        console.log(res)
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
         let result = {
             currentTemp: res.hourly.temperature_2m[hour],
@@ -84,6 +86,7 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
             uvIndex: res.hourly.uv_index[hour],
             precipProb: res.hourly.precipitation_probability[hour],
             visibility: res.hourly.visibility[hour],
+            lon: res.longitude,
         }
         return result
     })

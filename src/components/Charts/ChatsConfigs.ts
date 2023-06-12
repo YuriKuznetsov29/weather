@@ -1,5 +1,6 @@
-import ChartDataLabels from "chartjs-plugin-datalabels"
 import { ChartOptions, ChartData } from "chart.js"
+import { ElementOptionsByType } from "chart.js"
+import { LineAnnotationOptions } from "chartjs-plugin-annotation"
 const CHART_COLORS = {
     red: "rgb(255, 99, 132)",
     orange: "rgb(255, 159, 64)",
@@ -19,11 +20,15 @@ interface LineProps {
     options: ChartOptions<"line">
     data: ChartData<"line">
 }
+interface MultitypeProps {
+    options: ChartOptions<"line" | "bar">
+    data: ChartData<"bar">
+}
+
+// const dataTest =
 
 const chartConfigs = () => {
     const tempChartConfig: LineProps = {
-        // type: "line",
-        // color: "#fff",
         data: {
             labels: [],
             datasets: [
@@ -32,7 +37,6 @@ const chartConfigs = () => {
                     fill: "start",
                     backgroundColor: CHART_COLORS.blue,
                     borderColor: CHART_COLORS.red,
-                    // color: "#fff",
                     tension: 0.1,
                     data: [],
                     datalabels: {
@@ -43,7 +47,6 @@ const chartConfigs = () => {
             ],
         },
         options: {
-            // responsive: false,
             maintainAspectRatio: false,
             scales: {
                 y: {
@@ -82,95 +85,55 @@ const chartConfigs = () => {
         },
     }
 
-    const moiChartConfig = {
-        type: "line",
-        color: "#fff",
-        data: {
-            datasets: [
-                {
-                    label: "Moisture",
-                    fill: "start",
-                    backgroundColor: CHART_COLORS.purple,
-                    borderColor: CHART_COLORS.green,
-                    color: "#fff",
-                    tension: 0.1,
-                    // hidden: true
-                    pointHitRadius: 5,
-                },
-            ],
-        },
-        options: {
-            // responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    display: false,
-                    beginAtZero: true,
-                    grid: {
-                        display: false,
-                    },
-                },
-                x: {
-                    grid: {
-                        display: false,
-                    },
-                },
-            },
-            plugins: {
-                subtitle: {
-                    display: true,
-                    font: {
-                        size: 24,
-                    },
-                },
-                legend: {
-                    display: false,
-                    labels: {
-                        font: {
-                            size: 24,
-                        },
-                    },
-                },
-            },
-        },
-    }
-
     const windChartConfig = {
-        type: "line",
-        color: "#fff",
+        // type: "line",
+        // color: "#fff",
         data: {
+            labels: [""],
             datasets: [
                 {
+                    type: "line" as const,
                     borderColor: CHART_COLORS.orange,
-                    color: "#fff",
+                    // color: "#fff",
                     tension: 0.1,
                     // hidden: true,
                     pointHitRadius: 10,
-                    // rotation: res.dailyWindDir,
+                    // rotation: [0],
                     pointStyle: [arrow],
                     borderWidth: 0,
                     datalabels: {
                         display: false,
                     },
+                    data: [0],
                 },
                 {
-                    type: "bar",
+                    type: "bar" as const,
                     label: "Wind",
-                    fill: "start",
+                    // fill: "start",
                     backgroundColor: CHART_COLORS.blue,
                     color: "#fff",
                     tension: 0.1,
                     pointHitRadius: 10,
                     datalabels: {
-                        anchor: "end",
+                        // anchor: "end",
                     },
+                    data: [0],
                 },
             ],
         },
         options: {
-            // responsive: false,
             maintainAspectRatio: false,
             showAllTooltips: true,
+            elements: {
+                point: {
+                    rotation: [0],
+                },
+            },
+            layout: {
+                padding: {
+                    top: 35,
+                },
+            },
             scales: {
                 y: {
                     display: false,
@@ -188,7 +151,6 @@ const chartConfigs = () => {
             plugins: {
                 subtitle: {
                     display: true,
-                    // text: day,
                     font: {
                         size: 24,
                     },
@@ -196,7 +158,6 @@ const chartConfigs = () => {
                 legend: {
                     display: false,
                     labels: {
-                        // This more specific font property overrides the global property
                         font: {
                             size: 24,
                         },
@@ -209,64 +170,8 @@ const chartConfigs = () => {
         },
     }
 
-    const pressureChartConfig = {
-        type: "line",
-        color: "#fff",
-        data: {
-            // labels: res.dailyTime,
-            datasets: [
-                {
-                    label: "Pressure",
-                    // data: res.dailyPressure,
-                    fill: "start",
-                    backgroundColor: CHART_COLORS.green,
-                    borderColor: CHART_COLORS.orange,
-                    color: "#fff",
-                    tension: 0.1,
-                    // hidden: true
-                    pointHitRadius: 5,
-                },
-            ],
-        },
-        options: {
-            // responsive: false,
-            maintainAspectRatio: false,
-            scales: {
-                y: {
-                    display: false,
-                    beginAtZero: true,
-                    grid: {
-                        display: false,
-                    },
-                },
-                x: {
-                    grid: {
-                        display: false,
-                    },
-                },
-            },
-            plugins: {
-                subtitle: {
-                    display: true,
-                    // text: day,
-                    font: {
-                        size: 24,
-                    },
-                },
-                legend: {
-                    labels: {
-                        // This more specific font property overrides the global property
-                        font: {
-                            size: 24,
-                        },
-                    },
-                },
-            },
-        },
-    }
-
-    const annotation1 = {
-        type: "line",
+    const horizontConfig: LineAnnotationOptions = {
+        // type: "line",
         borderColor: "black",
         borderWidth: 0,
         label: {
@@ -274,18 +179,21 @@ const chartConfigs = () => {
             color: "#000",
             content: "Горизонт",
             display: true,
+            // font: {
+            //     weight: 400,
+            // },
         },
         yScaleID: "y",
-        yMax: 0.1,
-        yMin: 0.1,
+        yMax: 0.07,
+        yMin: 0.07,
 
         xScaleID: "x",
-        xMax: 90,
-        xMin: 90,
+        xMax: 95,
+        xMin: 95,
     }
 
     const sunriseConfig = {
-        type: "line",
+        // type: "line",
         borderColor: "black",
         borderWidth: 0,
         label: {
@@ -293,6 +201,10 @@ const chartConfigs = () => {
             color: "#000",
             content: "6:00",
             display: true,
+
+            // font: {
+            //     weight: 400,
+            // },
         },
         yScaleID: "y",
         yMax: -0.9,
@@ -312,6 +224,9 @@ const chartConfigs = () => {
             color: "#000",
             content: "Рассвет",
             display: true,
+            font: {
+                weight: 400,
+            },
         },
         yScaleID: "y",
         yMax: -0.8,
@@ -331,6 +246,9 @@ const chartConfigs = () => {
             color: "#000",
             content: "Истинный полдень",
             display: true,
+            font: {
+                weight: 400,
+            },
         },
         yScaleID: "y",
         yMax: -0.8,
@@ -340,6 +258,7 @@ const chartConfigs = () => {
         xMax: 48,
         xMin: 48,
     }
+
     const trueNoonConfig = {
         type: "line",
         borderColor: "black",
@@ -349,6 +268,9 @@ const chartConfigs = () => {
             color: "#000",
             content: "12:00",
             display: true,
+            font: {
+                weight: 400,
+            },
         },
         yScaleID: "y",
         yMax: -0.9,
@@ -368,6 +290,9 @@ const chartConfigs = () => {
             color: "#000",
             content: "18:00",
             display: true,
+            font: {
+                weight: 400,
+            },
         },
 
         yScaleID: "y",
@@ -388,6 +313,9 @@ const chartConfigs = () => {
             color: "#000",
             content: "Закат",
             display: true,
+            font: {
+                weight: 400,
+            },
         },
 
         yScaleID: "y",
@@ -401,65 +329,70 @@ const chartConfigs = () => {
 
     const sunChartConfig = {
         type: "line",
-        // color: '#fff',
+
         data: {
-            // labels: sunCalk()[0],
+            labels: [""],
             datasets: [
                 {
+                    type: "line" as const,
                     label: "Sunrise / Sunset",
-                    // data: sunCalk()[1],
                     fill: false,
                     backgroundColor: CHART_COLORS.yellow,
                     borderColor: CHART_COLORS.orange,
+                    borderWidth: 2,
                     color: "#fff",
                     tension: 0.1,
-                    // hidden: true
                     pointStyle: false,
                 },
                 {
+                    type: "line" as const,
                     label: "Sunrise / Sunset",
-                    // data: sunCalk()[1].slice(0, 25), // 6:30 18:30
                     fill: {
                         target: "origin",
-                        above: CHART_COLORS.yellow, // Area will be red above the origin
-                        below: CHART_COLORS.purple, // And blue below the origin
+                        above: CHART_COLORS.yellow,
+                        below: CHART_COLORS.purple,
                     },
                     backgroundColor: CHART_COLORS.yellow,
                     borderColor: CHART_COLORS.orange,
+                    borderWidth: 2,
+                    pointHitRadius: 0,
                     color: "#fff",
                     tension: 0.1,
-                    // hidden: true
-                    // pointStyle: false,
+                    pointRadius: 0,
                 },
                 {
+                    type: "line" as const,
                     label: "Sunrise / Sunset",
                     data: [],
                     fill: false,
                     backgroundColor: CHART_COLORS.yellow,
                     borderColor: CHART_COLORS.grey,
+                    borderWidth: 2,
                     color: "#fff",
                     tension: 0.1,
-                    // hidden: true
                     pointStyle: false,
                 },
                 {
+                    type: "line" as const,
                     label: "Sunrise / Sunset",
-                    // data: [],
                     fill: false,
                     backgroundColor: "rgba(0, 0, 0, 0.0)",
                     borderColor: "rgba(0, 0, 0, 0.0)",
                     color: "#fff",
                     tension: 0.1,
-                    borderWidth: 3,
-                    // hidden: true
+                    borderWidth: 2,
                     pointStyle: [],
                     pointHitRadius: 0,
                 },
             ],
         },
         options: {
-            // responsive: false,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 35,
+                },
+            },
             interaction: {
                 mode: "index",
                 intersect: false,
@@ -496,7 +429,6 @@ const chartConfigs = () => {
             plugins: {
                 subtitle: {
                     display: true,
-                    // text: day,
                     font: {
                         size: 24,
                     },
@@ -505,7 +437,6 @@ const chartConfigs = () => {
                     display: false,
 
                     labels: {
-                        // This more specific font property overrides the global property
                         font: {
                             size: 24,
                         },
@@ -519,7 +450,7 @@ const chartConfigs = () => {
                 },
                 annotation: {
                     annotations: {
-                        annotation1,
+                        horizontConfig,
                         sunriseConfig,
                         annotation3,
                         sunsetConfig,
@@ -534,9 +465,7 @@ const chartConfigs = () => {
 
     return {
         tempChartConfig,
-        moiChartConfig,
         windChartConfig,
-        pressureChartConfig,
         sunChartConfig,
         sunriseConfig,
         sunsetConfig,
