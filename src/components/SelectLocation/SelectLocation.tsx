@@ -65,6 +65,7 @@ const SelectLocation = () => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
             setActiveSearch(styles.active)
             setActiveStyleSearch(styles.search__active)
+            console.log(activeSearch)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
         } 
@@ -115,23 +116,30 @@ const SelectLocation = () => {
     return (
         <form className={styles.search} id="select" onClick={((event) => startSearchLocation(event)) }>
             <Container>
-                <div className={styles.search__wrapper} id="closeSearch">
-                    <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} size={24}  weight="thin" />
-                    <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
+                    <div className={styles.search__wrapper} id="closeSearch">
+
+                            <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} size={24}  weight="thin" />
+                            <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
+
+                        
                         <div className={styles.search__resultsWrapper}>
+
                             <div className={styles.search__wrapper}>
-                                <div className={`${styles.search__btnCurrentLocation}  ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
+                                <div className={`${styles.search__btnCurrentLocation} ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
                                     <NavigationArrow className={styles.currentLocation__icon} size={24} weight="thin" data-type="getLocation"/>
                                     Использовать текущее местоположение
                                 </div>
                             </div>
+
                             <div className={styles.search__wrapper}>
                                 <div className={styles.search__results} data-type="results">
                                     {results}
                                 </div>
                             </div>
+                        </div>
+
                     </div>
-                </div>
+
         </Container>
         </form>
         

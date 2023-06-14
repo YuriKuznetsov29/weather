@@ -20,12 +20,6 @@ interface LineProps {
     options: ChartOptions<"line">
     data: ChartData<"line">
 }
-interface MultitypeProps {
-    options: ChartOptions<"line" | "bar">
-    data: ChartData<"bar">
-}
-
-// const dataTest =
 
 const chartConfigs = () => {
     const tempChartConfig: LineProps = {
@@ -202,9 +196,9 @@ const chartConfigs = () => {
             content: "6:00",
             display: true,
 
-            // font: {
-            //     weight: 400,
-            // },
+            font: {
+                weight: 400,
+            },
         },
         yScaleID: "y",
         yMax: -0.9,
@@ -381,7 +375,7 @@ const chartConfigs = () => {
                     color: "#fff",
                     tension: 0.1,
                     borderWidth: 2,
-                    pointStyle: [],
+                    pointStyle: [0] as number[] | HTMLImageElement[],
                     pointHitRadius: 0,
                 },
             ],
@@ -470,6 +464,7 @@ const chartConfigs = () => {
         sunriseConfig,
         sunsetConfig,
         trueNoonConfig,
+        horizontConfig
     }
 }
 

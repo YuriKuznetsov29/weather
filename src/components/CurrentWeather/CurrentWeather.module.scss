@@ -2,10 +2,11 @@
 @import "../../styles/loading.scss";
 
 .currentWeather {
-    margin: 100px 0;
+    margin: 50px 0;
 }
 
 .currentWeather__wrapper {
+    
     display: flex;
     justify-content: space-between;
     color: #000;
@@ -41,8 +42,8 @@
     text-align: left;
 }
 
-.currentWeather__data_name,
-.currentWeather__data_value {
+
+.currentWeather__data_name, .currentWeather__data_value  {
     margin: 10px 0;
 }
 
@@ -50,22 +51,21 @@
     color: $subtitle-color;
 }
 
-@media (max-width: 650px) {
+@media(max-width: 650px) {
     .currentWeather {
         margin: 20px 0;
     }
-    .currentWeather__data_temp,
-    .code_icon {
+    .currentWeather__data_temp, .code_icon {
         font-size: 100px;
     }
+
 }
 
-@media (max-width: 450px) {
+@media(max-width: 450px) {
     .currentWeather__wrapper {
         font-size: 14px;
     }
-    .currentWeather__data_temp,
-    .code_icon {
+    .currentWeather__data_temp, .code_icon {
         font-size: 70px;
     }
 
