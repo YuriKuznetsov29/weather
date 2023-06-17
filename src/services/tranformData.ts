@@ -31,7 +31,7 @@ export function getTimeWithUtcOffset(offset: number) {
     return { time, modTime, month, day, hour }
 }
 
-export interface WeatherData {
+export interface CurentWether {
     currentTemp: number
     currentMoi: number
     currentPrecipitation: number
@@ -58,37 +58,42 @@ export interface WeatherData {
     lon: number
 }
 
+export interface WeatherData {
+    currentWether: WeatherData
+}
+
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
         console.log(res)
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
-        let result = {
-            currentTemp: res.hourly.temperature_2m[hour],
-            currentMoi: res.hourly.relativehumidity_2m[hour],
-            currentPrecipitation: res.hourly.precipitation[hour],
-            wind: res.hourly.windspeed_10m[hour],
-            sunrise: res.daily.sunrise[0].slice(-5),
-            sunset: res.daily.sunset[0].slice(-5),
-            weathercode: res.hourly.weathercode[hour],
-            dailyTemp: res.hourly.temperature_2m.slice(0, 24),
-            dailyMoi: res.hourly.relativehumidity_2m.slice(0, 24),
-            dailyPrecipitation: res.hourly.precipitation.slice(0, 24),
-            dailyPrecipitationProb: res.hourly.precipitation_probability.slice(0, 24),
-            dailyWind: res.hourly.windspeed_10m.slice(0, 24).map((el: number) => Math.round(el)),
-            dailyWindDir: res.hourly.winddirection_10m.slice(0, 24),
-            dailyPressure: res.hourly.pressure_msl.slice(0, 24).map((el: number) => Math.round(el)),
-            dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
-            utcOffset: res.utc_offset_seconds,
-            currentTempRound: Math.round(res.hourly.temperature_2m[hour]),
-            realFeel: Math.round(res.hourly.apparent_temperature[hour]),
-            dewpoint: res.hourly.dewpoint_2m[hour],
-            pressure: res.hourly.pressure_msl[hour],
-            uvIndex: res.hourly.uv_index[hour],
-            precipProb: res.hourly.precipitation_probability[hour],
-            visibility: res.hourly.visibility[hour],
-            lon: res.longitude,
+        return {
+            currentWether: {
+                currentTemp: res.hourly.temperature_2m[hour],
+                currentMoi: res.hourly.relativehumidity_2m[hour],
+                currentPrecipitation: res.hourly.precipitation[hour],
+                wind: res.hourly.windspeed_10m[hour],
+                sunrise: res.daily.sunrise[0].slice(-5),
+                sunset: res.daily.sunset[0].slice(-5),
+                weathercode: res.hourly.weathercode[hour],
+                dailyTemp: res.hourly.temperature_2m.slice(0, 24),
+                dailyMoi: res.hourly.relativehumidity_2m.slice(0, 24),
+                dailyPrecipitation: res.hourly.precipitation.slice(0, 24),
+                dailyPrecipitationProb: res.hourly.precipitation_probability.slice(0, 24),
+                dailyWind: res.hourly.windspeed_10m.slice(0, 24).map((el: number) => Math.round(el)),
+                dailyWindDir: res.hourly.winddirection_10m.slice(0, 24),
+                dailyPressure: res.hourly.pressure_msl.slice(0, 24).map((el: number) => Math.round(el)),
+                dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
+                utcOffset: res.utc_offset_seconds,
+                currentTempRound: Math.round(res.hourly.temperature_2m[hour]),
+                realFeel: Math.round(res.hourly.apparent_temperature[hour]),
+                dewpoint: res.hourly.dewpoint_2m[hour],
+                pressure: res.hourly.pressure_msl[hour],
+                uvIndex: res.hourly.uv_index[hour],
+                precipProb: res.hourly.precipitation_probability[hour],
+                visibility: res.hourly.visibility[hour],
+                lon: res.longitude,
+            }
         }
-        return result
     })
 }
 

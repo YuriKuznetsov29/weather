@@ -23,6 +23,11 @@ code {
     padding: 0;
 }
 
+a {
+    text-decoration: none;
+    color: #000;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-size: 12px;
