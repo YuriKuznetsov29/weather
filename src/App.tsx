@@ -6,8 +6,8 @@ import styles from './App.module.scss';
 function App() {
   return (
     <>
-      <div className={styles.background}></div>
-      <Header />
+      {/* <div className={styles.background}></div> */}
+      {/* <Header /> */}
       <Main />
     </>
   );
