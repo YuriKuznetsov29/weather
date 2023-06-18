@@ -1,5 +1,6 @@
 import Container from 'components/Container/Container'
 import styles from './CurrentWeather.module.scss'
+import { getTimeWithUtcOffset, weatherDescription } from 'services/tranformData'
 
 interface TomorrowProps {
     sunrise: string
@@ -13,15 +14,19 @@ interface TomorrowProps {
     lon: number
 }
 
-const Tomorrow = ({sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel}: TomorrowProps) => {
+const Tomorrow = ({sunrise, sunset, weathercode, utcOffset }: TomorrowProps) => {
+
+    const days = ["понедельник", "вторник", "среда", "четверг", "пятница", "суббота", "воскресенье"]
+    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
+    const  {tomorrowDay, tomorrowMonth} = getTimeWithUtcOffset(utcOffset)
+
     return(
         <div className={styles.currentWeather} id="currentWeather">
             <Container>
                 <div className={styles.currentWeather__wrapper}>
                     <div className={styles.currentWeather__data}>
-                        <div className={styles.currentWeather__data_time}>{day} {months[month]}, {time}</div>
-                        <div className={styles.currentWeather__data_temp}>{currentTemp}°C</div>
-                        <div className={styles.currentWeather__data_Feeltemp}>Ощущается как {realFeel}°C</div>
+                        <div className={styles.currentWeather__data_time}>{tomorrowDay} {months[tomorrowMonth]}</div>
+                        
                     </div>
                     <div className={styles.currentWeather__code}>
                         <i className={`wi ${image} ${styles.code_icon}`}></i>
@@ -31,15 +36,15 @@ const Tomorrow = ({sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint
             </Container>
             <Container>
                 <>
-                    <div className={styles.currentWeather__nowTitle}>Сейчас</div>
+                    <div className={styles.currentWeather__nowTitle}>Подробности</div>
                     <div className={styles.currentWeather__wrapper}>
                         <div className={styles.currentWeather__data}>
                             <div className={styles.currentWeather__data_name}>Влажность</div>
-                            <div className={styles.currentWeather__data_name}>Точка росы</div>
-                            <div className={styles.currentWeather__data_name}>Давление</div>
+                            {/* <div className={styles.currentWeather__data_name}>Точка росы</div>
+                            <div className={styles.currentWeather__data_name}>Давление</div> */}
                             <div className={styles.currentWeather__data_name}>УФ-индекс</div>
-                            <div className={styles.currentWeather__data_name}>Вероятность осадков</div>
-                            <div className={styles.currentWeather__data_name}>Видимость</div>
+                            <div className={styles.currentWeather__data_name}>Восход/Заход</div>
+                            {/* <div className={styles.currentWeather__data_name}>Видимость</div> */}
                             
                         </div>
                         <div className={styles.currentWeather__values}>

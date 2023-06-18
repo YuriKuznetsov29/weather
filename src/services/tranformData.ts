@@ -28,7 +28,11 @@ export function getTimeWithUtcOffset(offset: number) {
     const hours = time.slice(0, 2)
     const minutes = time.slice(3, 5)
     const modTime = +hours + (+minutes * (10 / 6)) / 100
-    return { time, modTime, month, day, hour }
+    utcDate.setSeconds(offset + 86400)
+    const tomorrowMonth = utcDate.getMonth()
+    const tomorrowDay = utcDate.getDate()
+
+    return { time, modTime, month, day, hour, tomorrowDay, tomorrowMonth }
 }
 
 export interface CurentWeather {
