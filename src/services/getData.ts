@@ -13,7 +13,7 @@ export function getCoordinateLocation(city: string) {
 export function getWetherDaily(lat: string | number, lon: string | number, timezone: string, day: string = getCurrentDate()) {
     return transformWeatherData(
         useHttp(
-            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,precipitation,visibility,precipitation_probability,apparent_temperature,weathercode,pressure_msl,surface_pressure,windspeed_10m,winddirection_10m,uv_index&daily=weathercode,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=${timezone}&start_date=${day}&end_date=${getLastDate()}`
+            `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&hourly=temperature_2m,relativehumidity_2m,dewpoint_2m,precipitation,visibility,precipitation_probability,apparent_temperature,weathercode,pressure_msl,surface_pressure,windspeed_10m,winddirection_10m,uv_index&daily=weathercode,uv_index_max,temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,precipitation_sum,windspeed_10m_max,windgusts_10m_max,winddirection_10m_dominant&timezone=${timezone}&start_date=${day}&end_date=${getLastDate()}`
         )
     )
 }

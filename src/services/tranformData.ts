@@ -31,8 +31,9 @@ export function getTimeWithUtcOffset(offset: number) {
     utcDate.setSeconds(offset + 86400)
     const tomorrowMonth = utcDate.getMonth()
     const tomorrowDay = utcDate.getDate()
+    const weekDay = utcDate.getDay()
 
-    return { time, modTime, month, day, hour, tomorrowDay, tomorrowMonth }
+    return { time, modTime, month, day, hour, tomorrowDay, tomorrowMonth, weekDay }
 }
 
 export interface CurentWeather {
@@ -62,7 +63,7 @@ export interface CurentWeather {
     lon: number
 }
 
-interface TomorrowWeather {
+export interface TomorrowWeather {
     sunrise: string
     sunset: string
     weathercode: number
@@ -72,10 +73,14 @@ interface TomorrowWeather {
     dailyTime: string[]
     utcOffset: number
     lon: number
+    dailyMoi: number
+    uvIndex: number
+    dailyPrecipitation: number[]
+    dailyPrecipitationProb: number[]
 }
 
 export interface WeatherData {
-    currentWether: CurentWeather
+    currentWeather: CurentWeather
     tomorrowWeather: TomorrowWeather
 }
 
@@ -84,7 +89,7 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
         console.log(res)
         return {
-            currentWether: {
+            currentWeather: {
                 currentTemp: res.hourly.temperature_2m[hour],
                 currentMoi: res.hourly.relativehumidity_2m[hour],
                 currentPrecipitation: res.hourly.precipitation[hour],
@@ -110,7 +115,7 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 visibility: res.hourly.visibility[hour],
                 lon: res.longitude,
             },
-            tomorrowWether: {
+            tomorrowWeather: {
                 sunrise: res.daily.sunrise[1].slice(-5),
                 sunset: res.daily.sunset[1].slice(-5),
                 weathercode: res.daily.weathercode[1],
@@ -120,6 +125,10 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
                 utcOffset: res.utc_offset_seconds,
                 lon: res.longitude,
+                dailyMoi: Math.round(res.hourly.relativehumidity_2m.slice(24, 48).reduce((acc: number, curr: number) => curr + acc)/24),
+                uvIndex: res.daily.uv_index_max[1],
+                dailyPrecipitation: res.hourly.precipitation.slice(24, 48),
+                dailyPrecipitationProb: res.hourly.precipitation_probability.slice(24, 48),
             },
         }
     })

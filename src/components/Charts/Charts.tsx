@@ -4,7 +4,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import chartConfigs from "./ChatsConfigs";
 import { useAppSelector } from "app/hooks";
-import { currentLocation, currentWether } from "app/selectors";
+import { currentWether, selectDay } from "app/selectors";
 import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
 import { getTimeWithUtcOffset } from "services/tranformData";
@@ -89,6 +89,7 @@ const Charts = () => {
     const sunRef = useRef<ChartJS<"line", number[], string>>(null)
 
     const wether = useAppSelector(currentWether)
+    const selectedDay = useAppSelector(selectDay)
 
     useEffect(() => {
         adaptiveCharts()
@@ -124,7 +125,7 @@ const Charts = () => {
 
     const updateCharts = () => {
         if (wether) {
-            const {dailyTime, dailyTemp, dailyWind, dailyWindDir, utcOffset, sunrise, sunset, lon} = wether.currentWether
+            const {dailyTime, dailyTemp, dailyWind, dailyWindDir, utcOffset, sunrise, sunset, lon} = wether.currentWeather
             // temperature
             tempChartConfig.data.labels = dailyTime
             tempChartConfig.data.datasets[0].data = dailyTemp

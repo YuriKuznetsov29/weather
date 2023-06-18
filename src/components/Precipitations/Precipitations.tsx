@@ -1,5 +1,5 @@
 import { useAppSelector } from 'app/hooks'
-import { currentWether } from 'app/selectors'
+import { currentWether, selectDay } from 'app/selectors'
 
 import styles from './Precipitations.module.scss'
 import Container from 'components/Container/Container'
@@ -9,7 +9,8 @@ interface PrecipitationsPercent {
 }
 
 const Precipitations = () => {
-    const wether = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWether)
+    const selectedDay = useAppSelector(selectDay)
 
     function calckPrecipitationInHour(quantity: number) {
         const precipPercent: PrecipitationsPercent = {'0.1': 0, '0.9': 20, '1': 30, '2': 55, '3': 65, '4': 80, '5': 90, '6': 100}
@@ -18,9 +19,9 @@ const Precipitations = () => {
     }
 
     const renderPrecipitations = () => {
-        if (wether) {
+        if (weather) {
 
-            const {dailyPrecipitation, dailyPrecipitationProb, dailyTime} = wether.currentWether
+            const {dailyPrecipitation, dailyPrecipitationProb, dailyTime} = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
 
             const itemsArr = dailyPrecipitation.map((pecipitation, i) => {
                 const percent = calckPrecipitationInHour(pecipitation)
