@@ -47,7 +47,7 @@ const Header = ({children}: HeaderProps) => {
             <Container>
                 <div className={styles.header__inner}>
                     <div className={styles.location__city} data-type="city">{city}</div>
-                    <List size={24} color="#fff" onClick={() => stateChange()} />
+                    <List className={styles.burger} onClick={() => stateChange()} />
                 </div>
             </Container>
         </header>

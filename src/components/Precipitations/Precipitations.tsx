@@ -20,12 +20,14 @@ const Precipitations = () => {
     const renderPrecipitations = () => {
         if (wether) {
 
-            const itemsArr = wether.dailyPrecipitation.map((pecipitation, i) => {
+            const {dailyPrecipitation, dailyPrecipitationProb, dailyTime} = wether.currentWether
+
+            const itemsArr = dailyPrecipitation.map((pecipitation, i) => {
                 const percent = calckPrecipitationInHour(pecipitation)
     
                 return (
                     <div key={i} className={styles.precipitation__item}>
-                        <div className={styles.precipitation__probability}>{wether.dailyPrecipitationProb[i]}%</div>
+                        <div className={styles.precipitation__probability}>{dailyPrecipitationProb[i]}%</div>
 
                         <svg className={styles.precipitation__quantity_drop} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="40" height="40">
                             <linearGradient id={`inside-gradient${i}`}  x1="100%" y1="100%">
@@ -41,7 +43,7 @@ const Precipitations = () => {
                         </svg>
 
                         <div className={styles.precipitation__quantity_value}>{pecipitation}</div>
-                        <div className={styles.precipitation__time}>{wether.dailyTime[i]}</div>
+                        <div className={styles.precipitation__time}>{dailyTime[i]}</div>
                     </div>
                 )
             })

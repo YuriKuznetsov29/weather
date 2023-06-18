@@ -48,7 +48,7 @@ const [data, setData] = useState<WeatherData | null>(null)
 
     const renderLocation = () => {
         if (data) {
-            const {sunrise, sunset, weathercode, utcOffset, currentTempRound, realFeel} = data
+            const {sunrise, sunset, weathercode, utcOffset, currentTempRound, realFeel} = data.currentWether
             const image = getWetherImage(sunrise, sunset, weathercode, utcOffset)
             return (
                 <div 

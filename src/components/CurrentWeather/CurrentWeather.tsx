@@ -12,7 +12,7 @@ const CurrentWeather = () => {
     const renderWether = () => {
 
         if (wether) {
-            const {sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel} = wether
+            const {sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel} = wether.currentWether
 
             const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
             const {time, month, day} = getTimeWithUtcOffset(utcOffset)

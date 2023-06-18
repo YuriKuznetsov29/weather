@@ -33,3 +33,11 @@
     color: #fff;
     font-size: 18px;
 }
+
+.burger {
+    font-size: 28px;
+    color: #fff;
+    &:hover {
+        cursor: pointer;
+    }
+}

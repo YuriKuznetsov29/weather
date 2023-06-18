@@ -31,7 +31,7 @@ export function getTimeWithUtcOffset(offset: number) {
     return { time, modTime, month, day, hour }
 }
 
-export interface CurentWether {
+export interface CurentWeather {
     currentTemp: number
     currentMoi: number
     currentPrecipitation: number
@@ -58,14 +58,27 @@ export interface CurentWether {
     lon: number
 }
 
+interface TomorrowWeather {
+    sunrise: string
+    sunset: string
+    weathercode: number
+    dailyTemp: number[]
+    tempMax: number
+    tempMin: number
+    dailyTime: string[]
+    utcOffset: number
+    lon: number
+}
+
 export interface WeatherData {
-    currentWether: WeatherData
+    currentWether: CurentWeather
+    tomorrowWeather: TomorrowWeather
 }
 
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
-        console.log(res)
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
+        console.log(res)
         return {
             currentWether: {
                 currentTemp: res.hourly.temperature_2m[hour],
@@ -92,7 +105,18 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 precipProb: res.hourly.precipitation_probability[hour],
                 visibility: res.hourly.visibility[hour],
                 lon: res.longitude,
-            }
+            },
+            tomorrowWether: {
+                sunrise: res.daily.sunrise[1].slice(-5),
+                sunset: res.daily.sunset[1].slice(-5),
+                weathercode: res.daily.weathercode[1],
+                dailyTemp: res.hourly.temperature_2m.slice(24, 48),
+                tempMax: res.daily.temperature_2m_max[1],
+                tempMin: res.daily.temperature_2m_min[1],
+                dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
+                utcOffset: res.utc_offset_seconds,
+                lon: res.longitude,
+            },
         }
     })
 }

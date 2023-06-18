@@ -124,7 +124,7 @@ const Charts = () => {
 
     const updateCharts = () => {
         if (wether) {
-            const {dailyTime, dailyTemp, dailyWind, dailyWindDir, utcOffset, sunrise, sunset, lon} = wether
+            const {dailyTime, dailyTemp, dailyWind, dailyWindDir, utcOffset, sunrise, sunset, lon} = wether.currentWether
             // temperature
             tempChartConfig.data.labels = dailyTime
             tempChartConfig.data.datasets[0].data = dailyTemp
@@ -152,7 +152,6 @@ const Charts = () => {
                 chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
                 windChart.update('active');
-                console.log(chartDatasets[0].data, chartDatasets[1].data)
 
                 // windChart.update();
             }

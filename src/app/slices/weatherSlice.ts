@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getWetherDaily } from "services/getData"
 
-import { WeatherData, getCurrentDate } from "services/tranformData"
+import { WeatherData } from "services/tranformData"
 
 export const loadWeather = createAsyncThunk<WeatherData, RequestWetherData, { state: { weather: WeatherSlice } }>(
     "weather/load-weather",
@@ -31,11 +31,11 @@ type WeatherSlice = {
     status: "idle" | "loading" | "finished" | "error"
 }
 
-type Day = 'today' | 'tomorrow'
+type Day = "today" | "tomorrow"
 
 const initialState: WeatherSlice = {
     currentWeatherData: null,
-    day: 'today',
+    day: "today",
     status: "idle",
 }
 
@@ -44,6 +44,9 @@ const weatherSlice = createSlice({
     initialState,
     reducers: {
         clearDetails: () => initialState,
+        setDay: (state, action) => {
+            state.day = action.payload
+        },
     },
     extraReducers: (builder) => {
         builder
@@ -60,5 +63,5 @@ const weatherSlice = createSlice({
     },
 })
 
-export const { clearDetails } = weatherSlice.actions
+export const { clearDetails, setDay } = weatherSlice.actions
 export const weatherReducer = weatherSlice.reducer
