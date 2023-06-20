@@ -21,8 +21,8 @@ export function getTimeWithUtcOffset(offset: number) {
     )
     utcDate.setSeconds(offset)
     const time = utcDate.toLocaleTimeString().slice(0, -3)
-    const months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"]
     const month = utcDate.getMonth()
+    const week = utcDate.getDay()
     const day = utcDate.getDate()
     const hour = utcDate.getHours()
     const hours = time.slice(0, 2)
@@ -33,7 +33,7 @@ export function getTimeWithUtcOffset(offset: number) {
     const tomorrowDay = utcDate.getDate()
     const weekDay = utcDate.getDay()
 
-    return { time, modTime, month, day, hour, tomorrowDay, tomorrowMonth, weekDay }
+    return { time, modTime, month, week, day, hour, tomorrowDay, tomorrowMonth, weekDay }
 }
 
 export interface CurentWeather {
@@ -68,6 +68,8 @@ export interface TomorrowWeather {
     sunset: string
     weathercode: number
     dailyTemp: number[]
+    dailyWind: number[]
+    dailyWindDir: number[]
     tempMax: number
     tempMin: number
     dailyTime: string[]
@@ -79,15 +81,30 @@ export interface TomorrowWeather {
     dailyPrecipitationProb: number[]
 }
 
+export interface TenDaysWeather {
+    sunrise: string[]
+    sunset: string[]
+    weathercode: number[]
+    dailyTemp: number[]
+    dailyWind: number[]
+    tempMax: number[]
+    tempMin: number[]
+    dailyTime: string[]
+    utcOffset: number
+    dailyMoi: number[]
+    dailyWindDir: number[]
+}
+
 export interface WeatherData {
     currentWeather: CurentWeather
     tomorrowWeather: TomorrowWeather
+    tenDaysWeather: TenDaysWeather
 }
 
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
-        console.log(res)
+        // console.log(res)
         return {
             currentWeather: {
                 currentTemp: res.hourly.temperature_2m[hour],
@@ -120,15 +137,29 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 sunset: res.daily.sunset[1].slice(-5),
                 weathercode: res.daily.weathercode[1],
                 dailyTemp: res.hourly.temperature_2m.slice(24, 48),
+                dailyWind: res.hourly.windspeed_10m.slice(24, 48).map((el: number) => Math.round(el)),
+                dailyWindDir: res.hourly.winddirection_10m.slice(24, 48),
                 tempMax: res.daily.temperature_2m_max[1],
                 tempMin: res.daily.temperature_2m_min[1],
                 dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
                 utcOffset: res.utc_offset_seconds,
                 lon: res.longitude,
-                dailyMoi: Math.round(res.hourly.relativehumidity_2m.slice(24, 48).reduce((acc: number, curr: number) => curr + acc)/24),
+                dailyMoi: Math.round(res.hourly.relativehumidity_2m.slice(24, 48).reduce((acc: number, curr: number) => curr + acc) / 24),
                 uvIndex: res.daily.uv_index_max[1],
                 dailyPrecipitation: res.hourly.precipitation.slice(24, 48),
                 dailyPrecipitationProb: res.hourly.precipitation_probability.slice(24, 48),
+            },
+            tenDaysWeather: {
+                sunrise: res.daily.sunrise.map((el: string) => el.slice(-5)),
+                sunset: res.daily.sunset.map((el: string) => el.slice(-5)),
+                weathercode: res.daily.weathercode,
+                dailyTemp: res.hourly.temperature_2m,
+                dailyWind: res.hourly.windspeed_10m,
+                dailyWindDir: res.hourly.winddirection_10m,
+                dailyMoi: res.hourly.relativehumidity_2m,
+                tempMax: res.daily.temperature_2m_max,
+                tempMin: res.daily.temperature_2m_min,
+                utcOffset: res.utc_offset_seconds,
             },
         }
     })

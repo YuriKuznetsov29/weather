@@ -88,13 +88,13 @@ const Charts = () => {
     const windRef = useRef<ChartJS>(null)
     const sunRef = useRef<ChartJS<"line", number[], string>>(null)
 
-    const wether = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWether)
     const selectedDay = useAppSelector(selectDay)
 
     useEffect(() => {
         adaptiveCharts()
         updateCharts()
-    }, [wether])
+    }, [weather])
 
     function adaptiveCharts() {
         if (document.documentElement.clientWidth <= 650) {
@@ -124,8 +124,18 @@ const Charts = () => {
     }
 
     const updateCharts = () => {
-        if (wether) {
-            const {dailyTime, dailyTemp, dailyWind, dailyWindDir, utcOffset, sunrise, sunset, lon} = wether.currentWeather
+        if (weather) {
+            const {
+                dailyTime, 
+                dailyTemp, 
+                dailyWind, 
+                dailyWindDir, 
+                utcOffset, 
+                sunrise, 
+                sunset, 
+                lon
+            } = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
+            
             // temperature
             tempChartConfig.data.labels = dailyTime
             tempChartConfig.data.datasets[0].data = dailyTemp
@@ -158,33 +168,35 @@ const Charts = () => {
             }
 
             //sun
+            if (selectedDay === "today") {
+                const {time} = getTimeWithUtcOffset(utcOffset)
+                const [labels, sin] = sinusCalk()
+                const sunPosition = culkSunPosition(sunrise, sunset, time)
+                const sun = createSunImg()
+                const trueNoon = culkTrueNoon(utcOffset, lon)
+                const shift = sunPosition < 24  || sunPosition > 72 ? 2 : 0
 
-            const {time} = getTimeWithUtcOffset(utcOffset)
-            const [labels, sin] = sinusCalk()
-            const sunPosition = culkSunPosition(sunrise, sunset, time)
-            const sun = createSunImg()
-            const trueNoon = culkTrueNoon(utcOffset, lon)
-            const shift = sunPosition < 24  || sunPosition > 72 ? 2 : 0
+                const sunDatasets = sunChartConfig.data.datasets
 
-            const sunDatasets = sunChartConfig.data.datasets
-
-            sunriseConfig.label.content = sunrise
-            sunsetConfig.label.content = sunset
-            trueNoonConfig.label.content = trueNoon;
-            sunChartConfig.data.labels = labels;
-            ( sunDatasets[0].data as string [] ) = sin; // sinus
-            ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
-            ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
-            ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
-            if (sunPosition > 1) {
-                sunDatasets[3].pointStyle = [];
-                sunDatasets[3].pointStyle[sunPosition - shift] = sun
+                sunriseConfig.label.content = sunrise
+                sunsetConfig.label.content = sunset
+                trueNoonConfig.label.content = trueNoon;
+                sunChartConfig.data.labels = labels;
+                ( sunDatasets[0].data as string [] ) = sin; // sinus
+                ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
+                ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
+                ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
+                if (sunPosition > 1) {
+                    sunDatasets[3].pointStyle = [];
+                    sunDatasets[3].pointStyle[sunPosition - shift] = sun
+                }
+                const sunChart = sunRef.current
+                if (sunChart) {
+                    sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
+                    sunChart.update()
+                }
             }
-            const sunChart = sunRef.current
-            if (sunChart) {
-                sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
-                sunChart.update()
-            }
+            
         }
     }
 
@@ -197,7 +209,7 @@ const Charts = () => {
                     <div className={styles.chartWrapper} >
                         <div className={styles.chart_container} style={adaptiveChart}>
                             {   
-                                wether ? 
+                                weather ? 
                                 <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options}/> 
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
@@ -215,7 +227,7 @@ const Charts = () => {
                     <div className={styles.chartWrapper}>
                         <div className={styles.chart_container} style={adaptiveChart}>
                             {   
-                                wether ? 
+                                weather ? 
                                 <Chart ref={windRef} type='bar' data={windChartConfig.data} options={windChartConfig.options}/> 
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
@@ -226,14 +238,14 @@ const Charts = () => {
                 </>
             </Container>
             </div>
-            <div className={styles.chart__inner}>
+            {selectedDay === "today" && <div className={styles.chart__inner}>
             <Container>
                 <>
                     <div className={styles.chartTitle}>Рассвет и закат</div>
                     <div className={styles.chartWrapper}>
                         <div className={styles.sunChart_container} style={sunAdaptiveChart}>
                             {   
-                                wether ? 
+                                weather ? 
                                 <Chart ref={sunRef} type='line' data={sunChartConfig.data as ChartData<"line">} options={sunChartConfig.options as unknown as ChartOptions<"line">}/> 
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
@@ -243,7 +255,7 @@ const Charts = () => {
                     </div>
                 </>
             </Container>
-            </div>
+            </div>}
             
         </div>
         

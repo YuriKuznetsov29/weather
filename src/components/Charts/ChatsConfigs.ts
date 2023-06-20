@@ -1,5 +1,4 @@
 import { ChartOptions, ChartData } from "chart.js"
-import { ElementOptionsByType } from "chart.js"
 import { LineAnnotationOptions } from "chartjs-plugin-annotation"
 const CHART_COLORS = {
     red: "rgb(255, 99, 132)",
@@ -42,6 +41,11 @@ const chartConfigs = () => {
         },
         options: {
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    top: 35,
+                },
+            },
             scales: {
                 y: {
                     display: false,
@@ -464,7 +468,7 @@ const chartConfigs = () => {
         sunriseConfig,
         sunsetConfig,
         trueNoonConfig,
-        horizontConfig
+        horizontConfig,
     }
 }
 

@@ -6,7 +6,7 @@ import {
   RouterProvider,
 } from "react-router-dom";
 
-import styles from './App.module.scss';
+import TenDays from 'pages/TenDays';
 
 const router = createBrowserRouter([
   {
@@ -17,6 +17,11 @@ const router = createBrowserRouter([
   {
     path: "/tomorrow",
     element: <Tomorrow />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/tenDays",
+    element: <TenDays />,
     errorElement: <ErrorPage />,
   },
 ]);
