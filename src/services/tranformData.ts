@@ -85,7 +85,7 @@ export interface TenDaysWeather {
     sunrise: string[]
     sunset: string[]
     weathercode: number[]
-    dailyTemp: number[]
+    dailyTemp: number[][]
     dailyWind: number[]
     tempMax: number[]
     tempMin: number[]
@@ -93,6 +93,11 @@ export interface TenDaysWeather {
     utcOffset: number
     dailyMoi: number[]
     dailyWindDir: number[]
+    wind: number[]
+    windDir: number[]
+    uvIndex: number[]
+    moi: number[]
+    hourlyWeatherCode: number[][]
 }
 
 export interface WeatherData {
@@ -104,7 +109,7 @@ export interface WeatherData {
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
-        // console.log(res)
+        console.log(res)
         return {
             currentWeather: {
                 currentTemp: res.hourly.temperature_2m[hour],
@@ -153,13 +158,20 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 sunrise: res.daily.sunrise.map((el: string) => el.slice(-5)),
                 sunset: res.daily.sunset.map((el: string) => el.slice(-5)),
                 weathercode: res.daily.weathercode,
-                dailyTemp: res.hourly.temperature_2m,
                 dailyWind: res.hourly.windspeed_10m,
                 dailyWindDir: res.hourly.winddirection_10m,
                 dailyMoi: res.hourly.relativehumidity_2m,
                 tempMax: res.daily.temperature_2m_max,
                 tempMin: res.daily.temperature_2m_min,
                 utcOffset: res.utc_offset_seconds,
+                wind: res.daily.windspeed_10m_max,
+                windDir: res.daily.winddirection_10m_dominant,
+                uvIndex: res.daily.uv_index_max,
+                moi: res.hourly.relativehumidity_2m.map((el: number, i:number, arr: number[]) => Math.round(arr.splice(0, 24).reduce((acc: number, curr: number) => curr + acc)/24)),
+                dailyTemp: res.hourly.temperature_2m.map((el: number, i:number, arr: number[]) => arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)),
+                hourlyWeatherCode: res.hourly.weathercode.map((el: number, i:number, arr: number[]) => arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)),
+                dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)).filter((el: number, i: number) => i % 2 === 0),
+
             },
         }
     })

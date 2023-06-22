@@ -2,43 +2,39 @@ import Container from "components/Container/Container"
 import { weatherDescription, getTimeWithUtcOffset, getWetherImage } from "services/tranformData"
 import { useAppSelector } from "app/hooks"
 import { currentWether } from "app/selectors"
-import styles from './TenDaysWeather.module.scss'
+import Day from "./Day"
 
 const TenDaysWeather = () => {
     const weather = useAppSelector(currentWether)
 
-    
-
     const renderContent = () => {
         if (weather) {
-            const {sunrise, sunset, weathercode, utcOffset, dailyMoi, tempMax, tempMin} = weather?.tenDaysWeather
-
-            const days = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
-            const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-            
+            const {sunrise, sunset, weathercode, utcOffset, moi, wind, windDir, uvIndex, tempMax, tempMin, dailyTemp, hourlyWeatherCode, dailyTime} = weather.tenDaysWeather
             let startOffset = utcOffset
             const content = []
-
             for (let i = 0; i < 10; i++) {
                 const {day, month, week} = getTimeWithUtcOffset(startOffset)
                 startOffset += 84600
-                const image = getWetherImage(sunrise[i], sunset[i], weathercode[i], utcOffset)
                 content.push(
-                    <Container key={i}>
-                        <div className={styles.days_wrapper}>
-                            <div>
-                                <div className={styles.time}>{days[week]} {day} {months[month]}</div>
-                                <div>{weatherDescription[weathercode[i]]}</div>
-                            </div>
-                            <div className={styles.data_wrapper}>
-                                <i className={`wi ${image} ${styles.icon}`}></i>
-                                <div>
-                                    <div className={styles.high_temp}>{tempMax[i]}</div>
-                                    <div className={styles.low_temp}>{tempMin[i]}</div>
-                                </div>
-                            </div>
-                        </div>
-                    </Container>
+                    <Day 
+                        day={day} 
+                        moi={moi[i]} 
+                        month={month} 
+                        sunrise={sunrise[i]} 
+                        sunset={sunset[i]} 
+                        tempMax={tempMax[i]} 
+                        tempMin={tempMin[i]} 
+                        utcOffset={utcOffset} 
+                        uvIndex={uvIndex[i]} 
+                        weathercode={weathercode[i]} 
+                        week={week} 
+                        wind={wind[i]}
+                        windDir={windDir[i]}
+                        dailyTemp={dailyTemp[i]}
+                        hourlyWeatherCode={hourlyWeatherCode[i]}
+                        dailyTime={dailyTime}
+                        key={i} 
+                        />
                 )
             }
             return content
