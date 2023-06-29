@@ -138,3 +138,10 @@ router.post('/token', async (req, res) => {
 })
 
 module.exports = router
+
+// {
+//     "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkNzcyOTlmMzU3ZmVlM2I5MzA3ZGYiLCJpYXQiOjE2ODgwNDU3MDYsImV4cCI6MTY4ODA0OTMwNn0.fFfOn_g6qMS-MYgIMdG7v4h9KDPsffF5UF-0NvYKDx0",
+//     "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDlkNzcyOTlmMzU3ZmVlM2I5MzA3ZGYiLCJpYXQiOjE2ODgwNDU3MDZ9.liEzocnWk6ZTgzQM28gAXY0vx5cfgDdOXhzdB34ylx8",
+//     "expiresIn": 3600,
+//     "userId": "649d77299f357fee3b9307df"
+// }
