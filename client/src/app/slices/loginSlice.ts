@@ -1,15 +1,17 @@
 import { createSlice } from "@reduxjs/toolkit"
-
+import { IUser } from '../../components/models/IUser'
 type LoginSlice = {
     authStatus: boolean
     signInState: boolean
     signUpState: boolean
+    user: IUser
 }
 
 const initialState: LoginSlice = {
     authStatus: false,
     signInState: false,
-    signUpState: false
+    signUpState: false,
+    user: {} as IUser
 }
 
 const loginSlice = createSlice({
@@ -25,6 +27,9 @@ const loginSlice = createSlice({
         setSignUpState: (state) => {
             state.signUpState = !state.signUpState
         },
+        setUser: (state, action) => {
+            state.user = action.payload
+        }
     },
 })
 
