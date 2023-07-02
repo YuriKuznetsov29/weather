@@ -109,7 +109,7 @@ export interface WeatherData {
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
     return data.then((res: any) => {
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
-        console.log(res)
+        // console.log(res)
         return {
             currentWeather: {
                 currentTemp: res.hourly.temperature_2m[hour],

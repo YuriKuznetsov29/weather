@@ -3,14 +3,19 @@ import styles from "./SideBar.module.scss"
 import { useContext, useEffect } from "react"
 import { Context } from "components/Header/Header"
 import { NavLink, useMatch } from "react-router-dom"
-import { useAppDispatch } from "app/hooks"
+import { useAppDispatch, useAppSelector } from "app/hooks"
 import { setDay } from "app/slices/weatherSlice"
 import Button from "components/Button/Button"
-import { setSignUpState, setSignInState } from "app/slices/loginSlice"
+import { setSignUpState, setSignInState, signOut } from "app/slices/loginSlice"
+import { authStatusSelector, userSelector } from "app/selectors"
 
 const SideBar = () => {
   const { barState, stateChange } = useContext(Context)
   const dispatch = useAppDispatch()
+
+  const authStatus = useAppSelector(authStatusSelector)
+  const user = useAppSelector(userSelector)
+
   const main = useMatch(`/`)
   const tomorrow = useMatch(`/tomorrow`)
 
@@ -30,23 +35,45 @@ const SideBar = () => {
     <div className={styles.sideBar} style={barState ? { display: "flex" } : { display: "none" }}>
       <nav className={styles.nav}>
         <X className={styles.close} weight="bold" onClick={() => stateChange()} />
+        {authStatus ? 
+        <h3>Привет {user.email}</h3> 
+        : 
+        <h3>Пожалуйста авторизуйтесь или зарегистрируйтесь</h3>}
         <div className={styles.buttonWrapper}>
+          {authStatus ?
           <Button
-            onClick={() => {
-              dispatch(setSignUpState())
-              stateChange()
-            }}
+          addStyles={{width: "100px"}} 
+          onClick={() => {
+            dispatch(signOut())
+            stateChange()
+          }}
           >
-            SignUp
-          </Button>
-          <Button
-            onClick={() => {
-              dispatch(setSignInState())
-              stateChange()
-            }}
-          >
-            SignIn
-          </Button>
+            SingOut
+          </Button> 
+          :
+          <>
+              <Button
+              addStyles={{width: "100px"}}
+              onClick={() => {
+                dispatch(setSignUpState())
+                stateChange()
+              }}
+            >
+              SignUp
+            </Button>
+            <Button
+              addStyles={{width: "100px"}}
+              onClick={() => {
+                dispatch(setSignInState())
+                stateChange()
+              }}
+            >
+              SignIn
+            </Button>
+          </>
+          }
+
+          
         </div>
         <NavLink
           to={`/`}

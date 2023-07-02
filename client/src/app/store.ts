@@ -1,7 +1,8 @@
-import { configureStore, ThunkAction, Action, combineReducers } from "@reduxjs/toolkit"
+import { configureStore, ThunkAction, Action, combineReducers, getDefaultMiddleware } from "@reduxjs/toolkit"
 import { weatherReducer } from "./slices/weatherSlice"
 import { locationsReducer } from "./slices/locationSlice"
 import { loginReducer } from "./slices/loginSlice"
+
 const rootReducer = combineReducers({
     weather: weatherReducer,
     locations: locationsReducer,
@@ -9,7 +10,7 @@ const rootReducer = combineReducers({
 })
 
 export const store = configureStore({
-    reducer: rootReducer,
+    reducer: rootReducer
 })
 
 export type AppDispatch = typeof store.dispatch

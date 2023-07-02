@@ -2,5 +2,6 @@
   "port": 8080,
   "mongoUri": "mongodb://127.0.0.1:27017/app",
   "accessSecret": "super secret from backend",
-  "refreshSecret": "super refresh key"
+  "refreshSecret": "super refresh key",
+  "clientURL": "http://localhost:3000"
 }

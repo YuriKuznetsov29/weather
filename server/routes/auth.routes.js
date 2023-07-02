@@ -16,7 +16,7 @@ router.post('/signUp', [
         min: 8
     }),
     async (req, res) => {
-        try {
+        try  {
             const errors = validationResult(req)
             if (!errors.isEmpty()) {
                 return res.status(400).json({
@@ -58,9 +58,13 @@ router.post('/signUp', [
             })
             await TokenService.save(newUser._id, tokens.refreshToken)
 
+            res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true, sameSite: 'None', secure: true}) // for https add flag secure
             res.status(201).send({
                 ...tokens,
-                userId: newUser._id
+                user: {
+                    email: newUser.email,
+                    userId: newUser._id
+                }
             })
 
         } catch (e) {
@@ -125,9 +129,14 @@ router.post('/signInWithPassword', [
                 _id: exitingUser._id
             })
             await TokenService.save(exitingUser._id, tokens.refreshToken)
+
+            res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true}) // for https add flag secure
             res.status(200).send({
                 ...tokens,
-                userId: exitingUser._id
+                user: {
+                    email: exitingUser.email,
+                    userId: exitingUser._id
+                }
             })
         } catch (e) {
             res.status(500).json({
@@ -138,16 +147,28 @@ router.post('/signInWithPassword', [
     }
 ])
 
+router.post('/signOut', async (req, res) => {
+    try {
+        const {refreshToken} = req.cookies
+        console.log(req.cookies)
+        const token = await TokenService.removeToken(refreshToken)
+        res.clearCookie('refreshToken')
+        res.status(200).json(token)
+    } catch (e) {
+        res.status(500).json({
+            message: 'На сервере произошла ошибка. Попробуйте позже'
+        })
+    }
+})
+
 function isTokenInvalid(data, dbToken) {
-    return !data || !dbToken || data._id !== dbToken ? .user ? .toString()
+    return !data || !dbToken
 }
 
-router.post('/token', async (req, res) => {
+router.get('/token', async (req, res) => {
     try {
-        const {
-            refresh_token: refreshToken
-        } = req.body
-        const data = await TokenService.validateRefresh(refreshToken)
+        const { refreshToken } = req.cookies
+        const data = TokenService.validateRefresh(refreshToken)
         const dbToken = await TokenService.findToken(refreshToken)
 
         if (isTokenInvalid(data, dbToken)) {
@@ -156,14 +177,20 @@ router.post('/token', async (req, res) => {
             })
         }
 
+        const user = await User.findById(data._id);
+
         const tokens = TokenService.generate({
             _id: data._id
         })
         await TokenService.save(data._id, tokens.refreshToken)
 
+        res.cookie('refreshToken', tokens.refreshToken, {maxAge: 30 * 24 * 60 * 60 * 1000, httpOnly: true})
         res.status(200).send({
             ...tokens,
-            userId: data._id
+            user: {
+                email: user.email,
+                userId: user._id
+            }
         })
     } catch (e) {
         res.status(500).json({

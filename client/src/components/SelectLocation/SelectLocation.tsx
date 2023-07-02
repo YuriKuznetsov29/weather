@@ -65,7 +65,6 @@ const SelectLocation = () => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
             setActiveSearch(styles.active)
             setActiveStyleSearch(styles.search__active)
-            console.log(activeSearch)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
         } 

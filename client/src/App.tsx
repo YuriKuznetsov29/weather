@@ -5,8 +5,10 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
-
 import TenDays from 'pages/TenDays';
+import { useEffect } from 'react';
+import { useAppDispatch } from 'app/hooks';
+import { checkAuth } from 'app/slices/loginSlice';
 
 const router = createBrowserRouter([
   {
@@ -27,6 +29,15 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    if (localStorage.getItem('token')) {
+      dispatch(checkAuth())
+    }
+  }, [])
+
   return (
     <>
       {/* <div className={styles.background}></div> */}

@@ -11,7 +11,7 @@ class TokenService {
         return {
             accessToken,
             refreshToken,
-            expiresIn: 3600
+            expiresIn: '30d'
         }
     }
 
@@ -19,7 +19,7 @@ class TokenService {
         const data = await Token.findOne({user})
         if (data) {
             data.refreshToken = refreshToken
-            return data.save()
+            return data.save() 
         }
 
         const token = await Token.create({user, refreshToken})
@@ -48,6 +48,15 @@ class TokenService {
         } catch (e) {
             return null
         }
+    }
+
+    async removeToken(refreshToken) {
+        try {
+            return await Token.deleteOne({refreshToken})
+        } catch (e) {
+            return null
+        }
+        
     }
 }
 
