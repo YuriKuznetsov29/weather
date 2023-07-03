@@ -51,7 +51,6 @@ export const checkAuth = createAsyncThunk(
     async () => {
         try {
             const response = await axios.get<AuthResponse>(`${API_URL}/auth/token`, {withCredentials: true})
-            console.log(response)
             localStorage.setItem("token", response.data.accessToken)
             return response.data
         } catch (e: unknown) {
