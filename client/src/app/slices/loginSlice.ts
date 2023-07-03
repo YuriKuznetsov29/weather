@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
 import { IUser } from "../../components/models/IUser"
 import { AuthService } from "services/AuthService"
-import axios from "axios"
+import axios, { AxiosError } from "axios"
 import { AuthResponse } from "components/models/response/AuthResponse"
 import { API_URL } from "components/http"
 
@@ -22,14 +22,16 @@ export const signUp = createAsyncThunk(
 export const signIn = createAsyncThunk(
     "login/signIn",
     async ({ email, password }: RequestAuthData) => {
-        console.log(email, password)
         try {
             const response = await AuthService.signIn(email, password)
-            console.log(response)
+            console.log('response', response)
             localStorage.setItem("token", response.data.accessToken)
             return response.data
-        } catch (e: unknown) {
+        } catch (e) {
             console.log(e)
+            // if (e instanceof AxiosError) {
+            //     return e.response?.data.error.message
+            // }
         }
     }
 )
@@ -69,6 +71,8 @@ type LoginSlice = {
     signInState: boolean
     signUpState: boolean
     user: IUser
+    status: "idle" | "loading" | "finished" | "error"
+    error: string
 }
 
 const initialState: LoginSlice = {
@@ -76,6 +80,8 @@ const initialState: LoginSlice = {
     signInState: false,
     signUpState: false,
     user: {} as IUser,
+    status: "idle",
+    error: ''
 }
 
 const loginSlice = createSlice({
@@ -97,24 +103,32 @@ const loginSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
-            // .addCase(loadWeather.pending, (state) => {
-            //     state.status = "loading"
-            // })
-            // .addCase(loadWeather.rejected, (state) => {
-            //     state.status = "error"
-            // })
+            .addCase(signUp.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(signUp.rejected, (state) => {
+                state.status = "error"
+            })
             .addCase(signUp.fulfilled, (state, action) => {
                 console.log(action.payload)
                 if (action.payload) {
                     state.authStatus = true
                     state.user = action.payload.user
+                    state.status = "finished"
                 }
             })
+            .addCase(signIn.pending, (state) => {
+                state.status = "loading"
+            })
+            .addCase(signIn.rejected, (state, action) => {
+                state.status = "error"
+                state.error = action.payload as string
+            })
             .addCase(signIn.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.payload) {
                     state.authStatus = true
                     state.user = action.payload.user
+                    state.status = "finished"
                 }
             })
             .addCase(signOut.fulfilled, (state) => {

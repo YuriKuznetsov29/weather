@@ -28,6 +28,7 @@ $api.interceptors.response.use((config) => {
             console.log('user in not autorized')
         }
     }
+    throw error
 })
 
 export default $api

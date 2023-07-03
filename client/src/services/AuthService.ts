@@ -3,7 +3,7 @@ import { AxiosResponse } from "axios"
 import { AuthResponse } from "components/models/response/AuthResponse"
 
 export class AuthService {
-    static async signIn(email: string, password: string): Promise<AxiosResponse<AuthResponse>> {
+    static async signIn(email: string, password: string): Promise<AxiosResponse<AuthResponse, any>>{
         return $api.post<AuthResponse>("/auth/signInWithPassword", { email, password })
     }
 
