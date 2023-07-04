@@ -15,6 +15,9 @@ export const signUp = createAsyncThunk(
             return response.data
         } catch (e: unknown) {
             console.log(e)
+            if (e instanceof AxiosError) {
+                return e.response?.data.error.message
+            }
         }
     }
 )
@@ -24,14 +27,13 @@ export const signIn = createAsyncThunk(
     async ({ email, password }: RequestAuthData) => {
         try {
             const response = await AuthService.signIn(email, password)
-            console.log('response', response)
             localStorage.setItem("token", response.data.accessToken)
             return response.data
         } catch (e) {
             console.log(e)
-            // if (e instanceof AxiosError) {
-            //     return e.response?.data.error.message
-            // }
+            if (e instanceof AxiosError) {
+                return e.response?.data.error.message
+            }
         }
     }
 )
@@ -72,7 +74,7 @@ type LoginSlice = {
     signUpState: boolean
     user: IUser
     status: "idle" | "loading" | "finished" | "error"
-    error: string
+    serverErrors: string
 }
 
 const initialState: LoginSlice = {
@@ -81,7 +83,7 @@ const initialState: LoginSlice = {
     signUpState: false,
     user: {} as IUser,
     status: "idle",
-    error: ''
+    serverErrors: ''
 }
 
 const loginSlice = createSlice({
@@ -110,11 +112,15 @@ const loginSlice = createSlice({
                 state.status = "error"
             })
             .addCase(signUp.fulfilled, (state, action) => {
-                console.log(action.payload)
-                if (action.payload) {
+                console.log('user' ,action.payload?.user)
+                if (action.payload?.user) {
                     state.authStatus = true
                     state.user = action.payload.user
                     state.status = "finished"
+                    state.serverErrors = ''
+                } else {
+                    state.status = "error"
+                    state.serverErrors = action.payload
                 }
             })
             .addCase(signIn.pending, (state) => {
@@ -122,13 +128,16 @@ const loginSlice = createSlice({
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = "error"
-                state.error = action.payload as string
             })
             .addCase(signIn.fulfilled, (state, action) => {
-                if (action.payload) {
+                if (action.payload?.user) {
                     state.authStatus = true
                     state.user = action.payload.user
                     state.status = "finished"
+                    state.serverErrors = ''
+                } else {
+                    state.status = "error"
+                    state.serverErrors = action.payload
                 }
             })
             .addCase(signOut.fulfilled, (state) => {

@@ -2,12 +2,13 @@ import Button from "components/Button/Button"
 import { X } from "@phosphor-icons/react"
 import Input from "components/Input/Input"
 import { setSignUpState, signUp } from "app/slices/loginSlice"
-import { useAppDispatch } from "app/hooks"
-import { useState, ChangeEvent } from "react"
+import { useAppDispatch, useAppSelector } from "app/hooks"
+import { useState, ChangeEvent, useEffect } from "react"
 import { Formik, Field, Form, ErrorMessage, useFormikContext } from "formik"
 import * as Yup from "yup"
 
 import styles from "./Form.module.scss"
+import { serverErrorsSelector, statusSelector } from "app/selectors"
 
 interface Values {
   email: string
@@ -32,10 +33,14 @@ const SignUpForm = () => {
   const [repeatPassword, setRepeatPassword] = useState("")
 
   const dispatch = useAppDispatch()
+  const loadStatus = useAppSelector(statusSelector)
+  const serverError = useAppSelector(serverErrorsSelector)
 
-  const data = useFormikContext()
-
-  console.log(data)
+  useEffect(() => {
+    if (loadStatus === "finished") {
+        dispatch(setSignUpState())
+      }
+  }, [loadStatus])
 
   return (
     <div className={styles.background_form}>
@@ -84,41 +89,11 @@ const SignUpForm = () => {
           />
           <ErrorMessage component="div" name="confirmPassword" />
 
+          {serverError && <div>{serverError}</div>}
+          {loadStatus === "loading" && <div>Loading...</div>}
           <Button type="submit">Войти</Button>
         </Form>
       </Formik>
-
-      {/* <form
-                className={styles.form}
-                onSubmit={(e) => {
-                    e.preventDefault()
-                    dispatch(signUp({email, password}))
-                }}
-            >
-                <div className={styles.title}>Регистрация</div>
-                <Input
-                    label="Email"
-                    value={email}
-                    placeholder="введите логин"
-                    type="email"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
-                ></Input>
-                <Input
-                    label="Пароль"
-                    value={password}
-                    placeholder="введите пароль"
-                    type="password"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setPassword(e.target.value)}
-                ></Input>
-                <Input
-                    label="Пароль"
-                    value={repeatPassword}
-                    placeholder="повторите пароль"
-                    type="password"
-                    onChange={(e: ChangeEvent<HTMLInputElement>) => setRepeatPassword(e.target.value)}
-                ></Input>
-                <Button type="submit">Зарегистрироваться</Button>
-            </form> */}
     </div>
   )
 }
