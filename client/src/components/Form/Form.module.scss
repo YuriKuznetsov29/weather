@@ -32,6 +32,12 @@
 
 }
 
+.inputWrapper {
+    margin-bottom: 10px;
+    width: 100%;
+    position: relative;
+}
+
 .title {
     margin-bottom: 20px;
     font-size: 26px;
@@ -52,4 +58,16 @@
     display: flex;
     justify-content: flex-start;
     font-size: 18px;
+}
+
+.passwordEye {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+
+.fieldError {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
 }

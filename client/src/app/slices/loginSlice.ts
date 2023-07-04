@@ -95,9 +95,11 @@ const loginSlice = createSlice({
         },
         setSignInState: (state) => {
             state.signInState = !state.signInState
+            state.serverErrors = ''
         },
         setSignUpState: (state) => {
             state.signUpState = !state.signUpState
+            state.serverErrors = ''
         },
         setUser: (state, action) => {
             state.user = action.payload

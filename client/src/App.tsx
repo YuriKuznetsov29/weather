@@ -1,14 +1,13 @@
-import Main from 'pages/Main';
-import Tomorrow from 'pages/Tomorrow';
-import ErrorPage from 'components/ErrorPage/ErrorPage';
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
-import TenDays from 'pages/TenDays';
-import { useEffect } from 'react';
-import { useAppDispatch } from 'app/hooks';
-import { checkAuth } from 'app/slices/loginSlice';
+import Main from "pages/Main"
+import Tomorrow from "pages/Tomorrow"
+import ErrorPage from "components/ErrorPage/ErrorPage"
+import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import TenDays from "pages/TenDays"
+import { useEffect } from "react"
+import { useAppDispatch } from "app/hooks"
+import { checkAuth } from "app/slices/loginSlice"
+import SavedLocatons from "pages/SavedLocations"
+import PrivateRoute from "components/hoc/PrivateRoute"
 
 const router = createBrowserRouter([
   {
@@ -26,14 +25,22 @@ const router = createBrowserRouter([
     element: <TenDays />,
     errorElement: <ErrorPage />,
   },
-]);
+  {
+    path: "/savedLocations",
+    element: (
+      <PrivateRoute>
+        <SavedLocatons />
+      </PrivateRoute>
+    ),
+    errorElement: <ErrorPage />,
+  },
+])
 
 function App() {
-
   const dispatch = useAppDispatch()
 
   useEffect(() => {
-    if (localStorage.getItem('token')) {
+    if (localStorage.getItem("token")) {
       dispatch(checkAuth())
     }
   }, [])
@@ -43,9 +50,8 @@ function App() {
       {/* <div className={styles.background}></div> */}
       {/* <Header /> */}
       <RouterProvider router={router} />
-
     </>
-  );
+  )
 }
 
-export default App;
+export default App

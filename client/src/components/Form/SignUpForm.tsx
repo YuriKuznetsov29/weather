@@ -1,6 +1,5 @@
 import Button from "components/Button/Button"
-import { X } from "@phosphor-icons/react"
-import Input from "components/Input/Input"
+import { X, Eye, EyeSlash } from "@phosphor-icons/react"
 import { setSignUpState, signUp } from "app/slices/loginSlice"
 import { useAppDispatch, useAppSelector } from "app/hooks"
 import { useState, ChangeEvent, useEffect } from "react"
@@ -28,18 +27,24 @@ const SignupSchema = Yup.object().shape({
 })
 
 const SignUpForm = () => {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [repeatPassword, setRepeatPassword] = useState("")
+  const [showPassword, setShowPassword] = useState("password")
 
   const dispatch = useAppDispatch()
   const loadStatus = useAppSelector(statusSelector)
   const serverError = useAppSelector(serverErrorsSelector)
 
+  const toggleShowPassword = () => {
+    if (showPassword === "password") {
+      setShowPassword("text")
+    } else {
+      setShowPassword("password")
+    }
+  }
+
   useEffect(() => {
     if (loadStatus === "finished") {
-        dispatch(setSignUpState())
-      }
+      dispatch(setSignUpState())
+    }
   }, [loadStatus])
 
   return (
@@ -62,32 +67,52 @@ const SignUpForm = () => {
           <label className={styles.label} htmlFor="email">
             Email
           </label>
-          <Field className={styles.input} id="email" name="email" placeholder="введите email" />
-          <ErrorMessage component="div" name="email" />
+          <div className={styles.inputWrapper}>
+            <Field className={styles.input} id="email" name="email" placeholder="введите email" />
+            <ErrorMessage className={styles.fieldError} component="div" name="email" />
+          </div>
 
           <label className={styles.label} htmlFor="password">
             Пароль
           </label>
-          <Field
-            className={styles.input}
-            id="password"
-            name="password"
-            type="password"
-            placeholder="введите пароль"
-          />
-          <ErrorMessage component="div" name="password" />
+          <div className={styles.inputWrapper}>
+            <Field
+              className={styles.input}
+              id="password"
+              name="password"
+              type={showPassword}
+              placeholder="введите пароль"
+            />
+            <div className={styles.passwordEye} onClick={toggleShowPassword}>
+              {showPassword === "password" ? (
+                <EyeSlash size={22} color="#000" />
+              ) : (
+                <Eye size={22} color="#000" />
+              )}
+            </div>
+            <ErrorMessage className={styles.fieldError} component="div" name="password" />
+          </div>
 
           <label className={styles.label} htmlFor="password">
-            Пароль
+            Повторите пароль
           </label>
-          <Field
-            className={styles.input}
-            id="confirmPassword"
-            name="confirmPassword"
-            type="password"
-            placeholder="повторите пароль"
-          />
-          <ErrorMessage component="div" name="confirmPassword" />
+          <div className={styles.inputWrapper}>
+            <Field
+              className={styles.input}
+              id="confirmPassword"
+              name="confirmPassword"
+              type={showPassword}
+              placeholder="повторите пароль"
+            />
+            <div className={styles.passwordEye} onClick={toggleShowPassword}>
+              {showPassword === "password" ? (
+                <EyeSlash size={22} color="#000" />
+              ) : (
+                <Eye size={22} color="#000" />
+              )}
+            </div>
+            <ErrorMessage className={styles.fieldError} component="div" name="confirmPassword" />
+          </div>
 
           {serverError && <div>{serverError}</div>}
           {loadStatus === "loading" && <div>Loading...</div>}

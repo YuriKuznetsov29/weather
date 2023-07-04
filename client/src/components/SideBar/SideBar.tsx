@@ -35,45 +35,44 @@ const SideBar = () => {
     <div className={styles.sideBar} style={barState ? { display: "flex" } : { display: "none" }}>
       <nav className={styles.nav}>
         <X className={styles.close} weight="bold" onClick={() => stateChange()} />
-        {authStatus ? 
-        <h3>Привет {user.email}</h3> 
-        : 
-        <h3>Пожалуйста авторизуйтесь или зарегистрируйтесь</h3>}
+        {authStatus ? (
+          <h3>Привет {user.email}</h3>
+        ) : (
+          <h3>Пожалуйста авторизуйтесь или зарегистрируйтесь</h3>
+        )}
         <div className={styles.buttonWrapper}>
-          {authStatus ?
-          <Button
-          addStyles={{width: "100px"}} 
-          onClick={() => {
-            dispatch(signOut())
-            stateChange()
-          }}
-          >
-            SingOut
-          </Button> 
-          :
-          <>
-              <Button
-              addStyles={{width: "100px"}}
-              onClick={() => {
-                dispatch(setSignUpState())
-                stateChange()
-              }}
-            >
-              SignUp
-            </Button>
+          {authStatus ? (
             <Button
-              addStyles={{width: "100px"}}
+              addStyles={{ width: "100px" }}
               onClick={() => {
-                dispatch(setSignInState())
+                dispatch(signOut())
                 stateChange()
               }}
             >
-              SignIn
+              SingOut
             </Button>
-          </>
-          }
-
-          
+          ) : (
+            <>
+              <Button
+                addStyles={{ width: "100px" }}
+                onClick={() => {
+                  dispatch(setSignUpState())
+                  stateChange()
+                }}
+              >
+                SignUp
+              </Button>
+              <Button
+                addStyles={{ width: "100px" }}
+                onClick={() => {
+                  dispatch(setSignInState())
+                  stateChange()
+                }}
+              >
+                SignIn
+              </Button>
+            </>
+          )}
         </div>
         <NavLink
           to={`/`}
@@ -99,6 +98,15 @@ const SideBar = () => {
           }
         >
           10 дней
+        </NavLink>
+
+        <NavLink
+          to={`/savedLocations`}
+          className={({ isActive }) =>
+            isActive ? `${styles.link} ${styles.active_link}` : styles.link
+          }
+        >
+          Сохраненные города
         </NavLink>
       </nav>
     </div>
