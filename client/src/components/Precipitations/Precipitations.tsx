@@ -1,5 +1,5 @@
 import { useAppSelector } from 'app/hooks'
-import { currentWether, selectDay } from 'app/selectors'
+import { currentWetherSelector, selectDay } from 'app/selectors'
 
 import styles from './Precipitations.module.scss'
 import Container from 'components/Container/Container'
@@ -9,7 +9,7 @@ interface PrecipitationsPercent {
 }
 
 const Precipitations = () => {
-    const weather = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
 
     function calckPrecipitationInHour(quantity: number) {

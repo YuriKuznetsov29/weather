@@ -4,6 +4,8 @@ import { AuthService } from "services/AuthService"
 import axios, { AxiosError } from "axios"
 import { AuthResponse } from "components/models/response/AuthResponse"
 import { API_URL } from "components/http"
+import UserService from "services/UserService"
+import { CurrentLocation } from "./locationSlice"
 
 export const signUp = createAsyncThunk(
     "login/signUp",
@@ -63,6 +65,25 @@ export const checkAuth = createAsyncThunk(
     }
 )
 
+export const saveLocations = createAsyncThunk(
+    "login/saveLocations",
+    async ({userId, savedLocations}: RequestSavedLocationsData) => {
+        try {
+            const response = await UserService.saveLocations(userId, savedLocations)
+            return response.data.user
+        } catch (e) {
+            console.log(e)
+            if (e instanceof AxiosError) {
+                return e.response?.data.error.message
+            }
+        }
+    }
+)
+
+interface RequestSavedLocationsData {
+    userId: string
+    savedLocations: CurrentLocation[]
+}
 interface RequestAuthData {
     email: string
     password: string
@@ -147,10 +168,14 @@ const loginSlice = createSlice({
                 state.user = {} as IUser
             })
             .addCase(checkAuth.fulfilled, (state, action) => {
-                console.log(action.payload)
                 if (action.payload) {
                     state.authStatus = true
                     state.user = action.payload.user
+                }
+            })
+            .addCase(saveLocations.fulfilled, (state, action) => {
+                if (action.payload) {
+                    state.user = action.payload
                 }
             })
     },

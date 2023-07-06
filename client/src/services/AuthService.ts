@@ -14,4 +14,6 @@ export class AuthService {
     static async signOut(): Promise<void> {
         return $api.post("/auth/signOut")
     }
+
+    
 }

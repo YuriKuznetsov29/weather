@@ -63,7 +63,8 @@ router.post('/signUp', [
                 ...tokens,
                 user: {
                     email: newUser.email,
-                    userId: newUser._id
+                    userId: newUser._id,
+                    SavedLocations: newUser.savedLocations
                 }
             })
 
@@ -135,7 +136,8 @@ router.post('/signInWithPassword', [
                 ...tokens,
                 user: {
                     email: exitingUser.email,
-                    userId: exitingUser._id
+                    userId: exitingUser._id,
+                    savedLocations: exitingUser.savedLocations
                 }
             })
         } catch (e) {
@@ -189,7 +191,8 @@ router.get('/token', async (req, res) => {
             ...tokens,
             user: {
                 email: user.email,
-                userId: user._id
+                userId: user._id,
+                savedLocations: user.savedLocations
             }
         })
     } catch (e) {

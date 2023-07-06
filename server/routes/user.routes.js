@@ -1,5 +1,4 @@
 const express = require('express')
-const SavedLocations = require('../models/SavedLocations')
 const User = require('../models/User')
 const auth = require('../middleware/auth.middleware')
 const router = express.Router({mergeParams: true})
@@ -8,10 +7,15 @@ const router = express.Router({mergeParams: true})
 router.patch('/:userId', auth, async (req, res) => {
     try {
         const { userId } = req.params
-        console.log(req.user)
         if (userId) {
             const updatedUser = await User.findByIdAndUpdate(userId, req.body, {new: true})
-            res.send(updatedUser)
+            res.send({
+                user: {
+                    email: updatedUser.email,
+                    userId: updatedUser._id,
+                    savedLocations: updatedUser.savedLocations
+                }
+            })
         }
     } catch (e) {
         console.log(e)

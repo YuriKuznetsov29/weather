@@ -1,11 +1,11 @@
 import Container from "components/Container/Container"
 import { weatherDescription, getTimeWithUtcOffset, getWetherImage } from "services/tranformData"
 import { useAppSelector } from "app/hooks"
-import { currentWether } from "app/selectors"
+import { currentWetherSelector } from "app/selectors"
 import Day from "./Day"
 
 const TenDaysWeather = () => {
-    const weather = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWetherSelector)
 
     const renderContent = () => {
         if (weather) {

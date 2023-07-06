@@ -1,16 +1,19 @@
 import { useAppSelector } from "app/hooks"
 import { authStatusSelector } from "app/selectors"
 import { Navigate } from "react-router-dom"
-import SavedLocations from "../../pages/SavedLocations"
 
 interface PrivateRouteProps {
   children: JSX.Element
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const isAuth = useAppSelector(authStatusSelector)
+  const auth = useAppSelector(authStatusSelector)
 
-  return <>{children}</>
+  if (!auth) {
+    return <Navigate to='/signIn'></Navigate>
+  }
+
+  return children
 }
 
 export default PrivateRoute

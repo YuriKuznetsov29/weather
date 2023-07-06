@@ -4,7 +4,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import chartConfigs from "./ChatsConfigs";
 import { useAppSelector } from "app/hooks";
-import { currentWether, selectDay } from "app/selectors";
+import { currentWetherSelector, selectDay } from "app/selectors";
 import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
 import { getTimeWithUtcOffset } from "services/tranformData";
@@ -88,7 +88,7 @@ const Charts = () => {
     const windRef = useRef<ChartJS>(null)
     const sunRef = useRef<ChartJS<"line", number[], string>>(null)
 
-    const weather = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
 
     useEffect(() => {

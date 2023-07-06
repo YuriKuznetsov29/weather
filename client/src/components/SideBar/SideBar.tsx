@@ -2,7 +2,7 @@ import { X } from "@phosphor-icons/react"
 import styles from "./SideBar.module.scss"
 import { useContext, useEffect } from "react"
 import { Context } from "components/Header/Header"
-import { NavLink, useMatch } from "react-router-dom"
+import { NavLink, useMatch, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "app/hooks"
 import { setDay } from "app/slices/weatherSlice"
 import Button from "components/Button/Button"
@@ -16,6 +16,7 @@ const SideBar = () => {
   const authStatus = useAppSelector(authStatusSelector)
   const user = useAppSelector(userSelector)
 
+  const navigate = useNavigate()
   const main = useMatch(`/`)
   const tomorrow = useMatch(`/tomorrow`)
 
@@ -46,31 +47,37 @@ const SideBar = () => {
               addStyles={{ width: "100px" }}
               onClick={() => {
                 dispatch(signOut())
-                stateChange()
+                // stateChange()
+                navigate("/", {replace: true})
               }}
             >
               SingOut
             </Button>
           ) : (
             <>
+            <NavLink to={"/signUp"}>
               <Button
                 addStyles={{ width: "100px" }}
-                onClick={() => {
-                  dispatch(setSignUpState())
-                  stateChange()
-                }}
+                // onClick={() => {
+                //   dispatch(setSignUpState())
+                //   stateChange()
+                // }}
               >
                 SignUp
               </Button>
+            </NavLink>
+            <NavLink to={"/signIn"}>
               <Button
                 addStyles={{ width: "100px" }}
-                onClick={() => {
-                  dispatch(setSignInState())
-                  stateChange()
-                }}
+                // onClick={() => {
+                //   dispatch(setSignInState())
+                //   stateChange()
+                // }}
               >
                 SignIn
               </Button>
+            </NavLink>  
+              
             </>
           )}
         </div>

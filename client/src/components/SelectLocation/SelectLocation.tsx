@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "app/hooks"
 import { CurrentLocation, setCurrentLocation } from "app/slices/locationSlice"
 import { loadWeather } from "app/slices/weatherSlice"
 import { getCoordinateLocation, getLocation } from "services/getData"
-import { currentLocation } from "app/selectors"
+import { currentLocationSelector } from "app/selectors"
 import { storage } from "services/storage"
 
 import styles from './SelectLocation.module.scss'
@@ -18,7 +18,7 @@ const SelectLocation = () => {
     const [searchRes, setSearchRes] = useState([])
 
     const dispatch = useAppDispatch()
-    const location: CurrentLocation | null = useAppSelector(currentLocation)
+    const location: CurrentLocation | null = useAppSelector(currentLocationSelector)
 
     useEffect(() => {
         if (searchValue) {
@@ -31,14 +31,14 @@ const SelectLocation = () => {
         }
     }, [searchValue])
 
-    useEffect(() => {
-        if (storage('currentLocation')) {
-            const {lat, lon, city, timezone, country} = storage('currentLocation')
-            dispatch(setCurrentLocation({lat: lat, lon: lon, city: city, timezone: timezone, country: country}))
-        } else {
-            getCurrentLocation()
-        }
-    }, [])
+    // useEffect(() => {
+    //     if (storage('currentLocation')) {
+    //         const {lat, lon, city, timezone, country} = storage('currentLocation')
+    //         dispatch(setCurrentLocation({lat: lat, lon: lon, city: city, timezone: timezone, country: country}))
+    //     } else {
+    //         getCurrentLocation()
+    //     }
+    // }, [])
 
     useEffect(() => {
         if (location) {
@@ -115,31 +115,29 @@ const SelectLocation = () => {
     return (
         <form className={styles.search} id="select" onClick={((event) => startSearchLocation(event)) }>
             <Container>
-                    <div className={styles.search__wrapper} id="closeSearch">
+                <div className={styles.search__wrapper} id="closeSearch">
 
-                            <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} size={24}  weight="thin" />
-                            <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
+                        <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} size={24}  weight="thin" />
+                        <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
 
-                        
-                        <div className={styles.search__resultsWrapper}>
+                    
+                    <div className={styles.search__resultsWrapper}>
 
-                            <div className={styles.search__wrapper}>
-                                <div className={`${styles.search__btnCurrentLocation} ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
-                                    <NavigationArrow className={styles.currentLocation__icon} size={24} weight="thin" data-type="getLocation"/>
-                                    Использовать текущее местоположение
-                                </div>
-                            </div>
-
-                            <div className={styles.search__wrapper}>
-                                <div className={styles.search__results} data-type="results">
-                                    {results}
-                                </div>
+                        <div className={styles.search__wrapper}>
+                            <div className={`${styles.search__btnCurrentLocation} ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
+                                <NavigationArrow className={styles.currentLocation__icon} size={24} weight="thin" data-type="getLocation"/>
+                                Использовать текущее местоположение
                             </div>
                         </div>
 
+                        <div className={styles.search__wrapper}>
+                            <div className={styles.search__results} data-type="results">
+                                {results}
+                            </div>
+                        </div>
                     </div>
-
-        </Container>
+                </div>
+            </Container>
         </form>
         
     )

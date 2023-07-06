@@ -8,7 +8,8 @@ import { Formik, Field, Form, ErrorMessage } from "formik"
 import * as Yup from "yup"
 
 import styles from "./Form.module.scss"
-import { serverErrorsSelector, statusSelector } from "app/selectors"
+import { authStatusSelector, serverErrorsSelector, statusSelector } from "app/selectors"
+import { useLocation, useNavigate } from "react-router-dom"
 
 interface Values {
   email: string
@@ -26,8 +27,14 @@ const SignUpForm = () => {
   const [showPassword, setShowPassword] = useState("password")
 
   const dispatch = useAppDispatch()
+  const auth = useAppSelector(authStatusSelector)
   const loadStatus = useAppSelector(statusSelector)
   const serverError = useAppSelector(serverErrorsSelector)
+
+  const navigate = useNavigate()
+  const location = useLocation()
+  const fromPage = location.state?.from?.pathname || '/'
+  console.log(location)
 
   const toggleShowPassword = () => {
     if (showPassword === "password") {
@@ -38,14 +45,15 @@ const SignUpForm = () => {
   }
 
   useEffect(() => {
-    if (loadStatus === "finished") {
-      dispatch(setSignInState())
+    if (auth) {
+      navigate(fromPage)
+      // dispatch(setSignInState())
     }
-  }, [loadStatus])
+  }, [auth])
 
   return (
     <div className={styles.background_form}>
-      <X className={styles.close} weight="bold" onClick={() => dispatch(setSignInState())} />
+      {/* <X className={styles.close} weight="bold"s onClick={() => dispatch(setSignInState())} /> */}
 
       <Formik
         initialValues={{

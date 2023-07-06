@@ -1,7 +1,7 @@
 import Container from 'components/Container/Container'
 import { getWetherImage, weatherDescription, getTimeWithUtcOffset } from 'services/tranformData'
 import { useAppSelector } from 'app/hooks'
-import { currentWether, selectDay } from 'app/selectors'
+import { currentWetherSelector, selectDay } from 'app/selectors'
 
 import styles from './CurrentWeather.module.scss'
 import TodayWeather from './TodayWeather'
@@ -9,7 +9,7 @@ import TomorrowWether from './TomorrowWether'
 
 const CurrentWeather = () => {
 
-    const weather = useAppSelector(currentWether)
+    const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
     
     const renderWether = () => {
