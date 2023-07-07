@@ -30,6 +30,7 @@
 // }
 
 .location__city {
+    margin-right: 10px;
     color: #fff;
     font-size: 18px;
 }
@@ -40,4 +41,25 @@
     &:hover {
         cursor: pointer;
     }
+}
+
+.star {
+    color: #fff;
+    fill: none;
+    &:hover {
+        cursor: pointer;
+        color: orange;
+        fill: orange;
+    }
+}
+
+.city_wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.activeStar {
+    color: orange;
+    fill: orange;
 }

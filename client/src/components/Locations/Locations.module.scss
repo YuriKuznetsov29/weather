@@ -1,4 +1,7 @@
 .locationWrapper {
     margin-top: 100px;
-    display: flex;
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    justify-items: center;
 }
