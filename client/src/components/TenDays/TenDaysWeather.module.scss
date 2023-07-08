@@ -39,7 +39,7 @@
 }
 
 .time {
-    font-size: 20px;
+    // font-size: 20px;
 }
 
 .data_wrapper {
@@ -60,7 +60,7 @@
 }
 
 .high_temp, .low_temp {
-    font-size: 26px;
+    // font-size: 26px;
     margin-left: 30px;
 }
 
@@ -91,6 +91,7 @@
     display: none;
     justify-content: space-between;
     font-size: 18px;
+    overflow-x: scroll;
 }
 
 .day__dailyTempData {
@@ -114,4 +115,24 @@
 
 .active {
     display: flex;
+}
+
+@media(max-width: 650px) {
+    .icon {
+        font-size: 50px;
+    }
+
+    .days_wrapper {
+        padding: 15px 5px;
+        font-size: 16px;
+    }
+
+    .day__data_name, .day__data_value {
+        font-size: 16px;
+    }
+
+    .day__dailyTempData {
+        margin: 0 5px;
+    }
+
 }

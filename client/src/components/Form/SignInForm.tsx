@@ -34,7 +34,6 @@ const SignUpForm = () => {
   const navigate = useNavigate()
   const location = useLocation()
   const fromPage = location.state?.from?.pathname || '/'
-  console.log(location)
 
   const toggleShowPassword = () => {
     if (showPassword === "password") {
@@ -53,8 +52,7 @@ const SignUpForm = () => {
 
   return (
     <div className={styles.background_form}>
-      {/* <X className={styles.close} weight="bold"s onClick={() => dispatch(setSignInState())} /> */}
-
+      <img className={styles.sun} src="sun.svg" alt="sun" onClick={() => navigate('/')} />
       <Formik
         initialValues={{
           email: "",

@@ -40,7 +40,7 @@ router.post('/signUp', [
             if (exitingUser) {
                 return res.status(400).json({
                     error: {
-                        message: 'EMAIL_EXISTS',
+                        message: 'Пользователь с таким email уже существует',
                         code: 400
                     }
                 })
@@ -110,7 +110,7 @@ router.post('/signInWithPassword', [
             if (!exitingUser) {
                 return res.status(400).send({
                     error: {
-                        message: 'EMAIL_NOT_FOUND',
+                        message: 'Пользователя с таким email не найдено',
                         code: 400
                     }
                 })

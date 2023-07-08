@@ -99,13 +99,17 @@ const SelectLocation = () => {
     const renderResults = () => {
         return searchRes.map(location => {
             const {latitude, longitude, name, timezone, country, country_code, id} = location
-            return <div 
+
+            if (latitude && longitude && name && timezone && country && country_code && id) {
+                return <div 
                         className={styles.search__result} 
                         key={id} data-type="setLocation" 
                         data-location={`${latitude},${longitude},${name},${timezone},${country}`}
                         onClick={event => selectLocation(event)}>
                             {`${country}, ${name}, ${country_code}`}
                     </div>
+            }
+            
         })
         
     }
@@ -117,7 +121,7 @@ const SelectLocation = () => {
             <Container>
                 <div className={styles.search__wrapper} id="closeSearch">
 
-                        <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} size={24}  weight="thin" />
+                        <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} weight="thin" />
                         <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
 
                     
@@ -125,7 +129,7 @@ const SelectLocation = () => {
 
                         <div className={styles.search__wrapper}>
                             <div className={`${styles.search__btnCurrentLocation} ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
-                                <NavigationArrow className={styles.currentLocation__icon} size={24} weight="thin" data-type="getLocation"/>
+                                <NavigationArrow className={styles.currentLocation__icon} weight="thin" data-type="getLocation"/>
                                 Использовать текущее местоположение
                             </div>
                         </div>

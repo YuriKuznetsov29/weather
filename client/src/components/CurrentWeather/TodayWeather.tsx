@@ -1,4 +1,5 @@
 import Container from 'components/Container/Container'
+import DayNigthTemp from 'components/DayNigthTemp/DayNigthTemp'
 import { getWetherImage, weatherDescription, getTimeWithUtcOffset, CurentWeather } from 'services/tranformData'
 
 import styles from './CurrentWeather.module.scss'
@@ -9,7 +10,7 @@ interface TodayProps {
 
 const TodayWeather = ({weather}: TodayProps) => {
 
-    const {sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel} = weather
+    const {sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel, tempMax, tempMin} = weather
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     const {time, month, day} = getTimeWithUtcOffset(utcOffset)
     const image = getWetherImage(sunrise, sunset, weathercode, utcOffset)
@@ -20,6 +21,7 @@ const TodayWeather = ({weather}: TodayProps) => {
                 <div className={styles.currentWeather__wrapper}>
                     <div className={styles.currentWeather__data}>
                         <div className={styles.currentWeather__data_time}>{day} {months[month]}, {time}</div>
+                        <DayNigthTemp dayTemp={tempMax} nigthTemp={tempMin} />
                         <div className={styles.currentWeather__data_temp}>{currentTemp}°C</div>
                         <div className={styles.currentWeather__data_Feeltemp}>Ощущается как {realFeel}°C</div>
                     </div>

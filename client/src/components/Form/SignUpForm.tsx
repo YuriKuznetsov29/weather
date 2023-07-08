@@ -56,8 +56,7 @@ const SignUpForm = () => {
 
   return (
     <div className={styles.background_form}>
-      {/* <X className={styles.close} weight="bold" onClick={(e) => dispatch(setSignUpState())} /> */}
-
+      <img className={styles.sun} src="sun.svg" alt="sun" onClick={() => navigate('/')} />
       <Formik
         initialValues={{
           email: "",
@@ -123,7 +122,7 @@ const SignUpForm = () => {
 
           {serverError && <div>{serverError}</div>}
           {loadStatus === "loading" && <div>Loading...</div>}
-          <Button type="submit">Войти</Button>
+          <Button type="submit">Зарегистрироваться</Button>
         </Form>
       </Formik>
     </div>

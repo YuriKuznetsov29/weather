@@ -13,6 +13,7 @@
     border: 1px solid #f05514;
     font-size: 18px;
     transition: all 0.2s;
+    white-space: nowrap;
     &:hover {
         cursor: pointer;
         background-color: #f03114;

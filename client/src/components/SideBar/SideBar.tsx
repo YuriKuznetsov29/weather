@@ -37,44 +37,35 @@ const SideBar = () => {
       <nav className={styles.nav}>
         <X className={styles.close} weight="bold" onClick={() => stateChange()} />
         {authStatus ? (
-          <h3>Привет {user.email}</h3>
+          <div className={styles.email}>{user.email}</div>
         ) : (
-          <h3>Пожалуйста авторизуйтесь или зарегистрируйтесь</h3>
+          <div className={styles.email}>Пожалуйста авторизуйтесь или зарегистрируйтесь</div>
         )}
         <div className={styles.buttonWrapper}>
           {authStatus ? (
             <Button
-              addStyles={{ width: "100px" }}
+              addStyles={{ width: "150px" }}
               onClick={() => {
                 dispatch(signOut())
-                // stateChange()
                 navigate("/", {replace: true})
               }}
             >
-              SingOut
+              Выйти
             </Button>
           ) : (
             <>
             <NavLink to={"/signUp"}>
               <Button
-                addStyles={{ width: "100px" }}
-                // onClick={() => {
-                //   dispatch(setSignUpState())
-                //   stateChange()
-                // }}
+                addStyles={{ width: "150px" }}
               >
-                SignUp
+                Регистрация
               </Button>
             </NavLink>
             <NavLink to={"/signIn"}>
               <Button
-                addStyles={{ width: "100px" }}
-                // onClick={() => {
-                //   dispatch(setSignInState())
-                //   stateChange()
-                // }}
+                addStyles={{ width: "150px" }}
               >
-                SignIn
+                Войти
               </Button>
             </NavLink>  
               

@@ -2,11 +2,17 @@ import { userSelector, currentLocationSelector } from "app/selectors"
 import { useAppSelector, useAppDispatch } from "app/hooks"
 import { CurrentLocation } from "app/slices/locationSlice"
 import { saveLocations } from "app/slices/loginSlice"
+import { useNavigate } from "react-router-dom"
+import { authStatusSelector } from "app/selectors"
 
 import styles from "./Header.module.scss"
 
 const StarSvg = () => {
+
+    const navigate = useNavigate()
+
     const dispatch = useAppDispatch()
+    const auth = useAppSelector(authStatusSelector)
     const currentLocation = useAppSelector(currentLocationSelector)
     const { userId, savedLocations } = useAppSelector(userSelector)
 
@@ -20,11 +26,13 @@ const StarSvg = () => {
     }
 
     const saveCurrentLocation = () => {
-        if (currentLocation) {
+        if (currentLocation && auth) {
             const newLocations: CurrentLocation[] = checkInclude()
                 ? savedLocations.filter((location) => location.city !== currentLocation.city)
                 : savedLocations.concat([currentLocation])
             dispatch(saveLocations({ userId, savedLocations: newLocations }))
+        } else {
+            navigate('/signIn')
         }
     }
 

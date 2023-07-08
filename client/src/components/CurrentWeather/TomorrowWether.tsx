@@ -2,6 +2,7 @@ import Container from 'components/Container/Container'
 import styles from './CurrentWeather.module.scss'
 import { getTimeWithUtcOffset, weatherDescription } from 'services/tranformData'
 import {TomorrowWeather, getWetherImage} from '../../services/tranformData'
+import DayNigthTemp from 'components/DayNigthTemp/DayNigthTemp'
 
 interface TomorrowProps {
     weather: TomorrowWeather
@@ -9,7 +10,7 @@ interface TomorrowProps {
 
 const TomorrowWether = ({weather}: TomorrowProps) => {
 
-    const {sunrise, sunset, weathercode, utcOffset, dailyMoi, uvIndex} = weather
+    const {sunrise, sunset, weathercode, utcOffset, dailyMoi, uvIndex, tempMax, tempMin} = weather
 
     const days = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
     const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
@@ -21,12 +22,12 @@ const TomorrowWether = ({weather}: TomorrowProps) => {
             <Container>
                 <div className={styles.currentWeather__wrapper}>
                     <div className={styles.currentWeather__data}>
-                        <div className={styles.currentWeather__data_time}>{days[weekDay]} {tomorrowDay} {months[tomorrowMonth]}</div>
-                        
+                        <div className={styles.currentWeather__data_time}>{days[weekDay]}, {tomorrowDay} {months[tomorrowMonth]}</div>
+                        <DayNigthTemp dayTemp={tempMax} nigthTemp={tempMin}/>
+                        <div className={styles.currentWeather__codeValue}>{weatherDescription[weathercode]}</div>
                     </div>
                     <div className={styles.currentWeather__code}>
                         <i className={`wi ${image} ${styles.code_icon}`}></i>
-                        <div className={styles.currentWeather__codeValue}>{weatherDescription[weathercode]}</div>
                     </div>
                 </div>
             </Container>
@@ -36,20 +37,13 @@ const TomorrowWether = ({weather}: TomorrowProps) => {
                     <div className={styles.currentWeather__wrapper}>
                         <div className={styles.currentWeather__data}>
                             <div className={styles.currentWeather__data_name}>Влажность</div>
-                            {/* <div className={styles.currentWeather__data_name}>Точка росы</div>
-                            <div className={styles.currentWeather__data_name}>Давление</div> */}
                             <div className={styles.currentWeather__data_name}>УФ-индекс</div>
                             <div className={styles.currentWeather__data_name}>Восход/Заход</div>
-                            {/* <div className={styles.currentWeather__data_name}>Видимость</div> */}
-                            
                         </div>
                         <div className={styles.currentWeather__values}>
                             <div className={styles.currentWeather__data_value}>{dailyMoi} %</div>
-                            {/* <div className={styles.currentWeather__data_value}>{dewpoint} °C</div> */}
-                            {/* <div className={styles.currentWeather__data_value}>{pressure} мбар</div> */}
                             <div className={styles.currentWeather__data_value}>{uvIndex}</div>
                             <div className={styles.currentWeather__data_value}>{sunrise}, {sunset}</div>
-                            {/* <div className={styles.currentWeather__data_value}>{visibility} M</div> */}
                         </div>
                     </div>
                 </>

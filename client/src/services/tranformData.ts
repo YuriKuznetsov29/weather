@@ -61,6 +61,8 @@ export interface CurentWeather {
     precipProb: number
     visibility: number
     lon: number
+    tempMax: number
+    tempMin: number
 }
 
 export interface TomorrowWeather {
@@ -136,6 +138,8 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 precipProb: res.hourly.precipitation_probability[hour],
                 visibility: res.hourly.visibility[hour],
                 lon: res.longitude,
+                tempMax: Math.round(res.daily.temperature_2m_max[0]),
+                tempMin: Math.round(res.daily.temperature_2m_min[0]),
             },
             tomorrowWeather: {
                 sunrise: res.daily.sunrise[1].slice(-5),
@@ -144,8 +148,8 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 dailyTemp: res.hourly.temperature_2m.slice(24, 48),
                 dailyWind: res.hourly.windspeed_10m.slice(24, 48).map((el: number) => Math.round(el)),
                 dailyWindDir: res.hourly.winddirection_10m.slice(24, 48),
-                tempMax: res.daily.temperature_2m_max[1],
-                tempMin: res.daily.temperature_2m_min[1],
+                tempMax: Math.round(res.daily.temperature_2m_max[1]),
+                tempMin: Math.round(res.daily.temperature_2m_min[1]),
                 dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
                 utcOffset: res.utc_offset_seconds,
                 lon: res.longitude,
