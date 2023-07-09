@@ -13,10 +13,14 @@ const Main = () => (
     <Header>
       <SideBar />
     </Header>
-    <Backgroud />
-    <Form />
-    <SelectLocation />
-    <RecentLocations />
+    <Backgroud>
+      <>
+        <SelectLocation />
+        <RecentLocations />
+      </>
+    </Backgroud>
+    {/* <Form /> */}
+    
     <CurrentWeather />
     <Precipitations />
     <Charts />

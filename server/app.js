@@ -28,7 +28,7 @@ if (process.env.NODE_ENV = 'production') {
 
     const indexPath = path.join(__dirname, 'index.html')
 
-    app.get('*', (req, res) => {
+    app.get('/*', (req, res) => {
         res.sendFile(indexPath)
     })
 }

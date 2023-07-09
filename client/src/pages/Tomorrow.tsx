@@ -12,9 +12,12 @@ const Tomorrow = () => (
         <Header>
             <SideBar />
         </Header>
-        <Backgroud />
-        <SelectLocation />
-        <RecentLocations />
+        <Backgroud>
+            <>
+                <SelectLocation />
+                <RecentLocations />
+            </>
+        </Backgroud>
         <CurrentWeather />
         <Precipitations />
         <Charts />
