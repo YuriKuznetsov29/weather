@@ -1,3 +1,24 @@
+export const getWindDirection = (dir: number): string => {
+    if (dir >= 337.5 && dir <= 360 || dir > 0 && dir < 22.5) {
+        return 'C'
+    } else if (dir >= 22.5 && dir < 67.5) {
+        return 'СВ'
+    } else if (dir >= 67.5 && dir < 112.5) {
+        return 'В'
+    } else if (dir >= 112.5 && dir < 157.5) {
+        return 'ЮВ'
+    } else if (dir >= 157.5 && dir < 202.5) {
+        return 'Ю'
+    } else if (dir >= 202.5 && dir < 247.5) {
+        return 'ЮЗ'
+    } else if (dir >= 247.5 && dir < 292.5) {
+        return 'З'
+    } else if (dir >= 292.5 && dir < 337.5) {
+        return 'СЗ'
+    } else return ''
+}
+
+
 export const getLastDate = () => {
     const date = new Date()
     date.setDate(date.getDate() + 15)

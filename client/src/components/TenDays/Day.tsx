@@ -1,5 +1,5 @@
 import Container from "components/Container/Container"
-import { weatherDescription, getTimeWithUtcOffset, getWetherImage } from "services/tranformData"
+import { weatherDescription, getTimeWithUtcOffset, getWetherImage, getWindDirection } from "services/tranformData"
 import { useState } from "react"
 
 import styles from './TenDaysWeather.module.scss'
@@ -56,7 +56,7 @@ const Day = ({sunrise, sunset, weathercode, utcOffset, moi, wind, windDir, uvInd
                         <div className={styles.day__data_name}>Восход/заход</div>
                     </div>
                     <div className={styles.currentWeather__values}>
-                        <div className={styles.day__data_value}>{wind} км/ч {windDir} </div>
+                        <div className={styles.day__data_value}>{wind} км/ч {getWindDirection(windDir)} </div>
                         <div className={styles.day__data_value}>{moi} %</div>
                         <div className={styles.day__data_value}>{uvIndex}</div>
                         <div className={styles.day__data_value}>{sunrise}, {sunset}</div>

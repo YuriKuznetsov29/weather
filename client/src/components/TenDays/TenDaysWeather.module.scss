@@ -91,7 +91,7 @@
     display: none;
     justify-content: space-between;
     font-size: 18px;
-    overflow-x: scroll;
+    // overflow-x: scroll;
 }
 
 .day__dailyTempData {
@@ -133,6 +133,10 @@
 
     .day__dailyTempData {
         margin: 0 5px;
+    }
+
+    .day__dailyTempWrapper {
+        overflow-x: scroll;
     }
 
 }

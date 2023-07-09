@@ -62,3 +62,10 @@
     font-size: 15px;
     text-align: center;
 }
+
+@media(max-width: 650px) {
+
+    .nav {
+        width: 100%;
+    }
+}
