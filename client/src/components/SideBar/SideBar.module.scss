@@ -1,0 +1,71 @@
+.sideBar {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    justify-content: right;
+    z-index: 1000;
+    background-color: rgba(0, 0, 0, 0.3);
+}
+
+.nav {
+    width: 400px;
+    height: 100%;
+    padding: 55px 15px;
+    background-color: #ebebeb;
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    color: black;
+    font-size: 35px;
+    font-weight: 800;
+    transition: 0.5s;
+    &:hover {
+        cursor: pointer;
+        rotate: 45deg;
+    }
+}
+
+.link {
+    width: 100%;
+    height: 40px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    &:hover {
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+.active_link {
+    font-weight: bold;
+}
+
+.buttonWrapper {
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn {
+    width: 100px;
+}
+
+.email {
+    margin-bottom: 10px;
+    font-size: 15px;
+    text-align: center;
+}
+
+@media(max-width: 650px) {
+
+    .nav {
+        width: 100%;
+    }
+}

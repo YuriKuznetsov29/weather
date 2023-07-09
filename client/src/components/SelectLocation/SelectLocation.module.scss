@@ -1,0 +1,142 @@
+.search {
+    margin-top: 100px;
+}
+
+.search__wrapper {
+    margin: 0 auto;
+    width: 540px;
+    // height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+}
+
+.search__icon, .currentLocation__icon {
+    // padding: 2px;
+    width: 40px;
+    background-color: #fff;
+    // font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search__icon {
+    height: 40px;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, .1);
+    border-radius: 5px 0 0 5px;
+}
+
+.currentLocation__icon {
+    // border-radius: 0 0 0 5px;
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    // text-align: center;
+    height: 100%; //37px
+    background-color: inherit;
+}
+
+.search__input, .search__btnCurrentLocation {
+    height: 40px;
+    font-size: 16px;
+    padding: 0 5px;
+}
+
+.search__input {
+    width: 100%;
+    border-radius: 0 5px 5px 0;
+    border: none;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, .1);
+    &:focus {
+        outline: none;
+    }
+}
+
+.search__resultsWrapper {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+}
+
+.search__btnCurrentLocation {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    color: #8d8d8d;
+    background-color: #fff;
+    border-top: 3px solid #ff7600;
+    display: none;
+    // visibility: hidden;
+    justify-content: left;
+    align-items: center;
+    // opacity: 0;
+    transition: opacity 0.2s;
+}
+
+.search__results {
+    width: 100%;
+    border-radius: 0 0 5px 5px;
+    box-shadow: 0 3px 0 0 rgba(0, 0, 0, .1);
+    overflow: hidden;
+}
+
+.search__result {
+    width: 100%;
+    height: 40px;
+    padding: 0 5px;
+    font-size: 16px;
+    color: #8d8d8d;
+    background-color: #fff;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+.search__btnCurrentLocation, .search__result {
+    // border: none;
+    &:hover {
+        cursor: pointer;
+        color: #000;
+        background: #ededed;
+    }
+}
+
+.search__active {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.active {
+    display: flex;
+}
+
+@media(max-width: 650px) {
+    .search__wrapper {
+        width: 400px;
+    }
+}
+
+@media(max-width: 450px) {
+    .search__wrapper {
+        width: 100%;
+    }
+
+    .search__resultsWrapper {
+        top: 35px;
+    }
+
+    .search__input, .search__btnCurrentLocation, .search__result {
+        height: 35px;
+        font-size: 14px;
+    }
+
+    .search__icon {
+        height: 35px;
+        font-size: 18px;
+    }
+
+    .currentLocation__icon {
+        font-size: 18px;
+    }
+}
