@@ -11,9 +11,12 @@ const TenDays = () => {
             <Header>
                 <SideBar />
             </Header>
-            <Backgroud />
-            <SelectLocation />
-            <RecentLocations />
+            <Backgroud>
+                <>
+                    <SelectLocation />
+                    <RecentLocations />
+                </>
+            </Backgroud>
             <TenDaysWeather />
         </>
     )
