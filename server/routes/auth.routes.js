@@ -64,7 +64,7 @@ router.post('/signUp', [
                 user: {
                     email: newUser.email,
                     userId: newUser._id,
-                    SavedLocations: newUser.savedLocations
+                    savedLocations: newUser.savedLocations
                 }
             })
 

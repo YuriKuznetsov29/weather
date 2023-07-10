@@ -26,11 +26,12 @@ const StarSvg = () => {
     }
 
     const saveCurrentLocation = () => {
-        if (currentLocation && auth) {
-            const newLocations: CurrentLocation[] = checkInclude()
+        console.log(savedLocations)
+        if (Array.isArray(savedLocations) && auth && currentLocation) {
+            const newLocations = checkInclude()
                 ? savedLocations.filter((location) => location.city !== currentLocation.city)
-                : saveLocations.length > 0 ? savedLocations.concat([currentLocation]) : [currentLocation]
-            dispatch(saveLocations({ userId, savedLocations: newLocations }))
+                : savedLocations.concat([currentLocation])
+            dispatch(saveLocations({ userId, savedLocations: newLocations as CurrentLocation[] }))
         } else {
             navigate('/signIn')
         }
