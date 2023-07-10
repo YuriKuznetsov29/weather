@@ -95,6 +95,7 @@ type LoginSlice = {
     signUpState: boolean
     user: IUser
     status: "idle" | "loading" | "finished" | "error"
+    authCheckStatus: "idle" | "loading" | "finished" | "error"
     serverErrors: string
 }
 
@@ -104,6 +105,7 @@ const initialState: LoginSlice = {
     signUpState: false,
     user: {} as IUser,
     status: "idle",
+    authCheckStatus: "idle",
     serverErrors: ''
 }
 
@@ -167,10 +169,17 @@ const loginSlice = createSlice({
                 state.authStatus = false
                 state.user = {} as IUser
             })
+            .addCase(checkAuth.pending, (state) => {
+                state.authCheckStatus = "loading"
+            })
+            .addCase(checkAuth.rejected, (state) => {
+                state.authCheckStatus = "error"
+            })
             .addCase(checkAuth.fulfilled, (state, action) => {
                 if (action.payload) {
                     state.authStatus = true
                     state.user = action.payload.user
+                    state.authCheckStatus = "finished"
                 }
             })
             .addCase(saveLocations.fulfilled, (state, action) => {

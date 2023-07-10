@@ -1,5 +1,5 @@
 import { useAppSelector } from "app/hooks"
-import { authStatusSelector } from "app/selectors"
+import { authStatusSelector, statusAuthCheckSelector } from "app/selectors"
 import { Navigate } from "react-router-dom"
 
 interface PrivateRouteProps {
@@ -8,8 +8,9 @@ interface PrivateRouteProps {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const auth = useAppSelector(authStatusSelector)
+  const status = useAppSelector(statusAuthCheckSelector)
 
-  if (!auth) {
+  if (!auth && status === "finished") {
     return <Navigate to='/signIn'></Navigate>
   }
 

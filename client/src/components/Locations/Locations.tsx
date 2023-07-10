@@ -11,7 +11,7 @@ const Locations = () => {
     const renderLocations = () => {
         return (
             <div className={styles.locationWrapper}>
-                {savedLocations.length > 0 ? (
+                {Array.isArray(savedLocations) && savedLocations.length > 0 ? (
                     savedLocations.map((location, i) => {
                         return <Location key={i} location={location} redirect={true} />
                     })
