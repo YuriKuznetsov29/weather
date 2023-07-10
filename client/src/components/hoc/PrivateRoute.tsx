@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const auth = useAppSelector(authStatusSelector)
   const status = useAppSelector(statusAuthCheckSelector)
 
-  if (!auth && status === "finished") {
+  if (!auth) {
     return <Navigate to='/signIn'></Navigate>
   }
 
