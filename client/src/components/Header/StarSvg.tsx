@@ -28,7 +28,6 @@ const StarSvg = () => {
     const saveCurrentLocation = () => {
         console.log(savedLocations)
         if (Array.isArray(savedLocations) && auth && currentLocation) {
-            debugger
             const newLocations = checkInclude()
                 ? savedLocations.filter((location) => location.city !== currentLocation.city)
                 : savedLocations.concat([currentLocation])
