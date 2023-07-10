@@ -29,7 +29,7 @@ const StarSvg = () => {
         if (currentLocation && auth) {
             const newLocations: CurrentLocation[] = checkInclude()
                 ? savedLocations.filter((location) => location.city !== currentLocation.city)
-                : savedLocations.concat([currentLocation])
+                : Array.isArray(savedLocations) ? savedLocations.concat([currentLocation]) : [currentLocation]
             dispatch(saveLocations({ userId, savedLocations: newLocations }))
         } else {
             navigate('/signIn')
