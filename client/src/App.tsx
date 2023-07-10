@@ -1,7 +1,7 @@
 import Main from "pages/Main"
 import Tomorrow from "pages/Tomorrow"
 import ErrorPage from "components/ErrorPage/ErrorPage"
-import { createBrowserRouter, RouterProvider } from "react-router-dom"
+import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom"
 import TenDays from "pages/TenDays"
 import { useEffect } from "react"
 import { useAppDispatch } from "app/hooks"
@@ -14,7 +14,7 @@ import { storage } from "services/storage"
 import { setCurrentLocation } from "app/slices/locationSlice"
 import { getLocation, getCoordinateLocation } from "services/getData"
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Main />,
