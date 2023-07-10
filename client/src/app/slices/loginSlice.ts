@@ -80,7 +80,7 @@ export const saveLocations = createAsyncThunk(
     }
 )
 
-interface RequestSavedLocationsData {
+export interface RequestSavedLocationsData {
     userId: string
     savedLocations: CurrentLocation[]
 }

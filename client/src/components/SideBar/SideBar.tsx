@@ -6,7 +6,7 @@ import { NavLink, useMatch, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "app/hooks"
 import { setDay } from "app/slices/weatherSlice"
 import Button from "components/Button/Button"
-import { setSignUpState, setSignInState, signOut } from "app/slices/loginSlice"
+import { signOut } from "app/slices/loginSlice"
 import { authStatusSelector, userSelector } from "app/selectors"
 
 const SideBar = () => {
