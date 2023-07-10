@@ -48,6 +48,7 @@ const SideBar = () => {
               onClick={() => {
                 dispatch(signOut())
                 navigate("/", {replace: true})
+                stateChange()
               }}
             >
               Выйти
@@ -57,6 +58,9 @@ const SideBar = () => {
             <NavLink to={"/signUp"}>
               <Button
                 addStyles={{ width: "150px" }}
+                onClick={() => {
+                  stateChange()
+                }}
               >
                 Регистрация
               </Button>
@@ -64,6 +68,9 @@ const SideBar = () => {
             <NavLink to={"/signIn"}>
               <Button
                 addStyles={{ width: "150px" }}
+                onClick={() => {
+                  stateChange()
+                }}
               >
                 Войти
               </Button>
@@ -77,6 +84,9 @@ const SideBar = () => {
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active_link}` : styles.link
           }
+          onClick={() => {
+            stateChange()
+          }}
         >
           Сегодня
         </NavLink>
@@ -85,6 +95,9 @@ const SideBar = () => {
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active_link}` : styles.link
           }
+          onClick={() => {
+            stateChange()
+          }}
         >
           Завтра
         </NavLink>
@@ -94,6 +107,9 @@ const SideBar = () => {
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active_link}` : styles.link
           }
+          onClick={() => {
+            stateChange()
+          }}
         >
           10 дней
         </NavLink>
@@ -103,6 +119,9 @@ const SideBar = () => {
           className={({ isActive }) =>
             isActive ? `${styles.link} ${styles.active_link}` : styles.link
           }
+          onClick={() => {
+            stateChange()
+          }}
         >
           Сохраненные города
         </NavLink>
