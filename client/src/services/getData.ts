@@ -6,7 +6,7 @@ export function getLocation() {
     return useHttp("https://api.ipgeolocation.io/ipgeo?apiKey=17a8d753063e4a20a9531fe3638de576")
 }
 
-export function getCoordinateLocation(city: string) {
+export function getCoordinateLocation(city: string = 'москва') {
     return useHttp(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5&language=ru`)
 }
 

@@ -12,14 +12,7 @@ const RecentLocations = () => {
     const [locationElement, setLocationElement] = useState<ReactElement[]>([])
 
     const currLocation: CurrentLocation | null = useAppSelector(currentLocationSelector)
-    const [locations, setLocations] = useState<CurrentLocation[]>([])
-
-
-    useEffect(() => {
-        if (storage('recentLocations')) {
-            setLocations(storage('recentLocations'))
-        } 
-    }, [])
+    const [locations, setLocations] = useState<CurrentLocation[]>(storage('recentLocations') || [])
 
     useEffect(() => {
         if (locations.length > 0) {
