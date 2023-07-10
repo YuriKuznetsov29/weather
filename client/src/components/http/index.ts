@@ -7,6 +7,8 @@ export const API_URL = `http://localhost:8080/api`
 
 //84.38.183.52
 
+//84.38.183.52
+
 const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
