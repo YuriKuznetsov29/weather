@@ -24,7 +24,7 @@ const Header = ({ children, background }: HeaderProps) => {
   const [barState, setBarState] = useState(false)
 
   const stateChange = () => {
-    setBarState(!barState)
+    setBarState((barState) => !barState)
   }
 
   const city = useAppSelector(currentCity)

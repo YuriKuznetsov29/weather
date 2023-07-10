@@ -46,11 +46,6 @@
 .star {
     color: #fff;
     fill: none;
-    &:hover {
-        cursor: pointer;
-        color: orange;
-        fill: orange;
-    }
 }
 
 .city_wrapper {
@@ -62,4 +57,14 @@
 .activeStar {
     color: orange;
     fill: orange;
+}
+
+@media(min-width: 1080px) {
+    .star {
+        &:hover {
+            cursor: pointer;
+            color: orange;
+            fill: orange;
+        }
+    }
 }

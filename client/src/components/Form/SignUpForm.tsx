@@ -121,8 +121,8 @@ const SignUpForm = () => {
           </div>
 
           {serverError && <div>{serverError}</div>}
-          {loadStatus === "loading" && <div>Loading...</div>}
-          <Button type="submit">Зарегистрироваться</Button>
+          <div style={loadStatus === "loading" ? {visibility: "visible"} : {visibility: "hidden"}}>Loading...</div>
+          <Button type="submit" disabled={loadStatus === "loading" ? true : false}>Зарегистрироваться</Button>
         </Form>
       </Formik>
     </div>
