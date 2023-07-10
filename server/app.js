@@ -17,7 +17,7 @@ app.use(express.urlencoded({
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: true//config.get('clientURLR') ?? 'http://localhost:3000'
+    origin: config.get('clientURL') ?? 'http://localhost:3000'
 }))
 app.use('/api', routes)
 
