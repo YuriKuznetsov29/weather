@@ -1,14 +1,8 @@
-import Main from "pages/Main/Main"
-import Tomorrow from "pages/Tomorrow/Tomorrow"
 import ErrorPage from "components/ErrorPage/ErrorPage"
-import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom"
-import TenDays from "pages/TenDays/TenDays"
+import { RouterProvider, createHashRouter } from "react-router-dom"
 import { Suspense, useEffect } from "react"
 import { useAppDispatch } from "app/hooks"
 import { checkAuth } from "app/slices/loginSlice"
-import SavedLocatons from "pages/SavedLocations/SavedLocations"
-import SignUp from "pages/SignUp/SignUp"
-import SignIn from "pages/SignIn/SingnIn"
 import { storage } from "services/storage"
 import { setCurrentLocation } from "app/slices/locationSlice"
 import { getLocation, getCoordinateLocation } from "services/getData"
@@ -18,6 +12,8 @@ import { SignInAsync } from "pages/SignIn/SignIn.async"
 import { SignUpAsync } from "pages/SignUp/SignUp.async"
 import { TenDaysAsync } from "pages/TenDays/TenDays.async"
 import { TomorrowAsync } from "pages/Tomorrow/Tomorrow.async"
+import Page404 from "components/Page404/Page404"
+import Spinner from "components/Spinner/Spinner"
 
 const router = createHashRouter([
   {
@@ -56,6 +52,13 @@ const router = createHashRouter([
     ),
     errorElement: <ErrorPage />,
   },
+  {
+    path: "*",
+    element: (
+        <Page404 />
+    ),
+    errorElement: <ErrorPage />,
+  },
 ])
 
 function App() {
@@ -83,7 +86,7 @@ function App() {
   }, [])
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense fallback={<Spinner />}>
       <RouterProvider router={router} />
     </Suspense>
   )
