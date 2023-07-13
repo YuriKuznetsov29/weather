@@ -1,55 +1,58 @@
-import Main from "pages/Main"
-import Tomorrow from "pages/Tomorrow"
+import Main from "pages/Main/Main"
+import Tomorrow from "pages/Tomorrow/Tomorrow"
 import ErrorPage from "components/ErrorPage/ErrorPage"
 import { createBrowserRouter, RouterProvider, createHashRouter } from "react-router-dom"
-import TenDays from "pages/TenDays"
-import { useEffect } from "react"
+import TenDays from "pages/TenDays/TenDays"
+import { Suspense, useEffect } from "react"
 import { useAppDispatch } from "app/hooks"
 import { checkAuth } from "app/slices/loginSlice"
-import SavedLocatons from "pages/SavedLocations"
-import PrivateRoute from "components/hoc/PrivateRoute"
-import SignUp from "pages/SignUp"
-import SignIn from "pages/SingnIn"
+import SavedLocatons from "pages/SavedLocations/SavedLocations"
+import SignUp from "pages/SignUp/SignUp"
+import SignIn from "pages/SignIn/SingnIn"
 import { storage } from "services/storage"
 import { setCurrentLocation } from "app/slices/locationSlice"
 import { getLocation, getCoordinateLocation } from "services/getData"
+import { MainAsync } from "pages/Main/Main.async"
+import { SavedLocationsAsync } from "pages/SavedLocations/SavedLocations.async"
+import { SignInAsync } from "pages/SignIn/SignIn.async"
+import { SignUpAsync } from "pages/SignUp/SignUp.async"
+import { TenDaysAsync } from "pages/TenDays/TenDays.async"
+import { TomorrowAsync } from "pages/Tomorrow/Tomorrow.async"
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <MainAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/tomorrow",
-    element: <Tomorrow />,
+    element: <TomorrowAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/tenDays",
-    element: <TenDays />,
+    element: <TenDaysAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/signUp",
     element: (
-      <SignUp />
+      <SignUpAsync />
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/signIn",
     element: (
-      <SignIn />
+      <SignInAsync />
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/savedLocations",
     element: (
-      <PrivateRoute>
-        <SavedLocatons />
-      </PrivateRoute>
+        <SavedLocationsAsync />
     ),
     errorElement: <ErrorPage />,
   },
@@ -80,9 +83,9 @@ function App() {
   }, [])
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <RouterProvider router={router} />
-    </>
+    </Suspense>
   )
 }
 
