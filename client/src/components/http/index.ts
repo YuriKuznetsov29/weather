@@ -1,7 +1,7 @@
 import axios from "axios";
 import { AuthResponse } from "components/models/response/AuthResponse";
 
-export const API_URL = `http://84.38.183.52/api`
+export const API_URL = `http://yura.batgen.ru/api`
 
 //84.38.183.52
 
