@@ -1,7 +1,7 @@
 import Backgroud from "components/Background/Background"
 import Header from "components/Header/Header"
 import SideBar from "components/SideBar/SideBar"
-import SingInForm from "../components/Form/SignInForm"
+import SingInForm from "../../components/Form/SignInForm"
 
 const SignIn = () => {
     return (
