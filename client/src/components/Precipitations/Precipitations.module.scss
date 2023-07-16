@@ -1,5 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/loading";
+@import "../../styles/mixins";
 
 .precipitation {
     font-size: 14px;
@@ -10,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     max-width: 100%;
+    padding: 4px 0;
 }
 
 .precipitation__titleWrapper {
@@ -20,9 +22,9 @@
 }
 
 .precipitationTitle {
+    @include shadow-text;
     margin-bottom: 20px;
     font-size: 30px;
-    color: #000;
 }
 
 .precipitation__quantity_title {

@@ -12,6 +12,7 @@ import { ChartData, ChartOptions } from "chart.js";
 import { createSunImg, culkSunPosition, culkTrueNoon, sinusCalk } from "./chartHelpers"
 
 import styles from './Charts.module.scss'
+import { log } from "console";
 
 ChartJS.register(
     annotationPlugin, 
@@ -72,6 +73,7 @@ const Charts = () => {
           trueNoonConfig.yMax = -1.2
           horizontConfig.yMax = 0.3
 
+
           const windowWidth = document.documentElement.clientWidth
           setSunAdaptiveChart({height: `${windowWidth * 0.5}px`, width: `${windowWidth - 30}px`})
           setAdaptiveChart({height: '300px', width: '800px'})
@@ -97,32 +99,31 @@ const Charts = () => {
             const tempChart = tempRef.current
             if (tempChart) {
                 tempChart.data.datasets[0].data = dailyTemp
-                tempChart.update('active')
+                tempChart.update()
             } 
             
             //wind
+            const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
             const datasets = windChartConfig.data.datasets
             windChartConfig.data.labels = dailyTime;
-            datasets[0].data = dailyWind.map(el => el + 2.5);
+            datasets[0].data = dailyWind.map(el => el + (avg * 0.25));
             datasets[1].data = dailyWind;
-            // datasets[1].datalabels.anchor = "end";
-            // datasets[0].rotation = dailyWindDir
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
                 // console.log(windChart.data.datasets[0].rotation as PointOptions)
                 const chartDatasets = windChart.data.datasets
-                chartDatasets[0].data = dailyWind.map(el => el + 2.5);
+                chartDatasets[0].data = dailyWind.map(el => el + (avg * 0.25)); // el + 2.5
                 // windChart.data.datasets[0].rotation as ScriptableAndArrayOptions<PointOptions> = dailyWindDir;
                 // datasets[0].rotation = dailyWindDir
                 chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
-                windChart.update('active');
 
-                // windChart.update();
+                windChart.update();
             }
 
             //sun
+
             if (selectedDay === "today") {
                 const {time} = getTimeWithUtcOffset(utcOffset)
                 const [labels, sin] = sinusCalk()

@@ -4,6 +4,7 @@
     @include shadow-text;
     margin: 10px 0;
     display: flex;
+    align-items: center;
 }
 
 .arrow {
@@ -14,4 +15,10 @@
 
 .data {
     margin-right: 40px;
+}
+
+@media (max-width: 650px) {
+    .data {
+        margin-right: 20px;
+    }
 }

@@ -86,8 +86,6 @@ const chartConfigs = () => {
     }
 
     const windChartConfig = {
-        // type: "line",
-        // color: "#fff",
         data: {
             labels: [""],
             datasets: [
@@ -118,6 +116,7 @@ const chartConfigs = () => {
                         // anchor: "end",
                     },
                     data: [0],
+                    grouped: true
                 },
             ],
         },
