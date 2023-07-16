@@ -118,7 +118,6 @@ const Charts = () => {
                 // datasets[0].rotation = dailyWindDir
                 chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
-
                 windChart.update();
             }
 
