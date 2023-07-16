@@ -2,7 +2,8 @@
 @import "../../styles/loading";
 
 .precipitation {
-    font-size: 16px;
+    font-size: 14px;
+    font-weight: 500;
 }
 
 .precipitation__wrapper {
@@ -53,7 +54,7 @@
 @media (max-width: 1200px) {
 
     .precipitation {
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .precipitation__wrapper {

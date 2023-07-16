@@ -61,6 +61,11 @@ const router = createHashRouter([
   },
 ])
 
+// classNames
+// базовые стили и переменные
+// декомпозировать компоненты
+// исправить зависимости
+
 function App() {
   const dispatch = useAppDispatch()
 

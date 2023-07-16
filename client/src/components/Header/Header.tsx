@@ -1,18 +1,14 @@
-import { useEffect, useState, createContext } from "react"
+import { useEffect, useState, createContext, useContext } from "react"
 import { List } from "@phosphor-icons/react"
 import Container from "components/Container/Container"
 import { useAppSelector } from "app/hooks"
 import { currentCity } from "app/selectors"
 import StarSvg from "./StarSvg"
+import { BarContext } from "components/SideBar/BarContext"
 
 import styles from "./Header.module.scss"
 
-type BarContext = {
-  barState: boolean
-  stateChange: () => void
-}
 
-export const Context = createContext<BarContext>(null!)
 
 interface HeaderProps {
   children: JSX.Element
@@ -21,11 +17,7 @@ interface HeaderProps {
 
 const Header = ({ children, background }: HeaderProps) => {
   const [scroll, setScroll] = useState({})
-  const [barState, setBarState] = useState(false)
-
-  const stateChange = () => {
-    setBarState((barState) => !barState)
-  }
+  const {stateChange} = useContext(BarContext)
 
   const city = useAppSelector(currentCity)
 
@@ -44,22 +36,22 @@ const Header = ({ children, background }: HeaderProps) => {
   })
 
   return (
-    <Context.Provider value={{ barState, stateChange }}>
+    <>
       <header className={`${styles.header} ${scroll} ${background && styles.scroll}`}>
-        <Container>
-          <div className={styles.header__inner}>
-            <div className={styles.city_wrapper}>
-              <div className={styles.location__city} data-type="city">
-                {city}
+          <Container>
+            <div className={styles.header__inner}>
+              <div className={styles.city_wrapper}>
+                <div className={styles.location__city} data-type="city">
+                  {city}
+                </div>
+                <StarSvg />
               </div>
-              <StarSvg />
+              <List className={styles.burger} onClick={stateChange} />
             </div>
-            <List className={styles.burger} onClick={() => stateChange()} />
-          </div>
-        </Container>
+          </Container>
       </header>
       {children}
-    </Context.Provider>
+    </>
   )
 }
 

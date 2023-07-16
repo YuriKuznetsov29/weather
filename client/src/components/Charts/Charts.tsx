@@ -1,5 +1,5 @@
 import { Line,  Chart } from "react-chartjs-2"
-import { Chart as ChartJS, LineController, LineElement, PointElement, CategoryScale, LinearScale, Filler, Legend, BarController, BarElement, ScriptableAndArrayOptions, PointOptions, ChartDataset, ChartTypeRegistry , Point} from "chart.js";
+import { Chart as ChartJS, LineController, LineElement, PointElement, CategoryScale, LinearScale, Filler, Legend, BarController, BarElement} from "chart.js";
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 import annotationPlugin from 'chartjs-plugin-annotation';
 import chartConfigs from "./ChatsConfigs";
@@ -9,76 +9,38 @@ import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
 import { getTimeWithUtcOffset } from "services/tranformData";
 import { ChartData, ChartOptions } from "chart.js";
+import { createSunImg, culkSunPosition, culkTrueNoon, sinusCalk } from "./chartHelpers"
+
 import styles from './Charts.module.scss'
 
-ChartJS.register(annotationPlugin, ChartDataLabels, LineController, LineElement, PointElement, CategoryScale, LinearScale, Filler, Legend, BarController, BarElement)
+ChartJS.register(
+    annotationPlugin, 
+    ChartDataLabels, 
+    LineController, 
+    LineElement, 
+    PointElement, 
+    CategoryScale, 
+    LinearScale, 
+    Filler, 
+    Legend, 
+    BarController, 
+    BarElement
+    )
 
-const {tempChartConfig, 
+const {
+    tempChartConfig, 
     windChartConfig, 
     sunChartConfig, 
     sunriseConfig,
     sunsetConfig,
     trueNoonConfig,
-    horizontConfig} = chartConfigs()
+    horizontConfig
+} = chartConfigs()
 
-ChartJS.defaults.color = '#000';
-ChartJS.defaults.font.size = 16;
-ChartJS.defaults.plugins.datalabels!.align = 'end';
-
-function culkSunPosition(sunrise: string, sunset: string, curtime: string): number {
-
-    const sOnDay = 24 * 60 * 60;
-    const allSteps = 96;
-    
-    const curtimeS = +curtime.split(':')[0] * 60 * 60 + +curtime.split(':')[1] * 60;
-  
-    const sunriseS = +sunrise.split(':')[0] * 60 * 60 + +sunrise.split(':')[1] * 60;
-    const sunsetS = +sunset.split(':')[0] * 60 * 60 + +sunset.split(':')[1] * 60;
-  
-    const morningStep = sunriseS/allSteps*4
-    const dayStep = (sunsetS - sunriseS)/allSteps*2;
-    const nightStep = (sOnDay - sunsetS)/allSteps*4
-    
-  
-    if (curtimeS >= sunsetS) {
-        return Math.ceil(allSteps / 4 * 3 + (curtimeS - sunsetS) / nightStep);
-    }
-    if (curtimeS >= sunriseS) {
-        return Math.floor(allSteps / 4 + (curtimeS - sunriseS) / dayStep);
-    }
-    return Math.round(curtimeS / morningStep);
-  }
-
-function createSunImg() {
-    let sun = document.createElement('img');
-    if (document.documentElement.clientWidth <= 650) {
-      sun.src = 'smallSun.svg';
-    } else {
-      sun.src = 'sun.svg';
-    }
-    return sun
-}
-  
-function sinusCalk() {
-    let labels = []
-    let sin = []
-  
-    const step = Math.PI / 48
-    
-    for (let i = -Math.PI / 2; i < 1.5*Math.PI; i+= step) {
-        labels.push(''+i.toFixed(10));
-        sin.push(Math.sin(i).toFixed(10));
-    }
-    
-    return [labels, sin];
-}
-
-function culkTrueNoon(offset: number, lon: number): string {
-    const trueNoon = 12 + ((offset/3600) - lon / 15)
-    return Math.floor(trueNoon) + ':' + (trueNoon % 1 * 0.6 * 100).toFixed()
-}
-
-
+ChartJS.defaults.color = '#000'
+ChartJS.defaults.font.size = 16
+ChartJS.defaults.plugins.datalabels!.align = 'end'
+ChartJS.defaults.animation = false
 
 const Charts = () => {
     const [sunAdaptiveChart, setSunAdaptiveChart] = useState({})
@@ -98,8 +60,6 @@ const Charts = () => {
 
     function adaptiveCharts() {
         if (document.documentElement.clientWidth <= 650) {
-        //   const chartContainer = root.querySelectorAll('.chart-container'),
-        //         sunChartContainer = document.querySelector('.sunChart-container');
       
           ChartJS.defaults.font.size = 10;
           tempChartConfig.data.datasets[0].borderWidth = 1
@@ -114,12 +74,7 @@ const Charts = () => {
 
           const windowWidth = document.documentElement.clientWidth
           setSunAdaptiveChart({height: `${windowWidth * 0.5}px`, width: `${windowWidth - 30}px`})
-        //   sunChartContainer.style.cssText = `height:${windowWidth * 0.5}px; width: ${windowWidth - 30}px;`
-
           setAdaptiveChart({height: '300px', width: '800px'})
-        //   chartContainer.forEach(el => {
-        //     el.style.cssText = 'height:300px; width: 800px;'
-        //   })
         }
     }
 
@@ -185,7 +140,7 @@ const Charts = () => {
                 ( sunDatasets[0].data as string [] ) = sin; // sinus
                 ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
                 ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
-                ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
+                ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.2 + '').slice(0, sunPosition + 1)
                 if (sunPosition > 1) {
                     sunDatasets[3].pointStyle = [];
                     sunDatasets[3].pointStyle[sunPosition - shift] = sun

@@ -1,16 +1,21 @@
 import { X } from "@phosphor-icons/react"
-import styles from "./SideBar.module.scss"
-import { useContext, useEffect } from "react"
-import { Context } from "components/Header/Header"
+import { useContext, useEffect, useState } from "react"
 import { NavLink, useMatch, useNavigate } from "react-router-dom"
 import { useAppDispatch, useAppSelector } from "app/hooks"
 import { setDay } from "app/slices/weatherSlice"
 import Button from "components/Button/Button"
 import { signOut } from "app/slices/loginSlice"
 import { authStatusSelector, userSelector } from "app/selectors"
+import classNames from "classnames"
+
+import './SideBar.module.scss'
+import styles from "./SideBar.module.scss"
+import { BarContext } from "./BarContext"
+
 
 const SideBar = () => {
-  const { barState, stateChange } = useContext(Context)
+  const {barState, stateChange} = useContext(BarContext)
+
   const dispatch = useAppDispatch()
 
   const authStatus = useAppSelector(authStatusSelector)
@@ -33,9 +38,9 @@ const SideBar = () => {
   }, [])
 
   return (
-    <div className={styles.sideBar} style={barState ? { display: "flex" } : { display: "none" }}>
+    <div className={classNames(`${styles.sidebar}`, { [styles.active_bar]: barState })}>
       <nav className={styles.nav}>
-        <X className={styles.close} weight="bold" onClick={() => stateChange()} />
+        <X className={styles.close} weight="bold" onClick={stateChange} />
         {authStatus ? (
           <div className={styles.email}>{user.email}</div>
         ) : (
@@ -47,7 +52,7 @@ const SideBar = () => {
               addStyles={{ width: "150px" }}
               onClick={() => {
                 dispatch(signOut())
-                navigate("/", {replace: true})
+                navigate("/", {replace: true});
                 stateChange()
               }}
             >

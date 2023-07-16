@@ -8,8 +8,12 @@ interface DayNigthTempProps {
 
 const DayNigthTemp = ({dayTemp, nigthTemp}: DayNigthTempProps) => (
     <div className={styles.temperature}>
-        Днем {dayTemp}° <ArrowUp />
-        Ночью {nigthTemp}° <ArrowDown  />
+        <div className={styles.data}>
+            Днем {dayTemp}° <ArrowUp className={styles.arrow} />
+        </div>
+        <div className={styles.data}>
+            Ночью {nigthTemp}° <ArrowDown className={styles.arrow} />
+        </div>
     </div>
 )
 
