@@ -1,5 +1,5 @@
 @import "../../styles/variables";
-@import "../../styles/mixins.scss";
+@import "../../styles/mixins";
 @import "../../styles/loading";
 
 .currentWeather {
@@ -29,6 +29,7 @@
 }
 
 .currentWeather__codeValue {
+    @include shadow-text;
     margin: 10px 0;
 }
 
@@ -39,9 +40,9 @@
 }
 
 .currentWeather__nowTitle {
+    @include shadow-text;
     margin-top: 30px;
     font-size: 30px;
-    color: #000;
 }
 
 .currentWeather__values {

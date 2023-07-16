@@ -101,9 +101,10 @@ const Charts = () => {
             } 
             
             //wind
+            const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
             const datasets = windChartConfig.data.datasets
             windChartConfig.data.labels = dailyTime;
-            datasets[0].data = dailyWind.map(el => el + 2.5);
+            datasets[0].data = dailyWind.map(el => el + (avg * 0.25));
             datasets[1].data = dailyWind;
             // datasets[1].datalabels.anchor = "end";
             // datasets[0].rotation = dailyWindDir
@@ -112,7 +113,7 @@ const Charts = () => {
             if (windChart) {
                 // console.log(windChart.data.datasets[0].rotation as PointOptions)
                 const chartDatasets = windChart.data.datasets
-                chartDatasets[0].data = dailyWind.map(el => el + 2.5);
+                chartDatasets[0].data = dailyWind.map(el => el + (avg * 0.25)); // el + 2.5
                 // windChart.data.datasets[0].rotation as ScriptableAndArrayOptions<PointOptions> = dailyWindDir;
                 // datasets[0].rotation = dailyWindDir
                 chartDatasets[1].data = dailyWind;
@@ -120,6 +121,7 @@ const Charts = () => {
                 windChart.update('active');
 
                 // windChart.update();
+
             }
 
             //sun

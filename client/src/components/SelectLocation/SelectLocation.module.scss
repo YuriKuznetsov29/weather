@@ -28,19 +28,16 @@
 }
 
 .currentLocation__icon {
-    // border-radius: 0 0 0 5px;
-    // display: flex;
-    // justify-content: center;
-    // align-items: center;
-    // text-align: center;
     height: 100%; //37px
     background-color: inherit;
+    border-bottom-left-radius: 5px;
+
 }
 
 .search__input, .search__btnCurrentLocation {
     height: 40px;
     font-size: 16px;
-    padding: 0 5px;
+    // padding: 0 5px;
 }
 
 .search__input {

@@ -10,9 +10,10 @@ import { currentLocationSelector } from "app/selectors"
 import { storage } from "services/storage"
 
 import styles from './SelectLocation.module.scss'
+import classNames from "classnames"
 
 const SelectLocation = () => {
-    const [activeSearch, setActiveSearch] = useState({})
+    const [activeSearch, setActiveSearch] = useState(false)
     const [activeStyleSearch, setActiveStyleSearch] = useState({})
     const [searchValue, setSearchValue] = useState('')
     const [searchRes, setSearchRes] = useState([])
@@ -30,15 +31,6 @@ const SelectLocation = () => {
                 })
         }
     }, [searchValue])
-
-    // useEffect(() => {
-    //     if (storage('currentLocation')) {
-    //         const {lat, lon, city, timezone, country} = storage('currentLocation')
-    //         dispatch(setCurrentLocation({lat: lat, lon: lon, city: city, timezone: timezone, country: country}))
-    //     } else {
-    //         getCurrentLocation()
-    //     }
-    // }, [])
 
     useEffect(() => {
         if (location) {
@@ -63,7 +55,7 @@ const SelectLocation = () => {
 
     const startSearchLocation = (event: React.MouseEvent<HTMLFormElement>) => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
-            setActiveSearch(styles.active)
+            setActiveSearch(!activeSearch)
             setActiveStyleSearch(styles.search__active)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
@@ -92,7 +84,7 @@ const SelectLocation = () => {
     const clearFind = () => {
         setSearchValue('')
         setSearchRes([])
-        setActiveSearch({})
+        setActiveSearch(false)
         setActiveStyleSearch({})
     }
 
@@ -121,16 +113,24 @@ const SelectLocation = () => {
             <Container>
                 <div className={styles.search__wrapper} id="closeSearch">
 
-                        <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} weight="thin" />
-                        <input className={`${styles.search__input} ${activeStyleSearch}`} type="text" placeholder="Поиск" value={searchValue} data-type="inputLocation" onInput={(event => searchLocation(event))}></input>
-
+                    <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} weight="thin" />
+                    <input 
+                        className={`${styles.search__input} ${activeStyleSearch}`} 
+                        type="text" placeholder="Поиск" value={searchValue} 
+                        data-type="inputLocation" 
+                        onInput={(event => searchLocation(event))}>
+                    </input>
                     
                     <div className={styles.search__resultsWrapper}>
-
                         <div className={styles.search__wrapper}>
-                            <div className={`${styles.search__btnCurrentLocation} ${activeSearch} ${searchRes.length > 0 ? styles.search__active : ''}`} data-type="getLocation">
-                                <NavigationArrow className={styles.currentLocation__icon} weight="thin" data-type="getLocation"/>
-                                Использовать текущее местоположение
+                            <div 
+                                className={ classNames(`${styles.search__btnCurrentLocation}`, { [styles.active]: activeSearch, [styles.search__active]: searchRes.length > 0 }) } 
+                                data-type="getLocation">
+                                    <NavigationArrow 
+                                        className={classNames(`${styles.currentLocation__icon}`, {[styles.search__active]: searchRes.length > 0})} 
+                                        weight="thin" 
+                                        data-type="getLocation"/>
+                                            Использовать текущее местоположение
                             </div>
                         </div>
 
