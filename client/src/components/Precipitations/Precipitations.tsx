@@ -50,7 +50,7 @@ const Precipitations = () => {
             })
 
             return (
-                <div className="styles.precipitation" id="precipitation">
+                <div className={`${styles.precipitation}`}id="precipitation">
                     <Container>
                         <>
                             <div className={styles.precipitationTitle}>Осадки</div>
@@ -73,7 +73,7 @@ const Precipitations = () => {
             )
         } else {
             return (
-                <div className="styles.precipitation" id="precipitation">
+                <div className={`${styles.precipitation}`} id="precipitation">
                     <Container>
                         <div className={styles.loading}>
                             <div className={styles.gradient}></div>

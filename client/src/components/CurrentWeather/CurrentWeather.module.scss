@@ -1,8 +1,9 @@
 @import "../../styles/variables";
+@import "../../styles/mixins";
 @import "../../styles/loading";
 
 .currentWeather {
-    margin: 50px 0;
+    margin: 20px 0;
 }
 
 .currentWeather__wrapper {
@@ -14,10 +15,13 @@
 }
 
 .currentWeather__data_temp {
+    @include shadow-text;
     font-size: 150px;
+
 }
 
 .currentWeather__code {
+    @include shadow-text;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -25,22 +29,28 @@
 }
 
 .currentWeather__codeValue {
+    @include shadow-text;
     margin: 10px 0;
 }
 
 .code_icon {
+    @include shadow-text;
     margin: 20px;
     font-size: 150px;
 }
 
 .currentWeather__nowTitle {
+    @include shadow-text;
     margin-top: 30px;
     font-size: 30px;
-    color: #000;
 }
 
 .currentWeather__values {
     text-align: left;
+}
+
+.currentWeather__data_Feeltemp {
+    @include shadow-text;
 }
 
 
@@ -53,9 +63,6 @@
 }
 
 @media(max-width: 650px) {
-    .currentWeather {
-        margin: 20px 0;
-    }
     .currentWeather__data_temp, .code_icon {
         font-size: 100px;
     }
@@ -67,7 +74,7 @@
         font-size: 14px;
     }
     .currentWeather__data_temp, .code_icon {
-        font-size: 70px;
+        font-size: 60px;
     }
 
     .code_icon {

@@ -44,6 +44,8 @@ const chartConfigs = () => {
             layout: {
                 padding: {
                     top: 35,
+                    left: 0,
+                    right: 0
                 },
             },
             scales: {
@@ -84,8 +86,6 @@ const chartConfigs = () => {
     }
 
     const windChartConfig = {
-        // type: "line",
-        // color: "#fff",
         data: {
             labels: [""],
             datasets: [
@@ -116,6 +116,7 @@ const chartConfigs = () => {
                         // anchor: "end",
                     },
                     data: [0],
+                    grouped: true
                 },
             ],
         },
@@ -130,6 +131,8 @@ const chartConfigs = () => {
             layout: {
                 padding: {
                     top: 35,
+                    left: 0,
+                    right: 0
                 },
             },
             scales: {
@@ -327,7 +330,6 @@ const chartConfigs = () => {
 
     const sunChartConfig = {
         type: "line",
-
         data: {
             labels: [""],
             datasets: [

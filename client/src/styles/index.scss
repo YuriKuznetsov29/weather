@@ -1,0 +1,22 @@
+@import-normalize;
+@import "weather-icons.min";
+
+*,
+*:before,
+*:after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+a {
+    text-decoration: none;
+    color: #000;
+}
+
+body {
+    font-family: var(--font-family-main);
+    font-size: 12px;
+    // font-size: var(--font-size-l);
+}
+

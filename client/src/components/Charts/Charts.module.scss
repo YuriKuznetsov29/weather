@@ -1,5 +1,6 @@
 @import "../../styles/variables";
 @import "../../styles/loading";
+@import "../../styles/mixins";
 
 .chart__inner {
     margin-top: 50px;
@@ -7,7 +8,7 @@
 }
 
 .chartTitle {
-    color: #000;
+    @include shadow-text;
     font-size: 30px;
     margin-bottom: 10px;
 }

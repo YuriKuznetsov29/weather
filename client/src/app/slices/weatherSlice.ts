@@ -27,11 +27,11 @@ interface RequestWetherData {
 
 type WeatherSlice = {
     currentWeatherData: WeatherData | null
-    day: Day
+    day: Days
     status: "idle" | "loading" | "finished" | "error"
 }
 
-type Day = "today" | "tomorrow"
+export type Days = "today" | "tomorrow"
 
 const initialState: WeatherSlice = {
     currentWeatherData: null,
