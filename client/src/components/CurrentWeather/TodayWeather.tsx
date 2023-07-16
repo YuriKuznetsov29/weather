@@ -26,7 +26,10 @@ const TodayWeather = ({weather}: TodayProps) => {
                         <div className={styles.currentWeather__data_Feeltemp}>Ощущается как {realFeel}°C</div>
                     </div>
                     <div className={styles.currentWeather__code}>
-                        <i className={`wi ${image} ${styles.code_icon}`}></i>
+                        <div>
+                            <i className={`wi ${image} ${styles.code_icon}`}></i>
+                        </div>
+
                         <div className={styles.currentWeather__codeValue}>{weatherDescription[weathercode]}</div>
                     </div>
                 </div>

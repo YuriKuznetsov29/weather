@@ -30,12 +30,10 @@
 
 .currentWeather__codeValue {
     @include shadow-text;
-    margin: 10px 0;
 }
-
 .code_icon {
     @include shadow-text;
-    margin: 20px;
+    margin-top: 20px;
     font-size: 150px;
 }
 
