@@ -3,7 +3,7 @@ import { IUser } from "../../components/models/IUser"
 import { AuthService } from "services/AuthService"
 import axios, { AxiosError } from "axios"
 import { AuthResponse } from "components/models/response/AuthResponse"
-import { API_URL } from "components/http"
+import { API_URL } from "../../http/index"
 import UserService from "services/UserService"
 import { CurrentLocation } from "./locationSlice"
 

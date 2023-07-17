@@ -22,7 +22,10 @@ const TodayWeather = ({weather}: TodayProps) => {
                     <div className={styles.currentWeather__data}>
                         <div className={styles.currentWeather__data_time}>{day} {months[month]}, {time}</div>
                         <DayNigthTemp dayTemp={tempMax} nigthTemp={tempMin} />
-                        <div className={styles.currentWeather__data_temp}>{currentTemp}°C</div>
+                        <div className={styles.currentWeather__data_temp}>
+                            {currentTemp}
+                            <div className={styles.celsius}>°C</div>
+                        </div>
                         <div className={styles.currentWeather__data_Feeltemp}>Ощущается как {realFeel}°C</div>
                     </div>
                     <div className={styles.currentWeather__code}>
