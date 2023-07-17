@@ -1,4 +1,4 @@
-import $api from "components/http"
+import $api from "../http/index"
 import { AxiosResponse } from "axios"
 import { CurrentLocation } from "app/slices/locationSlice"
 import { AuthResponse } from "components/models/response/AuthResponse"

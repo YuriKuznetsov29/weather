@@ -330,6 +330,7 @@ const chartConfigs = () => {
 
     const sunChartConfig = {
         type: "line",
+
         data: {
             labels: [""],
             datasets: [

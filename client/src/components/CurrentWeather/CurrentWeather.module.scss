@@ -17,7 +17,11 @@
 .currentWeather__data_temp {
     @include shadow-text;
     font-size: 150px;
+    display: flex;
+}
 
+.celsius {
+    font-size: 80px;
 }
 
 .currentWeather__code {
@@ -64,6 +68,9 @@
     .currentWeather__data_temp, .code_icon {
         font-size: 100px;
     }
+    .celsius {
+        font-size: 60px;
+    }
 
 }
 
@@ -73,6 +80,10 @@
     }
     .currentWeather__data_temp, .code_icon {
         font-size: 60px;
+    }
+
+    .celsius {
+        font-size: 35px;
     }
 
     .code_icon {

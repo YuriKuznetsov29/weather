@@ -41,7 +41,7 @@ const {
 ChartJS.defaults.color = '#000'
 ChartJS.defaults.font.size = 16
 ChartJS.defaults.plugins.datalabels!.align = 'end'
-ChartJS.defaults.animation = false
+// ChartJS.defaults.animation = false
 
 const Charts = () => {
     const [sunAdaptiveChart, setSunAdaptiveChart] = useState({})
@@ -104,25 +104,25 @@ const Charts = () => {
             
             //wind
             const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
+            const forMobile = document.documentElement.clientWidth <= 650
             const datasets = windChartConfig.data.datasets
             windChartConfig.data.labels = dailyTime;
-            datasets[0].data = dailyWind.map(el => el + (avg * 0.25));
+            datasets[0].data = dailyWind.map(el => el + (forMobile ? avg * 0.35 : avg * 0.25));
             datasets[1].data = dailyWind;
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
                 // console.log(windChart.data.datasets[0].rotation as PointOptions)
                 const chartDatasets = windChart.data.datasets
-                chartDatasets[0].data = dailyWind.map(el => el + (avg * 0.25)); // el + 2.5
+                chartDatasets[0].data = dailyWind.map(el => el + (forMobile ? avg * 0.35 : avg * 0.25)); // el + 2.5
                 // windChart.data.datasets[0].rotation as ScriptableAndArrayOptions<PointOptions> = dailyWindDir;
                 // datasets[0].rotation = dailyWindDir
                 chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
-                windChart.update();
+                // windChart.update();
             }
 
             //sun
-
             if (selectedDay === "today") {
                 const {time} = getTimeWithUtcOffset(utcOffset)
                 const [labels, sin] = sinusCalk()
@@ -140,15 +140,18 @@ const Charts = () => {
                 ( sunDatasets[0].data as string [] ) = sin; // sinus
                 ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
                 ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
-                ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.2 + '').slice(0, sunPosition + 1)
-                if (sunPosition > 1) {
+                ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
+                if (sunPosition > 2) {
                     sunDatasets[3].pointStyle = [];
                     sunDatasets[3].pointStyle[sunPosition - shift] = sun
+                } else if (sunPosition <= 2) {
+                    sunDatasets[3].pointStyle = [];
                 }
                 const sunChart = sunRef.current
                 if (sunChart) {
                     sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
-                    sunChart.update()
+                    // sunChart.update()
+
                 }
             }
             
@@ -165,7 +168,7 @@ const Charts = () => {
                         <div className={styles.chart_container} style={adaptiveChart}>
                             {   
                                 weather ? 
-                                <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options}/> 
+                                <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
                                 </div>
@@ -183,7 +186,7 @@ const Charts = () => {
                         <div className={styles.chart_container} style={adaptiveChart}>
                             {   
                                 weather ? 
-                                <Chart ref={windRef} type='bar' data={windChartConfig.data} options={windChartConfig.options}/> 
+                                <Chart ref={windRef} type='bar' data={windChartConfig.data} options={windChartConfig.options} redraw={true}/> 
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
                                 </div>
@@ -201,7 +204,12 @@ const Charts = () => {
                         <div className={styles.sunChart_container} style={sunAdaptiveChart}>
                             {   
                                 weather ? 
-                                <Chart ref={sunRef} type='line' data={sunChartConfig.data as ChartData<"line">} options={sunChartConfig.options as unknown as ChartOptions<"line">}/> 
+                                <Chart 
+                                    ref={sunRef} type='line' 
+                                    data={sunChartConfig.data as ChartData<"line">} 
+                                    options={sunChartConfig.options as unknown as ChartOptions<"line">}
+                                    redraw={true}
+                                />
                                 : <div className={styles.loadingChart}>
                                     <div className={styles.gradient}></div>
                                 </div>
