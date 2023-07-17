@@ -41,6 +41,7 @@ const chartConfigs = () => {
         },
         options: {
             maintainAspectRatio: false,
+            animation: false,
             layout: {
                 padding: {
                     top: 35,
@@ -102,7 +103,7 @@ const chartConfigs = () => {
                     datalabels: {
                         display: false,
                     },
-                    data: [0],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 },
                 {
                     type: "bar" as const,
@@ -115,7 +116,7 @@ const chartConfigs = () => {
                     datalabels: {
                         // anchor: "end",
                     },
-                    data: [0],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     grouped: true
                 },
             ],
@@ -330,6 +331,7 @@ const chartConfigs = () => {
 
     const sunChartConfig = {
         type: "line",
+
         data: {
             labels: [""],
             datasets: [
