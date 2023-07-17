@@ -151,6 +151,7 @@ const Charts = () => {
                 if (sunChart) {
                     sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
                     sunChart.update()
+
                 }
             }
             

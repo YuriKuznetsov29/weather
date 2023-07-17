@@ -41,6 +41,7 @@ const chartConfigs = () => {
         },
         options: {
             maintainAspectRatio: false,
+            animation: false,
             layout: {
                 padding: {
                     top: 35,
