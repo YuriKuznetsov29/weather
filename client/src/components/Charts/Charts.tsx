@@ -151,6 +151,7 @@ const Charts = () => {
                 if (sunChart) {
                     sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
                     sunChart.update()
+
                 }
             }
             
@@ -163,22 +164,22 @@ const Charts = () => {
                 <Container>
                     <>
                         <div className={styles.chartTitle}>Температура</div>
-                        <div className={styles.chartWrapper} >
-                            <div className={styles.chart_container} style={adaptiveChart}>
-                                {   
-                                    weather ? 
-                                    <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
-                                    : <div className={styles.loadingChart}>
-                                        <div className={styles.gradient}></div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                            <div className={styles.chartWrapper} >
+                                  <div className={styles.chart_container} style={adaptiveChart}>
+                                  {   
+                                      weather ? 
+                                      <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
+                                      : <div className={styles.loadingChart}>
+                                          <div className={styles.gradient}></div>
+                                      </div>
+                                  }
+                                  </div>
+                           </div>
                     </>
                 </Container>
             </div>
             <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
                         <div className={styles.chartWrapper}>
@@ -196,7 +197,7 @@ const Charts = () => {
                 </Container>
             </div>
             {selectedDay === "today" && <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Рассвет и закат</div>
                         <div className={styles.chartWrapper}>
