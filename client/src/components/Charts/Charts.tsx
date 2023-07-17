@@ -121,10 +121,12 @@ const Charts = () => {
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
-                const chartDatasets = windChart.data.datasets
-                chartDatasets[0].data = dailyWind.map(el => el + (forMobile ? avg * 0.35 : avg * 0.25)); // el + 2.5
-                chartDatasets[1].data = dailyWind;
+                // const chartDatasets = windChart.data.datasets
+                // chartDatasets[0].data = dailyWind.map(el => el + (forMobile ? avg * 0.35 : avg * 0.25)); // el + 2.5
+                // chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
+                
+                windChart.data = windChartConfig.data
                 windChart.update('active');
             }
 
