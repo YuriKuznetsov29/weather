@@ -8,9 +8,10 @@
 }
 
 .arrow {
-    @include shadow-text;
-    filter: drop-shadow(1px 1px 2px black);
+    // @include shadow-text;
+    filter: drop-shadow(1px 1px 1px black);
     position: absolute;
+    weight: bold;
 }
 
 .data {

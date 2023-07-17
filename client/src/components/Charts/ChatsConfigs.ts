@@ -41,6 +41,7 @@ const chartConfigs = () => {
         },
         options: {
             maintainAspectRatio: false,
+            animation: false,
             layout: {
                 padding: {
                     top: 35,
@@ -330,6 +331,7 @@ const chartConfigs = () => {
 
     const sunChartConfig = {
         type: "line",
+
         data: {
             labels: [""],
             datasets: [
