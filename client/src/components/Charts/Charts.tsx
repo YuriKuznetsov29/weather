@@ -96,12 +96,12 @@ const Charts = () => {
             const tempChart = tempRef.current
             
             if (tempChart) {
-                // tempChart.clear()
+              // tempChart.clear()
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
                 // tempChart.data.datasets[0].data = dailyTemp
 
-
+              
                 tempChart.data = tempChartConfig.data as ChartData<"line", number[], string>
                 // tempChart.resize()
                 tempChart.update('active')
@@ -109,6 +109,7 @@ const Charts = () => {
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
             }
+            tempChart?.render()
             
             //wind
             const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
@@ -168,22 +169,22 @@ const Charts = () => {
                 <Container>
                     <>
                         <div className={styles.chartTitle}>Температура</div>
-                        <div className={styles.chartWrapper} >
-                            <div className={styles.chart_container} style={adaptiveChart}>
-                                {   
-                                    weather ? 
-                                    <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
-                                    : <div className={styles.loadingChart}>
-                                        <div className={styles.gradient}></div>
-                                    </div>
-                                }
-                            </div>
-                        </div>
+                            <div className={styles.chartWrapper} >
+                                  <div className={styles.chart_container} style={adaptiveChart}>
+                                  {   
+                                      weather ? 
+                                      <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
+                                      : <div className={styles.loadingChart}>
+                                          <div className={styles.gradient}></div>
+                                      </div>
+                                  }
+                                  </div>
+                           </div>
                     </>
                 </Container>
             </div>
             <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
                         <div className={styles.chartWrapper}>
@@ -201,7 +202,7 @@ const Charts = () => {
                 </Container>
             </div>
             {selectedDay === "today" && <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Рассвет и закат</div>
                         <div className={styles.chartWrapper}>
