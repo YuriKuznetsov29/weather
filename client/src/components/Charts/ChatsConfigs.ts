@@ -31,7 +31,7 @@ const chartConfigs = () => {
                     backgroundColor: CHART_COLORS.blue,
                     borderColor: CHART_COLORS.red,
                     tension: 0.1,
-                    data: [],
+                    data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     datalabels: {
                         align: "end",
                         // anchor: 'end'
