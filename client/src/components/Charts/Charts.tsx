@@ -12,7 +12,6 @@ import { ChartData, ChartOptions } from "chart.js";
 import { createSunImg, culkSunPosition, culkTrueNoon, sinusCalk } from "./chartHelpers"
 
 import styles from './Charts.module.scss'
-import { log } from "console";
 
 ChartJS.register(
     annotationPlugin, 
@@ -97,10 +96,13 @@ const Charts = () => {
             const tempChart = tempRef.current
             
             if (tempChart) {
-                tempChart.reset()
+              // tempChart.clear()
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
-                tempChart.data.datasets[0].data = dailyTemp
+                // tempChart.data.datasets[0].data = dailyTemp
+
+              
+                tempChart.data = tempChartConfig.data as ChartData<"line", number[], string>
                 // tempChart.resize()
                 tempChart.update('active')
             } else {
