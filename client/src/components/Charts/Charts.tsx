@@ -94,13 +94,15 @@ const Charts = () => {
             } = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
             
             // temperature
-            tempChartConfig.data.labels = dailyTime
-            tempChartConfig.data.datasets[0].data = dailyTemp
             const tempChart = tempRef.current
+            tempChartConfig.data.labels = dailyTime
             if (tempChart) {
                 tempChart.data.datasets[0].data = dailyTemp
-                tempChart.update()
-            } 
+                tempChart.resize()
+                tempChart.update('active')
+            } else {
+                tempChartConfig.data.datasets[0].data = dailyTemp
+            }
             
             //wind
             const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
@@ -112,14 +114,11 @@ const Charts = () => {
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
-                // console.log(windChart.data.datasets[0].rotation as PointOptions)
                 const chartDatasets = windChart.data.datasets
                 chartDatasets[0].data = dailyWind.map(el => el + (forMobile ? avg * 0.35 : avg * 0.25)); // el + 2.5
-                // windChart.data.datasets[0].rotation as ScriptableAndArrayOptions<PointOptions> = dailyWindDir;
-                // datasets[0].rotation = dailyWindDir
                 chartDatasets[1].data = dailyWind;
                 windChart.data.datasets[1].datalabels!.anchor = "end"
-                windChart.update();
+                windChart.update('active');
             }
 
             //sun
@@ -150,8 +149,7 @@ const Charts = () => {
                 const sunChart = sunRef.current
                 if (sunChart) {
                     sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
-                    sunChart.update()
-
+                    sunChart.update('active')
                 }
             }
             
