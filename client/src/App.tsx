@@ -14,47 +14,41 @@ import { TenDaysAsync } from "pages/TenDays/TenDays.async"
 import { TomorrowAsync } from "pages/Tomorrow/Tomorrow.async"
 import Page404 from "components/Page404/Page404"
 import Spinner from "components/Spinner/Spinner"
-import Main from "pages/Main/Main"
-import Tomorrow from "pages/Tomorrow/Tomorrow"
-import TenDays from "pages/TenDays/TenDays"
-import SignUp from "pages/SignUp/SignUp"
-import SavedLocatons from "pages/SavedLocations/SavedLocations"
-import { SignIn } from "@phosphor-icons/react"
 
 const router = createHashRouter([
   {
     path: "/",
-    element: <Main />,
+    element: <MainAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/tomorrow",
-    element: <Tomorrow />,
+    element: <TomorrowAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/tenDays",
-    element: <TenDays />,
+    element: <TenDaysAsync />,
     errorElement: <ErrorPage />,
   },
   {
     path: "/signUp",
     element: (
-      <SignUp />
+      <SignUpAsync />
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/signIn",
     element: (
-      <SignIn />
+      <SignInAsync />
     ),
     errorElement: <ErrorPage />,
   },
   {
     path: "/savedLocations",
     element: (
-        <SavedLocatons />
+        <SavedLocationsAsync />
     ),
     errorElement: <ErrorPage />,
   },
@@ -97,9 +91,9 @@ function App() {
   }, [])
 
   return (
-    // <Suspense fallback={<Spinner />}>
+    <Suspense fallback={<Spinner />}>
       <RouterProvider router={router} />
-    // </Suspense>
+    </Suspense>
   )
 }
 
