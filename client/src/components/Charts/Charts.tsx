@@ -95,14 +95,16 @@ const Charts = () => {
             
             // temperature
             const tempChart = tempRef.current
-            tempChartConfig.data.labels = dailyTime
+            
             if (tempChart) {
                 tempChart.clear()
+                tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
                 tempChart.data.datasets[0].data = dailyTemp
                 tempChart.resize()
                 tempChart.update('active')
             } else {
+                tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
             }
             
