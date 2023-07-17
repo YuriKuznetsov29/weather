@@ -97,16 +97,17 @@ const Charts = () => {
             const tempChart = tempRef.current
             
             if (tempChart) {
-                tempChart.clear()
+                tempChart.reset()
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
                 tempChart.data.datasets[0].data = dailyTemp
-                tempChart.resize()
+                // tempChart.resize()
                 tempChart.update('active')
             } else {
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
             }
+            tempChart?.render()
             
             //wind
             const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
