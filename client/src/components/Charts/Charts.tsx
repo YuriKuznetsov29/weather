@@ -97,6 +97,8 @@ const Charts = () => {
             const tempChart = tempRef.current
             tempChartConfig.data.labels = dailyTime
             if (tempChart) {
+                tempChart.clear()
+                tempChartConfig.data.datasets[0].data = dailyTemp
                 tempChart.data.datasets[0].data = dailyTemp
                 tempChart.resize()
                 tempChart.update('active')
