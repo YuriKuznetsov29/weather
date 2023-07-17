@@ -161,67 +161,65 @@ const Charts = () => {
     return ( 
         <div className={styles.charts}>
             <div className={styles.chart__inner}>
-            <Container>
-                <>
-                    <div className={styles.chartTitle}>Температура</div>
-                    <div className={styles.chartWrapper} >
-                        <div className={styles.chart_container} style={adaptiveChart}>
-                            {   
-                                weather ? 
-                                <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
-                                : <div className={styles.loadingChart}>
-                                    <div className={styles.gradient}></div>
-                                </div>
-                            }
-                        </div>
-                    </div>
-                </>
-            </Container>
+                <Container>
+                    <>
+                        <div className={styles.chartTitle}>Температура</div>
+                            <div className={styles.chartWrapper} >
+                                  <div className={styles.chart_container} style={adaptiveChart}>
+                                  {   
+                                      weather ? 
+                                      <Line ref={tempRef} data={tempChartConfig.data} options={tempChartConfig.options} redraw={true}/> 
+                                      : <div className={styles.loadingChart}>
+                                          <div className={styles.gradient}></div>
+                                      </div>
+                                  }
+                                  </div>
+                           </div>
+                    </>
+                </Container>
             </div>
             <div className={styles.chart__inner}>
-            <Container>
-                <>
-                    <div className={styles.chartTitle}>Ветер</div>
-                    <div className={styles.chartWrapper}>
-                        <div className={styles.chart_container} style={adaptiveChart}>
-                            {   
-                                weather ? 
-                                <Chart ref={windRef} type='bar' data={windChartConfig.data} options={windChartConfig.options} redraw={true}/> 
-                                : <div className={styles.loadingChart}>
-                                    <div className={styles.gradient}></div>
-                                </div>
-                            }
+              <Container>
+                    <>
+                        <div className={styles.chartTitle}>Ветер</div>
+                        <div className={styles.chartWrapper}>
+                            <div className={styles.chart_container} style={adaptiveChart}>
+                                {   
+                                    weather ? 
+                                    <Chart ref={windRef} type='bar' data={windChartConfig.data} options={windChartConfig.options} redraw={true}/> 
+                                    : <div className={styles.loadingChart}>
+                                        <div className={styles.gradient}></div>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
-                </>
-            </Container>
+                    </>
+                </Container>
             </div>
             {selectedDay === "today" && <div className={styles.chart__inner}>
-            <Container>
-                <>
-                    <div className={styles.chartTitle}>Рассвет и закат</div>
-                    <div className={styles.chartWrapper}>
-                        <div className={styles.sunChart_container} style={sunAdaptiveChart}>
-                            {   
-                                weather ? 
-                                <Chart 
-                                    ref={sunRef} type='line' 
-                                    data={sunChartConfig.data as ChartData<"line">} 
-                                    options={sunChartConfig.options as unknown as ChartOptions<"line">}
-                                    redraw={true}
-                                />
-                                : <div className={styles.loadingChart}>
-                                    <div className={styles.gradient}></div>
-                                </div>
-                            }
+              <Container>
+                    <>
+                        <div className={styles.chartTitle}>Рассвет и закат</div>
+                        <div className={styles.chartWrapper}>
+                            <div className={styles.sunChart_container} style={sunAdaptiveChart}>
+                                {   
+                                    weather ? 
+                                    <Chart 
+                                        ref={sunRef} type='line' 
+                                        data={sunChartConfig.data as ChartData<"line">} 
+                                        options={sunChartConfig.options as unknown as ChartOptions<"line">}
+                                        redraw={true}
+                                    />
+                                    : <div className={styles.loadingChart}>
+                                        <div className={styles.gradient}></div>
+                                    </div>
+                                }
+                            </div>
                         </div>
-                    </div>
-                </>
-            </Container>
+                    </>
+                </Container>
             </div>}
-            
         </div>
-        
     )
 }
 
