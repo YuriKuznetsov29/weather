@@ -1,19 +1,34 @@
 import Container from 'components/Container/Container'
-import DayNigthTemp from 'components/DayNigthTemp/DayNigthTemp'
-import { getWetherImage, weatherDescription, getTimeWithUtcOffset, CurentWeather } from 'services/tranformData'
+import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
+import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/tranformData'
+import { months, weatherDescription } from 'helpers/constants'
 
 import styles from './CurrentWeather.module.scss'
+import { memo } from 'react'
 
 interface TodayProps {
-    weather: CurentWeather
+    weather: CurrentWeather
+    date: {
+        time: string,
+        month: number,
+        day: number
+    }
 }
 
-const TodayWeather = ({weather}: TodayProps) => {
+function compareFunction(prevProps: TodayProps, nextProps: TodayProps): boolean {
+    if (JSON.stringify(prevProps) === JSON.stringify(nextProps)) {
+        return true
+    }
+    return false
+}
+
+const TodayWeather = memo(({weather, date}: TodayProps) => {
 
     const {sunrise, sunset, weathercode, utcOffset, currentMoi, dewpoint, pressure, uvIndex, precipProb, visibility, currentTemp, realFeel, tempMax, tempMin} = weather
-    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-    const {time, month, day} = getTimeWithUtcOffset(utcOffset)
+    const {time, month, day} = date
     const image = getWetherImage(sunrise, sunset, weathercode, utcOffset)
+
+    console.log('current weather')
 
     return (
         <div className={styles.currentWeather} id="currentWeather">
@@ -21,7 +36,7 @@ const TodayWeather = ({weather}: TodayProps) => {
                 <div className={styles.currentWeather__wrapper}>
                     <div className={styles.currentWeather__data}>
                         <div className={styles.currentWeather__data_time}>{day} {months[month]}, {time}</div>
-                        <DayNigthTemp dayTemp={tempMax} nigthTemp={tempMin} />
+                        <DayNightTemp dayTemp={tempMax} nightTemp={tempMin} />
                         <div className={styles.currentWeather__data_temp}>
                             {currentTemp}
                             <div className={styles.celsius}>°C</div>
@@ -38,7 +53,6 @@ const TodayWeather = ({weather}: TodayProps) => {
                 </div>
             </Container>
             <Container>
-                <>
                     <div className={styles.currentWeather__nowTitle}>Сейчас</div>
                     <div className={styles.currentWeather__wrapper}>
                         <div className={styles.currentWeather__data}>
@@ -59,10 +73,9 @@ const TodayWeather = ({weather}: TodayProps) => {
                             <div className={styles.currentWeather__data_value}>{visibility} M</div>
                         </div>
                     </div>
-                </>
             </Container>
         </div>
     )
-}
+}, compareFunction)
 
 export default TodayWeather

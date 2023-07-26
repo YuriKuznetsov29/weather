@@ -1,8 +1,8 @@
 import $api from "../http/index"
 import { AxiosResponse } from "axios"
 import { CurrentLocation } from "app/slices/locationSlice"
-import { AuthResponse } from "components/models/response/AuthResponse"
-import { UserResponse } from "components/models/response/UserResponse"
+import { AuthResponse } from "models/response/AuthResponse"
+import { UserResponse } from "models/response/UserResponse"
 
 
 export default class UserService {

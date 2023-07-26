@@ -1,5 +1,6 @@
 import Container from "components/Container/Container"
-import { weatherDescription, getTimeWithUtcOffset, getWetherImage, getWindDirection } from "services/tranformData"
+import { getWetherImage, getWindDirection } from "helpers/tranformData"
+import { weatherDescription } from "helpers/constants"
 import { useState } from "react"
 
 import styles from './TenDaysWeather.module.scss'

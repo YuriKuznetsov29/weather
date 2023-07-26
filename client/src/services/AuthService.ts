@@ -1,6 +1,6 @@
 import $api from "../http/index"
 import { AxiosResponse } from "axios"
-import { AuthResponse } from "components/models/response/AuthResponse"
+import { AuthResponse } from "models/response/AuthResponse"
 
 export class AuthService {
     static async signIn(email: string, password: string): Promise<AxiosResponse<AuthResponse, any>>{

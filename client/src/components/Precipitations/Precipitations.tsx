@@ -1,29 +1,9 @@
 import { useAppSelector } from "app/hooks"
 import { currentWetherSelector, selectDay } from "app/selectors"
-
-import styles from "./Precipitations.module.scss"
 import Container from "components/Container/Container"
 import DropSvg from "./DropSvg"
 
-function calckPrecipitationInHour(quantity: number) {
-    const precipPercent: PrecipitationsPercent = {
-        "0.1": 0,
-        "0.9": 20,
-        "1": 30,
-        "2": 55,
-        "3": 65,
-        "4": 80,
-        "5": 90,
-        "6": 100,
-    }
-    quantity =
-        quantity > 1 ? (quantity >= 6 ? 6 : Math.round(quantity)) : quantity > 0.1 ? 0.9 : 0.1
-    return precipPercent[quantity]
-}
-
-interface PrecipitationsPercent {
-    [key: string]: number
-}
+import styles from "./Precipitations.module.scss"
 
 const Precipitations = () => {
     const weather = useAppSelector(currentWetherSelector)
@@ -35,7 +15,6 @@ const Precipitations = () => {
                 selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
 
             const itemsArr = dailyPrecipitation.map((pecipitation, i) => {
-                const percent = calckPrecipitationInHour(pecipitation)
 
                 return (
                     <div key={i} className={styles.precipitation__item}>

@@ -14,7 +14,7 @@ import classNames from "classnames"
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
-    const [activeStyleSearch, setActiveStyleSearch] = useState({})
+    const [activeStyleSearch, setActiveStyleSearch] = useState(false)
     const [searchValue, setSearchValue] = useState('')
     const [searchRes, setSearchRes] = useState([])
 
@@ -55,8 +55,8 @@ const SelectLocation = () => {
 
     const startSearchLocation = (event: React.MouseEvent<HTMLFormElement>) => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
-            setActiveSearch(!activeSearch)
-            setActiveStyleSearch(styles.search__active)
+            setActiveSearch(true)
+            setActiveStyleSearch(true)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
         } 
@@ -85,7 +85,7 @@ const SelectLocation = () => {
         setSearchValue('')
         setSearchRes([])
         setActiveSearch(false)
-        setActiveStyleSearch({})
+        setActiveStyleSearch(false)
     }
 
     const renderResults = () => {
@@ -113,23 +113,24 @@ const SelectLocation = () => {
             <Container>
                 <div className={styles.search__wrapper} id="closeSearch">
 
-                    <MagnifyingGlass className={`${styles.search__icon} ${activeStyleSearch}`} weight="thin" />
-                    <input 
-                        className={`${styles.search__input} ${activeStyleSearch}`} 
-                        type="text" placeholder="Поиск" value={searchValue} 
-                        data-type="inputLocation" 
+                    <MagnifyingGlass className={classNames(`${styles.search__icon}`, {[styles.search__active]: activeStyleSearch})} weight="thin" />
+                    <input
+                        className={classNames(`${styles.search__input}`, {[styles.search__active]: activeStyleSearch})}
+                        type="text" placeholder="Поиск" value={searchValue}
+                        data-type="inputLocation"
                         onInput={(event => searchLocation(event))}>
                     </input>
                     
                     <div className={styles.search__resultsWrapper}>
                         <div className={styles.search__wrapper}>
-                            <div 
+                            <div
                                 className={ classNames(`${styles.search__btnCurrentLocation}`, { [styles.active]: activeSearch, [styles.search__active]: searchRes.length > 0 }) } 
                                 data-type="getLocation">
                                     <NavigationArrow 
                                         className={classNames(`${styles.currentLocation__icon}`, {[styles.search__active]: searchRes.length > 0})} 
                                         weight="thin" 
-                                        data-type="getLocation"/>
+                                        data-type="getLocation"
+                                    />
                                             Использовать текущее местоположение
                             </div>
                         </div>
