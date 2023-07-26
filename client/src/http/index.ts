@@ -1,5 +1,5 @@
 import axios from "axios";
-import { AuthResponse } from "components/models/response/AuthResponse";
+import { AuthResponse } from "models/response/AuthResponse";
 
 export const API_URL = `http://yura.batgen.ru:8080/api`
 

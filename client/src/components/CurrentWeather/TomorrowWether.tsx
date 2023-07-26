@@ -1,8 +1,10 @@
 import Container from 'components/Container/Container'
+import { getTimeWithUtcOffset } from 'helpers/tranformData'
+import { days, months, weatherDescription } from 'helpers/constants'
+import {TomorrowWeather, getWetherImage} from 'helpers/tranformData'
+import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
+
 import styles from './CurrentWeather.module.scss'
-import { getTimeWithUtcOffset, weatherDescription } from 'services/tranformData'
-import {TomorrowWeather, getWetherImage} from '../../services/tranformData'
-import DayNigthTemp from 'components/DayNigthTemp/DayNigthTemp'
 
 interface TomorrowProps {
     weather: TomorrowWeather
@@ -11,9 +13,6 @@ interface TomorrowProps {
 const TomorrowWether = ({weather}: TomorrowProps) => {
 
     const {sunrise, sunset, weathercode, utcOffset, dailyMoi, uvIndex, tempMax, tempMin} = weather
-
-    const days = ["воскресенье", "понедельник", "вторник", "среда", "четверг", "пятница", "суббота"]
-    const months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
     const  {tomorrowDay, tomorrowMonth, weekDay} = getTimeWithUtcOffset(utcOffset)
     const image = getWetherImage(sunrise, sunset, weathercode, utcOffset)
 
@@ -23,7 +22,7 @@ const TomorrowWether = ({weather}: TomorrowProps) => {
                 <div className={styles.currentWeather__wrapper}>
                     <div className={styles.currentWeather__data}>
                         <div className={styles.currentWeather__data_time}>{days[weekDay]}, {tomorrowDay} {months[tomorrowMonth]}</div>
-                        <DayNigthTemp dayTemp={tempMax} nigthTemp={tempMin}/>
+                        <DayNightTemp dayTemp={tempMax} nightTemp={tempMin}/>
                         <div className={styles.currentWeather__codeValue}>{weatherDescription[weathercode]}</div>
                     </div>
                     <div className={styles.currentWeather__code}>

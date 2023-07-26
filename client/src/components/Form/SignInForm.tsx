@@ -6,10 +6,12 @@ import { setSignInState, signIn } from "app/slices/loginSlice"
 import { useState, ChangeEvent, useEffect } from "react"
 import { Formik, Field, Form, ErrorMessage } from "formik"
 import * as Yup from "yup"
-
-import styles from "./Form.module.scss"
 import { authStatusSelector, serverErrorsSelector, statusSelector } from "app/selectors"
 import { useLocation, useNavigate } from "react-router-dom"
+import Spinner from "components/Spinner/Spinner"
+
+import styles from "./Form.module.scss"
+
 
 interface Values {
   email: string
@@ -78,7 +80,7 @@ const SignUpForm = () => {
           </label>
           <div className={styles.inputWrapper}>
             <Field
-              className={styles.input}
+              className={`${styles.input} ${styles.lastInput}`}
               id="password"
               name="password"
               type={showPassword}
@@ -94,8 +96,14 @@ const SignUpForm = () => {
             <ErrorMessage className={styles.fieldError} component="div" name="password" />
           </div>
 
-          {serverError && <div>{serverError}</div>}
-          <div style={loadStatus === "loading" ? {visibility: "visible"} : {visibility: "hidden"}}>Loading...</div>
+          {serverError 
+            ? <div>{serverError}</div>
+            : <div style={{visibility: "hidden"}}>Error</div>}
+            
+          {loadStatus === "loading" 
+            ? <Spinner smallSize={true}/>
+            : <div style={{height: "34px"}}></div>
+          }
           <Button type="submit" disabled={loadStatus === "loading" ? true : false}>Войти</Button>
         </Form>
       </Formik>

@@ -1,21 +1,19 @@
 import styles from "./Button.module.scss";
 
-interface ButtonrProps {
-  children: string;
+interface ButtonProps {
+  children: React.ReactNode;
   onClick?: React.MouseEventHandler;
   type?: "button" | "submit" | "reset" | undefined
   addStyles?: {}
   disabled?: boolean
 }
 
-const Button = ({ children, onClick, type, addStyles, disabled }: ButtonrProps) => {
+const Button = ({ children, onClick, type, addStyles, disabled }: ButtonProps) => {
   return (
-    <>
-      <button className={styles.btn} style={addStyles} type={type} onClick={onClick} disabled={disabled}>
+      <button className={styles.btn}  type={type} style={addStyles} onClick={onClick} disabled={disabled}>
         {children}
       </button>
-    </>
-  );
-};
+  )
+}
 
 export default Button;

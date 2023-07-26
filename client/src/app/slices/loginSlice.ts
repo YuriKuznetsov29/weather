@@ -1,8 +1,8 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
-import { IUser } from "../../components/models/IUser"
+import { IUser } from "../../models/IUser"
 import { AuthService } from "services/AuthService"
 import axios, { AxiosError } from "axios"
-import { AuthResponse } from "components/models/response/AuthResponse"
+import { AuthResponse } from "models/response/AuthResponse"
 import { API_URL } from "../../http/index"
 import UserService from "services/UserService"
 import { CurrentLocation } from "./locationSlice"
@@ -132,6 +132,7 @@ const loginSlice = createSlice({
         builder
             .addCase(signUp.pending, (state) => {
                 state.status = "loading"
+                state.serverErrors = ''
             })
             .addCase(signUp.rejected, (state) => {
                 state.status = "error"
@@ -150,6 +151,7 @@ const loginSlice = createSlice({
             })
             .addCase(signIn.pending, (state) => {
                 state.status = "loading"
+                state.serverErrors = ''
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = "error"

@@ -12,8 +12,6 @@ const CHART_COLORS = {
 
 let arrow = document.createElement("img")
 arrow.src = "arrow-up-bold.svg"
-// let sun = document.createElement('img');
-// sun.src = 'sun.png';
 
 interface LineProps {
     options: ChartOptions<"line">

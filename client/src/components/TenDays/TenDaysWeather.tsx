@@ -1,5 +1,4 @@
-import Container from "components/Container/Container"
-import { weatherDescription, getTimeWithUtcOffset, getWetherImage } from "services/tranformData"
+import { getTimeWithUtcOffset } from "helpers/tranformData"
 import { useAppSelector } from "app/hooks"
 import { currentWetherSelector } from "app/selectors"
 import Day from "./Day"

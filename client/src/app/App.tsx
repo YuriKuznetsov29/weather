@@ -64,7 +64,8 @@ const router = createHashRouter([
 // classNames
 // базовые стили и переменные
 // декомпозировать компоненты
-// исправить зависимости
+// изменить структуру проекта
+// изменить импорты картинок и работу с svg
 
 function App() {
   const dispatch = useAppDispatch()

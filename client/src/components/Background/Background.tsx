@@ -1,7 +1,7 @@
 import styles from './Backgroud.module.scss'
 
 interface BackgroudProps {
-    children: JSX.Element
+    children: React.ReactNode
 }
 
 const Backgroud = ({children}: BackgroudProps) => {

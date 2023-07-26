@@ -1,11 +1,12 @@
 import Container from 'components/Container/Container'
-import { getWetherImage, weatherDescription, getTimeWithUtcOffset } from 'services/tranformData'
 import { useAppSelector } from 'app/hooks'
 import { currentWetherSelector, selectDay } from 'app/selectors'
-
-import styles from './CurrentWeather.module.scss'
 import TodayWeather from './TodayWeather'
 import TomorrowWether from './TomorrowWether'
+import { getTimeWithUtcOffset } from 'helpers/tranformData'
+
+import styles from './CurrentWeather.module.scss'
+
 
 const CurrentWeather = () => {
 
@@ -15,8 +16,11 @@ const CurrentWeather = () => {
     const renderWether = () => {
 
         if (weather) {
+            const {utcOffset} = weather.currentWeather
+            const date = getTimeWithUtcOffset(utcOffset)
+
             if (selectedDay === "today") {
-                return <TodayWeather weather={weather.currentWeather}/>
+                return <TodayWeather weather={weather.currentWeather} date={date}/>
             } else if (selectedDay === "tomorrow") {
                 return <TomorrowWether weather={weather.tomorrowWeather}/>
             }

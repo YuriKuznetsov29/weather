@@ -1,7 +1,7 @@
 import styles from "./Input.module.scss"
 import { ChangeEvent } from "react"
 
-interface InputProp {
+interface InputProps {
   label: string
   type: string
   placeholder: string
@@ -9,7 +9,7 @@ interface InputProp {
   onChange?: (e: ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input = ({ label, type, placeholder, value, onChange }: InputProp) => {
+const Input = ({ label, type, placeholder, value, onChange }: InputProps) => {
   return (
     <>
       <label className={styles.label}>{label}</label>

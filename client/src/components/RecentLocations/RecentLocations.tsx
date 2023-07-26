@@ -1,5 +1,5 @@
 import Container from 'components/Container/Container'
-import { ReactElement, useEffect, useState } from 'react'
+import { ReactElement, useCallback, useEffect, useState } from 'react'
 import { useAppDispatch, useAppSelector } from 'app/hooks'
 import { currentLocationSelector } from 'app/selectors'
 import { CurrentLocation } from 'app/slices/locationSlice'
@@ -45,6 +45,13 @@ const RecentLocations = () => {
         }
     }
 
+    // const renderLocations = useCallback(() => {
+    //     setLocationElement(locations.map((location, i) => {
+    //         return (
+    //             <Location key={i} location={location} />
+    //         )
+    //     }))
+    // }, [locations])
     const renderLocations = () => {
         setLocationElement(locations.map((location, i) => {
             return (
