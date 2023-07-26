@@ -101,6 +101,7 @@ const Charts = () => {
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
             }
+            tempChart?.render()
             
             //wind
             const avg = dailyWind.reduce((acc, cur) => acc + cur) / dailyWind.length
@@ -112,6 +113,7 @@ const Charts = () => {
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
+
                 windChart.data.datasets[1].datalabels!.anchor = "end"
                 
                 windChart.data = windChartConfig.data
@@ -173,7 +175,7 @@ const Charts = () => {
                 </Container>
             </div>
             <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
                         <div className={styles.chartWrapper}>
@@ -191,7 +193,7 @@ const Charts = () => {
                 </Container>
             </div>
             {selectedDay === "today" && <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Рассвет и закат</div>
                         <div className={styles.chartWrapper}>
