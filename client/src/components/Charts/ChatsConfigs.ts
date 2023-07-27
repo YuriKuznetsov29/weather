@@ -202,6 +202,7 @@ const chartConfigs = () => {
             display: true,
 
             font: {
+                // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
@@ -224,6 +225,7 @@ const chartConfigs = () => {
             content: "Рассвет",
             display: true,
             font: {
+                // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
@@ -246,6 +248,7 @@ const chartConfigs = () => {
             content: "Истинный полдень",
             display: true,
             font: {
+                // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
@@ -268,6 +271,7 @@ const chartConfigs = () => {
             content: "12:00",
             display: true,
             font: {
+                // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
@@ -313,6 +317,7 @@ const chartConfigs = () => {
             content: "Закат",
             display: true,
             font: {
+                // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
@@ -389,8 +394,12 @@ const chartConfigs = () => {
             maintainAspectRatio: false,
             layout: {
                 padding: {
-                    top: 35,
+                    // top: 35,
+                    bottom: 0
                 },
+                margin: {
+                    bottom: 0
+                }
             },
             interaction: {
                 mode: "index",

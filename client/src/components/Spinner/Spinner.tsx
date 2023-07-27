@@ -8,7 +8,6 @@ interface SpinnerProps {
 }
 
 const Spinner = ({smallSize, visible}: SpinnerProps) => {
-    console.log(visible)
     return (
         <>
             {smallSize 

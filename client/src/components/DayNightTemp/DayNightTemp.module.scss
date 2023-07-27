@@ -8,18 +8,24 @@
 }
 
 .arrow {
-    // @include shadow-text;
-    filter: drop-shadow(1px 1px 1px black);
-    position: absolute;
-    weight: bold;
+    @include shadow-text;
+    font-size: 28px;
+    vertical-align: middle;
 }
 
-.data {
-    margin-right: 40px;
+.separator {
+    font-size: 26px;
+    margin: 0 20px;
 }
 
 @media (max-width: 650px) {
-    .data {
-        margin-right: 20px;
+    .separator {
+        margin: 0 10px;
+        font-size: 20px;
     }
+
+    .arrow {
+        font-size: 22px;
+    }
+
 }

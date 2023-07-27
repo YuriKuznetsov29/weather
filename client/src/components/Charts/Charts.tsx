@@ -9,9 +9,11 @@ import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
 import { getTimeWithUtcOffset } from "helpers/tranformData";
 import { ChartData, ChartOptions } from "chart.js";
-import { createSunImg, culkSunPosition, culkTrueNoon, sinusCalk } from "./chartHelpers"
+import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk, calkDayDuration } from "./chartHelpers"
 
 import styles from './Charts.module.scss'
+import DayParameters from "./DayParameters";
+import CurrentWind from "./CurrentWind";
 
 ChartJS.register(
     annotationPlugin, 
@@ -90,6 +92,7 @@ const Charts = () => {
                 lon
             } = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
             
+            
             // temperature
             const tempChart = tempRef.current
             if (tempChart) {
@@ -124,7 +127,7 @@ const Charts = () => {
                 const [labels, sin] = sinusCalk()
                 const sunPosition = culkSunPosition(sunrise, sunset, time)
                 const sun = createSunImg()
-                const trueNoon = culkTrueNoon(utcOffset, lon)
+                const trueNoon = calkTrueNoon(utcOffset, lon)
                 const shift = sunPosition < 24  || sunPosition > 72 ? 2 : 0
 
                 const sunDatasets = sunChartConfig.data.datasets
@@ -152,6 +155,9 @@ const Charts = () => {
         }
     }
 
+
+    
+
     return ( 
         <div className={styles.charts}>
             <div className={styles.chart__inner}>
@@ -176,6 +182,7 @@ const Charts = () => {
                 <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
+                        <CurrentWind />
                         <div className={styles.chartWrapper}>
                             <div className={styles.chart_container} style={adaptiveChart}>
                                 {   
@@ -198,17 +205,20 @@ const Charts = () => {
                             <div className={styles.sunChart_container} style={sunAdaptiveChart}>
                                 {   
                                     weather 
-                                    ? <Chart 
-                                        ref={sunRef} type='line' 
-                                        data={sunChartConfig.data as ChartData<"line">} 
-                                        options={sunChartConfig.options as unknown as ChartOptions<"line">}
-                                        redraw={true}
-                                    />
+                                    ? <>
+                                        <Chart 
+                                            ref={sunRef} type='line' 
+                                            data={sunChartConfig.data as ChartData<"line">} 
+                                            options={sunChartConfig.options as unknown as ChartOptions<"line">}
+                                            redraw={true}
+                                        />
+                                    </>
                                     : <div className={styles.loadingChart}>
                                         <div className={styles.gradient}></div>
                                     </div>
                                 }
                             </div>
+                            <DayParameters />
                         </div>
                     </>
                 </Container>

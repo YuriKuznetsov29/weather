@@ -51,7 +51,6 @@ const SignUpForm = () => {
   useEffect(() => {
     if (auth) {
         navigate(fromPage)
-    //   dispatch(setSignUpState())
     }
   }, [auth])
 

@@ -10,7 +10,6 @@ export function culkSunPosition(sunrise: string, sunset: string, curtime: string
     const morningStep = sunriseS/allSteps*4
     const dayStep = (sunsetS - sunriseS)/allSteps*2
     const nightStep = (sOnDay - sunsetS)/allSteps*4
-    
   
     if (curtimeS >= sunsetS) {
         return Math.ceil(allSteps / 4 * 3 + (curtimeS - sunsetS) / nightStep)
@@ -45,7 +44,25 @@ export function sinusCalk() {
     return [labels, sin]
 }
 
-export function culkTrueNoon(offset: number, lon: number): string {
+export function calkTrueNoon(offset: number, lon: number): string {
     const trueNoon = 12 + ((offset/3600) - lon / 15)
     return Math.floor(trueNoon) + ':' + (trueNoon % 1 * 0.6 * 100).toFixed()
+}
+
+export function calkDayDuration(sunrise: string, sunset: string, hour: number, minutes: string) {
+
+    const sunsetHour = +sunset.slice(0, 2)
+    const sunriseHour = +sunrise.slice(0, 2)
+    const sunsetMin = +sunset.slice(3, 5)
+    const sunriseMin = +sunrise.slice(3, 5)
+
+    const hours = sunsetMin - sunriseMin < 0 ? sunsetHour - sunriseHour - 1 : sunsetHour - sunriseHour
+    const min = sunsetMin - sunriseMin < 0 ? 60 - Math.abs(sunsetMin - sunriseMin) : sunsetMin - sunriseMin
+    const beforeSunsetHour = sunsetMin - +minutes < 0 ? sunsetHour - hour - 1 : sunsetHour - hour
+    const beforeSunsetMin = sunsetMin - +minutes < 0 ? 60 - Math.abs(sunsetMin - +minutes) : sunsetMin - +minutes
+
+    console.log(sunsetMin - +minutes)
+
+    return [hours, min, beforeSunsetHour, beforeSunsetMin]
+
 }

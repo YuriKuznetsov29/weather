@@ -23,8 +23,18 @@
 }
 
 .sunChart_container {
+    position: relative;
     height: 600px;
     width: 100%;
+}
+
+.additionalData {
+    margin-bottom: 50px;
+    width: 100%;
+    font-size: 18px;
+    font-family: 'Helvetica Neue';
+    display: flex;
+    justify-content: space-around;
 }
 
 .text {
@@ -36,24 +46,46 @@
     font-size: 40px;
 }
 
+.currentWind {
+    position: relative;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 50px;
+    text-align: center;
+    font-size: 18px;
+}
+
+.windValue {
+    font-size: 120px;
+    color: #36A2EB;
+}
+
+.windDir {
+    position: absolute;
+    left: 135px;
+    padding-top: 25px;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.arrow {
+    width: 50px;
+    height: 50px;
+}
+
 @media (max-width: 1200px) {
     .chartWrapper {
         overflow-x: scroll;
     }
 
-    // .sunChart_container {
-    //     width: 100%;
-    //     height: 100%;
-    // }
 }
-/* @media(max-width: 900px) {
-    .day {
-        margin-top: 100px;
-    }
-} */
 
 @media (max-width: 450px) {
-    .chart__innner {
+    .chart__inner {
         margin-top: 20px;
     }
 
@@ -64,5 +96,32 @@
 
     .chartTitle {
         font-size: 20px;
+    }
+
+    .additionalData {
+        margin-bottom: 15px;
+        display: block;
+        font-size: 11px;
+    }
+    .additionalData_value {
+        line-height: 1.5;
+    }
+
+    .currentWind {
+        font-size: 12px;
+    }
+
+    .windValue {
+        font-size: 60px;
+    }
+
+    .windDir {
+        padding-top: 15px;
+        left: 75px;
+    }
+
+    .arrow {
+        width: 30px;
+        height: 30px;
     }
 }
