@@ -1,6 +1,6 @@
 import { useAppSelector } from 'app/hooks'
 import { currentWetherSelector, selectDay } from 'app/selectors'
-import { getTimeWithUtcOffset, getWindDirectionLong } from 'helpers/tranformData'
+import { getTimeWithUtcOffset, getWindDirectionLong } from 'helpers/transformData'
 import { ReactComponent as Arrow } from './arrow-up-bold.svg'
 
 import styles from './Charts.module.scss'
@@ -22,7 +22,7 @@ const CurrentWind = () => {
             const directionName = getWindDirectionLong(dailyWindDir[hour])
             return (
                 <div className={styles.currentWind}>
-                    <div>
+                    <div className={styles.windValueWrapper}>
                         <div className={styles.windValue}>{dailyWind[hour]}</div>
                         км/ч
                     </div>

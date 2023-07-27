@@ -61,8 +61,18 @@ export function calkDayDuration(sunrise: string, sunset: string, hour: number, m
     const beforeSunsetHour = sunsetMin - +minutes < 0 ? sunsetHour - hour - 1 : sunsetHour - hour
     const beforeSunsetMin = sunsetMin - +minutes < 0 ? 60 - Math.abs(sunsetMin - +minutes) : sunsetMin - +minutes
 
-    console.log(sunsetMin - +minutes)
+    return {hours, min, beforeSunsetHour, beforeSunsetMin}
 
-    return [hours, min, beforeSunsetHour, beforeSunsetMin]
+}
 
+export function checkTimesOfDay(sunrise: string, sunset: string, time: string): boolean {
+    const sunriseMod = Number(sunrise.match(/[^:]/g)?.join(''))
+    const sunsetMod = Number(sunset.match(/[^:]/g)?.join(''))
+    const timeMod = Number(time.match(/[^:]/g)?.join(''))
+
+    if (timeMod > sunriseMod && timeMod < sunsetMod) {
+        return true
+    }
+
+    return false
 }

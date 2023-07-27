@@ -1,4 +1,4 @@
-import { getTimeWithUtcOffset } from "helpers/tranformData"
+import { getTimeWithUtcOffset } from "helpers/transformData"
 import { useAppSelector } from "app/hooks"
 import { currentWetherSelector } from "app/selectors"
 import Day from "./Day"

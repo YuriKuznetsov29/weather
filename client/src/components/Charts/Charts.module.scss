@@ -47,13 +47,21 @@
 }
 
 .currentWind {
-    position: relative;
+    height: 160px;
     display: flex;
     justify-content: left;
     align-items: center;
-    gap: 50px;
     text-align: center;
     font-size: 18px;
+}
+
+.windValueWrapper {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+
 }
 
 .windValue {
@@ -62,8 +70,7 @@
 }
 
 .windDir {
-    position: absolute;
-    left: 135px;
+    margin-left: 20px;
     padding-top: 25px;
     height: 100%;
     display: flex;
@@ -73,8 +80,8 @@
 }
 
 .arrow {
-    width: 50px;
-    height: 50px;
+    width: 70px;
+    height: 70px;
 }
 
 @media (max-width: 1200px) {
@@ -108,6 +115,7 @@
     }
 
     .currentWind {
+        height: 90px;
         font-size: 12px;
     }
 
@@ -117,11 +125,10 @@
 
     .windDir {
         padding-top: 15px;
-        left: 75px;
     }
 
     .arrow {
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
 }

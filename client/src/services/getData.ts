@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useHttp } from "hooks/useHttp"
-import { getCurrentDate, getLastDate, transformWeatherData } from "../helpers/tranformData"
+import { getCurrentDate, getLastDate, transformWeatherData } from "../helpers/transformData"
 
 export function getLocation() {
     return useHttp("https://api.ipgeolocation.io/ipgeo?apiKey=17a8d753063e4a20a9531fe3638de576")

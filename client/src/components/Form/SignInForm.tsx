@@ -93,7 +93,7 @@ const SignUpForm = () => {
                 <Eye size={22} color="#000" />
               )}
             </div>
-            <ErrorMessage className={styles.fieldError} component="div" name="password" />
+            <ErrorMessage className={`${styles.fieldError} ${styles.fieldErrorLats}`} component="div" name="password" />
           </div>
 
           {serverError 

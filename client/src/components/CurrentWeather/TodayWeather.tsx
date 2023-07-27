@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container'
 import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
-import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/tranformData'
+import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/transformData'
 import { months, weatherDescription } from 'helpers/constants'
 
 import styles from './CurrentWeather.module.scss'

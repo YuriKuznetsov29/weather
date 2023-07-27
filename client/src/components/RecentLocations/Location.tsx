@@ -1,10 +1,10 @@
 import { CurrentLocation } from "app/slices/locationSlice"
 import { setCurrentLocation } from "app/slices/locationSlice"
-import { getWetherImage } from "helpers/tranformData"
+import { getWetherImage } from "helpers/transformData"
 import { getWetherDaily } from "services/getData"
 import { useAppDispatch } from "app/hooks"
 import { memo, useEffect, useState } from "react"
-import { WeatherData } from "helpers/tranformData"
+import { WeatherData } from "helpers/transformData"
 import { Thermometer } from "@phosphor-icons/react"
 import { useNavigate } from "react-router-dom"
 
@@ -15,7 +15,7 @@ interface LocationProps {
     redirect?: boolean
 }
 
-const Location = ({ location, redirect }: LocationProps) => {
+const Location = memo(({ location, redirect }: LocationProps) => {
     const [data, setData] = useState<WeatherData | null>(null)
     
     const dispatch = useAppDispatch()
@@ -105,6 +105,6 @@ const Location = ({ location, redirect }: LocationProps) => {
     const content = renderLocation()
 
     return <>{content}</>
-}
+})
 
 export default Location

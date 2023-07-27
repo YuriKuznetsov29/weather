@@ -25,6 +25,14 @@ const SideBar = () => {
   const main = useMatch(`/`)
   const tomorrow = useMatch(`/tomorrow`)
 
+  useEffect(() => {
+    if (barState) {
+            document.body.style.overflow = 'hidden'
+        } else {
+            document.body.style.overflow = 'auto'
+        }
+  }, [barState])
+
   const checkUrl = () => {
     if (main) {
       dispatch(setDay("today"))

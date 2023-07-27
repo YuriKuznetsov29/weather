@@ -6,7 +6,6 @@ import RecentLocations from "components/RecentLocations/RecentLocations";
 import SelectLocation from "components/SelectLocation/SelectLocation";
 import SideBar from "components/SideBar/SideBar";
 import Header from "components/Header/Header";
-import Form from "components/Form/Form";
 
 const Main = () => (
   <>

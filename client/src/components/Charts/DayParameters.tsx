@@ -1,7 +1,7 @@
 import { useAppSelector } from "app/hooks";
 import { currentWetherSelector } from "app/selectors";
-import { getTimeWithUtcOffset } from "helpers/tranformData";
-import { calkDayDuration } from "./chartHelpers";
+import { getTimeWithUtcOffset } from "helpers/transformData";
+import { calkDayDuration, checkTimesOfDay } from "./chartHelpers";
 
 import  styles from "./Charts.module.scss";
 
@@ -18,12 +18,18 @@ const DayParameters = () => {
                 sunset, 
             } = weather.currentWeather
             
-            const {hour, minutes} = getTimeWithUtcOffset(utcOffset)
-            const [hours, min, beforeSunsetHour, beforeSunsetMin] = calkDayDuration(sunrise, sunset, hour, minutes)
+            const {hour, minutes, time} = getTimeWithUtcOffset(utcOffset)
+            const timesOfDay = checkTimesOfDay(sunrise, sunset, time)
+
+
+            const {hours, min, beforeSunsetHour, beforeSunsetMin} = calkDayDuration(sunrise, sunset, hour, minutes)
             return (
                 <div className={styles.additionalData}>
                     <div className={styles.additionalData_value}>Продолжительность дня {hours} ч {min} мин</div>
-                    <div className={styles.additionalData_value}>Время до захода {beforeSunsetHour} ч {beforeSunsetMin} мин</div>
+                    {timesOfDay && <div className={styles.additionalData_value}>
+                        Время до захода {beforeSunsetHour !== 0 && `${beforeSunsetHour} ч`} {beforeSunsetMin} мин
+                    </div>
+                    }
                 </div>
             )
         }

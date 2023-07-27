@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container'
 import { ReactElement, useCallback, useEffect, useState } from 'react'
-import { useAppDispatch, useAppSelector } from 'app/hooks'
+import { useAppSelector } from 'app/hooks'
 import { currentLocationSelector } from 'app/selectors'
 import { CurrentLocation } from 'app/slices/locationSlice'
 import { storage } from 'services/storage'
@@ -45,20 +45,23 @@ const RecentLocations = () => {
         }
     }
 
-    // const renderLocations = useCallback(() => {
-    //     setLocationElement(locations.map((location, i) => {
-    //         return (
-    //             <Location key={i} location={location} />
-    //         )
-    //     }))
-    // }, [locations])
-    const renderLocations = () => {
+    console.log('rendder')
+
+    const renderLocations = useCallback(() => {
         setLocationElement(locations.map((location, i) => {
             return (
                 <Location key={i} location={location} />
             )
         }))
-    }
+    }, [locations])
+    
+    // const renderLocations = () => {
+    //     setLocationElement(locations.map((location, i) => {
+    //         return (
+    //             <Location key={i} location={location} />
+    //         )
+    //     }))
+    // }
 
     return (
         <div className={styles.recent_locations} id="recent">
