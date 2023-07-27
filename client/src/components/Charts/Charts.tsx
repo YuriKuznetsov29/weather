@@ -7,7 +7,7 @@ import { useAppSelector } from "app/hooks";
 import { currentWetherSelector, selectDay } from "app/selectors";
 import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
-import { getTimeWithUtcOffset } from "helpers/tranformData";
+import { getTimeWithUtcOffset } from "helpers/transformData";
 import { ChartData, ChartOptions } from "chart.js";
 import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk, calkDayDuration } from "./chartHelpers"
 
@@ -118,7 +118,7 @@ const Charts = () => {
                 windChart.data.datasets[1].datalabels!.anchor = "end"
                 
                 windChart.data = windChartConfig.data
-                windChart.update('active');
+                windChart.update('active')
             }
 
             //sun
@@ -140,10 +140,10 @@ const Charts = () => {
                 ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
                 ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
                 ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
-                if (sunPosition > 2) {
+                if (sunPosition > 3) {
                     sunDatasets[3].pointStyle = [];
                     sunDatasets[3].pointStyle[sunPosition - shift] = sun
-                } else if (sunPosition <= 2) {
+                } else if (sunPosition <= 3) {
                     sunDatasets[3].pointStyle = [];
                 }
                 const sunChart = sunRef.current
@@ -154,9 +154,6 @@ const Charts = () => {
             }
         }
     }
-
-
-    
 
     return ( 
         <div className={styles.charts}>

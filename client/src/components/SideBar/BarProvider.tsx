@@ -9,7 +9,7 @@ const BarProvider = ({children}: BarProviderProps) => {
     const [barState, setBarState] = useState(false)
 
     const stateChange = (): void => {
-        setBarState(!barState)
+        setBarState(prev => !prev)
     }
 
     const defaultProps = useMemo(() => ({

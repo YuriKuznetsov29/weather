@@ -1,10 +1,10 @@
 import { CurrentLocation } from "app/slices/locationSlice"
 import { setCurrentLocation } from "app/slices/locationSlice"
-import { getWetherImage } from "helpers/tranformData"
+import { getWetherImage } from "helpers/transformData"
 import { getWetherDaily } from "services/getData"
 import { useAppDispatch } from "app/hooks"
 import { memo, useEffect, useState } from "react"
-import { WeatherData } from "helpers/tranformData"
+import { WeatherData } from "helpers/transformData"
 import { Thermometer } from "@phosphor-icons/react"
 import { useNavigate } from "react-router-dom"
 
