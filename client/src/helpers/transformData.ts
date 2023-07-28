@@ -20,6 +20,26 @@ export const getWindDirection = (dir: number): string => {
     } else return ''
 }
 
+export const getWindDirectionLong = (dir: number): string => {
+    if ((dir >= 337.5 && dir <= 360) || (dir > 0 && dir < 22.5)) {
+        return 'Северный'
+    } else if (dir >= 22.5 && dir < 67.5) {
+        return 'Северо-восточный'
+    } else if (dir >= 67.5 && dir < 112.5) {
+        return 'Восточный'
+    } else if (dir >= 112.5 && dir < 157.5) {
+        return 'Юго-восточный'
+    } else if (dir >= 157.5 && dir < 202.5) {
+        return 'Южный'
+    } else if (dir >= 202.5 && dir < 247.5) {
+        return 'Юго-западный'
+    } else if (dir >= 247.5 && dir < 292.5) {
+        return 'Западный'
+    } else if (dir >= 292.5 && dir < 337.5) {
+        return 'Северо-западный'
+    } else return ''
+}
+
 
 export const getLastDate = () => {
     const date = new Date()
@@ -56,7 +76,7 @@ export function getTimeWithUtcOffset(offset: number) {
     const tomorrowDay = utcDate.getDate()
     const weekDay = utcDate.getDay()
 
-    return { time, modTime, month, week, day, hour, tomorrowDay, tomorrowMonth, weekDay }
+    return { time, modTime, month, week, day, hour, minutes, tomorrowDay, tomorrowMonth, weekDay }
 }
 
 export interface CurrentWeather {
@@ -70,6 +90,7 @@ export interface CurrentWeather {
     dailyTemp: number[]
     dailyMoi: number[]
     dailyPrecipitation: number[]
+    dailyPrecipitationSum: number
     dailyPrecipitationProb: number[]
     dailyWind: number[]
     dailyWindDir: number[]
@@ -103,6 +124,7 @@ export interface TomorrowWeather {
     dailyMoi: number
     uvIndex: number
     dailyPrecipitation: number[]
+    dailyPrecipitationSum: number
     dailyPrecipitationProb: number[]
 }
 
@@ -146,6 +168,7 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 dailyTemp: res.hourly.temperature_2m.slice(0, 24),
                 dailyMoi: res.hourly.relativehumidity_2m.slice(0, 24),
                 dailyPrecipitation: res.hourly.precipitation.slice(0, 24),
+                dailyPrecipitationSum: (res.hourly.precipitation.slice(0, 24).reduce((acc: number, curr: number) => acc + curr)).toFixed(1),
                 dailyPrecipitationProb: res.hourly.precipitation_probability.slice(0, 24),
                 dailyWind: res.hourly.windspeed_10m.slice(0, 24).map((el: number) => Math.round(el)),
                 dailyWindDir: res.hourly.winddirection_10m.slice(0, 24),
@@ -178,6 +201,7 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 dailyMoi: Math.round(res.hourly.relativehumidity_2m.slice(24, 48).reduce((acc: number, curr: number) => curr + acc) / 24),
                 uvIndex: res.daily.uv_index_max[1],
                 dailyPrecipitation: res.hourly.precipitation.slice(24, 48),
+                dailyPrecipitationSum: (res.hourly.precipitation.slice(24, 48).reduce((acc: number, curr: number) => acc + curr)).toFixed(1),
                 dailyPrecipitationProb: res.hourly.precipitation_probability.slice(24, 48),
             },
             tenDaysWeather: {

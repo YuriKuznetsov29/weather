@@ -11,7 +11,7 @@ const Precipitations = () => {
 
     const renderPrecipitations = () => {
         if (weather) {
-            const { dailyPrecipitation, dailyPrecipitationProb, dailyTime } =
+            const { dailyPrecipitation, dailyPrecipitationSum, dailyPrecipitationProb, dailyTime } =
                 selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
 
             const itemsArr = dailyPrecipitation.map((pecipitation, i) => {
@@ -45,6 +45,9 @@ const Precipitations = () => {
                                     </div>
                                 </div>
                                 {itemsArr}
+                            </div>
+                            <div className={styles.general}>
+                                Общий суточный объем <div className={styles.generalValue}>{dailyPrecipitationSum}мм</div>
                             </div>
                         </>
                     </Container>

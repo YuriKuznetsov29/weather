@@ -9,10 +9,11 @@ interface DayNightTempProps {
 const DayNightTemp = ({dayTemp, nightTemp}: DayNightTempProps) => (
     <div className={styles.temperature}>
         <div className={styles.data}>
-            Днем {dayTemp}° <ArrowUp className={styles.arrow} />
+            Днем {dayTemp}° <i className={`wi wi-direction-up ${styles.arrow}`}></i>
         </div>
+        <div className={styles.separator}>•</div>
         <div className={styles.data}>
-            Ночью {nightTemp}° <ArrowDown className={styles.arrow} />
+            Ночью {nightTemp}° <i className={`wi wi-direction-down ${styles.arrow}`}></i>
         </div>
     </div>
 )

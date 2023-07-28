@@ -1,6 +1,6 @@
 import Container from 'components/Container/Container'
 import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
-import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/tranformData'
+import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/transformData'
 import { months, weatherDescription } from 'helpers/constants'
 
 import styles from './CurrentWeather.module.scss'
@@ -28,8 +28,6 @@ const TodayWeather = memo(({weather, date}: TodayProps) => {
     const {time, month, day} = date
     const image = getWetherImage(sunrise, sunset, weathercode, utcOffset)
 
-    console.log('current weather')
-
     return (
         <div className={styles.currentWeather} id="currentWeather">
             <Container>
@@ -47,7 +45,6 @@ const TodayWeather = memo(({weather, date}: TodayProps) => {
                         <div>
                             <i className={`wi ${image} ${styles.code_icon}`}></i>
                         </div>
-
                         <div className={styles.currentWeather__codeValue}>{weatherDescription[weathercode]}</div>
                     </div>
                 </div>

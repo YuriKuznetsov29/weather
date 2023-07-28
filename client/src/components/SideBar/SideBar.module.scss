@@ -12,10 +12,21 @@
 }
 
 .nav {
+    position: relative;
     width: 400px;
     height: 100%;
     padding: 55px 15px;
     background-color: #ebebeb;
+    animation: navAnimation .2s linear;
+}
+
+@keyframes navAnimation {
+    from {
+        right: -400px;
+    }
+    to {
+        right: 0px;
+    }
 }
 
 .close {

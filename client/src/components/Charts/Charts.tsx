@@ -7,11 +7,14 @@ import { useAppSelector } from "app/hooks";
 import { currentWetherSelector, selectDay } from "app/selectors";
 import { useEffect, useRef, useState } from "react"
 import Container from "components/Container/Container";
-import { getTimeWithUtcOffset } from "helpers/tranformData";
+import { getTimeWithUtcOffset } from "helpers/transformData";
 import { ChartData, ChartOptions } from "chart.js";
-import { createSunImg, culkSunPosition, culkTrueNoon, sinusCalk } from "./chartHelpers"
+import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk, calkDayDuration } from "./chartHelpers"
+import DayParameters from "./DayParameters"
+import CurrentWind from "./CurrentWind"
 
 import styles from './Charts.module.scss'
+
 
 ChartJS.register(
     annotationPlugin, 
@@ -90,6 +93,7 @@ const Charts = () => {
                 lon
             } = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
             
+            
             // temperature
             const tempChart = tempRef.current
             if (tempChart) {
@@ -117,7 +121,7 @@ const Charts = () => {
                 windChart.data.datasets[1].datalabels!.anchor = "end"
                 
                 windChart.data = windChartConfig.data
-                windChart.update('active');
+                windChart.update('active')
             }
 
             //sun
@@ -126,7 +130,7 @@ const Charts = () => {
                 const [labels, sin] = sinusCalk()
                 const sunPosition = culkSunPosition(sunrise, sunset, time)
                 const sun = createSunImg()
-                const trueNoon = culkTrueNoon(utcOffset, lon)
+                const trueNoon = calkTrueNoon(utcOffset, lon)
                 const shift = sunPosition < 24  || sunPosition > 72 ? 2 : 0
 
                 const sunDatasets = sunChartConfig.data.datasets
@@ -139,10 +143,10 @@ const Charts = () => {
                 ( sunDatasets[1].data as string [] ) = sin.slice(0, sunPosition + 1);
                 ( sunDatasets[2].data as number[] ) = new Array(labels.length).fill(0); // горизонт
                 ( sunDatasets[3].data as string[] ) = sin.map(el => +el + 0.20 + '').slice(0, sunPosition + 1)
-                if (sunPosition > 2) {
+                if (sunPosition > 3) {
                     sunDatasets[3].pointStyle = [];
                     sunDatasets[3].pointStyle[sunPosition - shift] = sun
-                } else if (sunPosition <= 2) {
+                } else if (sunPosition <= 3) {
                     sunDatasets[3].pointStyle = [];
                 }
                 const sunChart = sunRef.current
@@ -178,6 +182,7 @@ const Charts = () => {
               <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
+                        <CurrentWind />
                         <div className={styles.chartWrapper}>
                             <div className={styles.chart_container} style={adaptiveChart}>
                                 {   
@@ -200,17 +205,20 @@ const Charts = () => {
                             <div className={styles.sunChart_container} style={sunAdaptiveChart}>
                                 {   
                                     weather 
-                                    ? <Chart 
-                                        ref={sunRef} type='line' 
-                                        data={sunChartConfig.data as ChartData<"line">} 
-                                        options={sunChartConfig.options as unknown as ChartOptions<"line">}
-                                        redraw={true}
-                                    />
+                                    ? <>
+                                        <Chart 
+                                            ref={sunRef} type='line' 
+                                            data={sunChartConfig.data as ChartData<"line">} 
+                                            options={sunChartConfig.options as unknown as ChartOptions<"line">}
+                                            redraw={true}
+                                        />
+                                    </>
                                     : <div className={styles.loadingChart}>
                                         <div className={styles.gradient}></div>
                                     </div>
                                 }
                             </div>
+                            <DayParameters />
                         </div>
                     </>
                 </Container>

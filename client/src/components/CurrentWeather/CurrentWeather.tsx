@@ -3,7 +3,7 @@ import { useAppSelector } from 'app/hooks'
 import { currentWetherSelector, selectDay } from 'app/selectors'
 import TodayWeather from './TodayWeather'
 import TomorrowWether from './TomorrowWether'
-import { getTimeWithUtcOffset } from 'helpers/tranformData'
+import { getTimeWithUtcOffset } from 'helpers/transformData'
 
 import styles from './CurrentWeather.module.scss'
 

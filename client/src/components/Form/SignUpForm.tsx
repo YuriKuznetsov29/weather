@@ -51,7 +51,6 @@ const SignUpForm = () => {
   useEffect(() => {
     if (auth) {
         navigate(fromPage)
-    //   dispatch(setSignUpState())
     }
   }, [auth])
 
@@ -105,7 +104,7 @@ const SignUpForm = () => {
           </label>
           <div className={styles.inputWrapper}>
             <Field
-              className={styles.input}
+              className={`${styles.input} ${styles.lastInput}`}
               id="confirmPassword"
               name="confirmPassword"
               type={showPassword}
@@ -118,7 +117,7 @@ const SignUpForm = () => {
                 <Eye size={22} color="#000" />
               )}
             </div>
-            <ErrorMessage className={styles.fieldError} component="div" name="confirmPassword" />
+            <ErrorMessage className={`${styles.fieldError} ${styles.fieldErrorLats}`} component="div" name="confirmPassword" />
           </div>
 
           {serverError 

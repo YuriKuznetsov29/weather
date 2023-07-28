@@ -1,5 +1,5 @@
 import Container from "components/Container/Container"
-import { getWetherImage, getWindDirection } from "helpers/tranformData"
+import { getWetherImage, getWindDirection } from "helpers/transformData"
 import { weatherDescription } from "helpers/constants"
 import { useState } from "react"
 

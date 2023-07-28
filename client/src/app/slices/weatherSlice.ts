@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 import { getWetherDaily } from "services/getData"
 
-import { WeatherData } from "helpers/tranformData"
+import { WeatherData } from "helpers/transformData"
 
 export const loadWeather = createAsyncThunk<WeatherData, RequestWetherData, { state: { weather: WeatherSlice } }>(
     "weather/load-weather",
