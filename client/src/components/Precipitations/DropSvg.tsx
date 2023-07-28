@@ -21,7 +21,8 @@ const DropSvg = ({ pecipitation, i }: DropSvgProps) => {
             "5": 90,
             "6": 100,
         }
-        quantity = quantity > 1 ? (quantity >= 6 ? 6 : Math.round(quantity)) : quantity > 0.1 ? 0.9 : 0.1
+        quantity =
+            quantity > 1 ? (quantity >= 6 ? 6 : Math.round(quantity)) : quantity > 0.1 ? 0.9 : 0.1
         return precipPercent[quantity]
     }
 

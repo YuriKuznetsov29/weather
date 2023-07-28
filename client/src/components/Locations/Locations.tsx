@@ -1,9 +1,9 @@
 import Container from "components/Container/Container"
 import Location from "components/RecentLocations/Location"
-
-import styles from "./Locations.module.scss"
 import { useAppSelector } from "app/hooks"
 import { userSelector } from "app/selectors"
+
+import styles from "./Locations.module.scss"
 
 const Locations = () => {
     const { savedLocations } = useAppSelector(userSelector)

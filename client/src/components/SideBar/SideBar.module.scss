@@ -8,14 +8,23 @@
     display: none;
     justify-content: right;
     z-index: 1000;
-    background-color: rgba(0, 0, 0, 0.3);
+    animation: show 1s forwards;
+}
+
+@keyframes show {
+    from {
+        background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+        background-color: rgba(0, 0, 0, 0.6);
+    }
 }
 
 .nav {
     position: relative;
     width: 400px;
     height: 100%;
-    padding: 55px 15px;
+    padding: 20px 15px;
     background-color: #ebebeb;
     animation: navAnimation .2s linear;
 }

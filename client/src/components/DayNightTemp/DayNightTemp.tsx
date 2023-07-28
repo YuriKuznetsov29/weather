@@ -1,12 +1,11 @@
-import { ArrowDown, ArrowUp } from '@phosphor-icons/react'
-import styles from './DayNightTemp.module.scss'
+import styles from "./DayNightTemp.module.scss"
 
 interface DayNightTempProps {
     dayTemp: number
     nightTemp: number
 }
 
-const DayNightTemp = ({dayTemp, nightTemp}: DayNightTempProps) => (
+const DayNightTemp = ({ dayTemp, nightTemp }: DayNightTempProps) => (
     <div className={styles.temperature}>
         <div className={styles.data}>
             Днем {dayTemp}° <i className={`wi wi-direction-up ${styles.arrow}`}></i>

@@ -8,7 +8,6 @@ import { authStatusSelector } from "app/selectors"
 import styles from "./Header.module.scss"
 
 const StarSvg = () => {
-
     const navigate = useNavigate()
 
     const dispatch = useAppDispatch()
@@ -33,7 +32,7 @@ const StarSvg = () => {
                 : savedLocations.concat([currentLocation])
             dispatch(saveLocations({ userId, savedLocations: newLocations as CurrentLocation[] }))
         } else {
-            navigate('/signIn')
+            navigate("/signIn")
         }
     }
 

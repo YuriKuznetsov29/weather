@@ -40,34 +40,30 @@ export const signIn = createAsyncThunk(
     }
 )
 
-export const signOut = createAsyncThunk(
-    "login/signOut",
-    async () => {
-        try {
-            await AuthService.signOut()
-            localStorage.removeItem("token")
-        } catch (e: unknown) {
-            console.log(e)
-        }
+export const signOut = createAsyncThunk("login/signOut", async () => {
+    try {
+        await AuthService.signOut()
+        localStorage.removeItem("token")
+    } catch (e: unknown) {
+        console.log(e)
     }
-)
+})
 
-export const checkAuth = createAsyncThunk(
-    "login/checkAuth",
-    async () => {
-        try {
-            const response = await axios.get<AuthResponse>(`${API_URL}/auth/token`, {withCredentials: true})
-            localStorage.setItem("token", response.data.accessToken)
-            return response.data
-        } catch (e: unknown) {
-            console.log(e)
-        }
+export const checkAuth = createAsyncThunk("login/checkAuth", async () => {
+    try {
+        const response = await axios.get<AuthResponse>(`${API_URL}/auth/token`, {
+            withCredentials: true,
+        })
+        localStorage.setItem("token", response.data.accessToken)
+        return response.data
+    } catch (e: unknown) {
+        console.log(e)
     }
-)
+})
 
 export const saveLocations = createAsyncThunk(
     "login/saveLocations",
-    async ({userId, savedLocations}: RequestSavedLocationsData) => {
+    async ({ userId, savedLocations }: RequestSavedLocationsData) => {
         try {
             const response = await UserService.saveLocations(userId, savedLocations)
             return response.data.user
@@ -106,7 +102,7 @@ const initialState: LoginSlice = {
     user: {} as IUser,
     status: "idle",
     authCheckStatus: "idle",
-    serverErrors: ''
+    serverErrors: "",
 }
 
 const loginSlice = createSlice({
@@ -118,11 +114,11 @@ const loginSlice = createSlice({
         },
         setSignInState: (state) => {
             state.signInState = !state.signInState
-            state.serverErrors = ''
+            state.serverErrors = ""
         },
         setSignUpState: (state) => {
             state.signUpState = !state.signUpState
-            state.serverErrors = ''
+            state.serverErrors = ""
         },
         setUser: (state, action) => {
             state.user = action.payload
@@ -132,18 +128,18 @@ const loginSlice = createSlice({
         builder
             .addCase(signUp.pending, (state) => {
                 state.status = "loading"
-                state.serverErrors = ''
+                state.serverErrors = ""
             })
             .addCase(signUp.rejected, (state) => {
                 state.status = "error"
             })
             .addCase(signUp.fulfilled, (state, action) => {
-                console.log('user' ,action.payload?.user)
+                console.log("user", action.payload?.user)
                 if (action.payload?.user) {
                     state.authStatus = true
                     state.user = action.payload.user
                     state.status = "finished"
-                    state.serverErrors = ''
+                    state.serverErrors = ""
                 } else {
                     state.status = "error"
                     state.serverErrors = action.payload
@@ -151,7 +147,7 @@ const loginSlice = createSlice({
             })
             .addCase(signIn.pending, (state) => {
                 state.status = "loading"
-                state.serverErrors = ''
+                state.serverErrors = ""
             })
             .addCase(signIn.rejected, (state, action) => {
                 state.status = "error"
@@ -161,7 +157,7 @@ const loginSlice = createSlice({
                     state.authStatus = true
                     state.user = action.payload.user
                     state.status = "finished"
-                    state.serverErrors = ''
+                    state.serverErrors = ""
                 } else {
                     state.status = "error"
                     state.serverErrors = action.payload
