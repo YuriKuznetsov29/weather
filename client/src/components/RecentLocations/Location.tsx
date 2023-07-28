@@ -15,7 +15,7 @@ interface LocationProps {
     redirect?: boolean
 }
 
-const Location = ({ location, redirect }: LocationProps) => {
+const Location = memo(({ location, redirect }: LocationProps) => {
     const [data, setData] = useState<WeatherData | null>(null)
     
     const dispatch = useAppDispatch()
@@ -105,6 +105,6 @@ const Location = ({ location, redirect }: LocationProps) => {
     const content = renderLocation()
 
     return <>{content}</>
-}
+})
 
 export default Location
