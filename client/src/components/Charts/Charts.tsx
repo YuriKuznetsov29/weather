@@ -10,10 +10,11 @@ import Container from "components/Container/Container";
 import { getTimeWithUtcOffset } from "helpers/transformData";
 import { ChartData, ChartOptions } from "chart.js";
 import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk, calkDayDuration } from "./chartHelpers"
+import DayParameters from "./DayParameters"
+import CurrentWind from "./CurrentWind"
 
 import styles from './Charts.module.scss'
-import DayParameters from "./DayParameters";
-import CurrentWind from "./CurrentWind";
+
 
 ChartJS.register(
     annotationPlugin, 

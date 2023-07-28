@@ -1,5 +1,4 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import { useEffect, useState } from "react"
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react"
 import Container from "components/Container/Container"
 import { NavigationArrow, MagnifyingGlass } from "@phosphor-icons/react"
 import { useAppDispatch, useAppSelector } from "app/hooks"
@@ -8,9 +7,9 @@ import { loadWeather } from "app/slices/weatherSlice"
 import { getCoordinateLocation, getLocation } from "services/getData"
 import { currentLocationSelector } from "app/selectors"
 import { storage } from "services/storage"
+import classNames from "classnames"
 
 import styles from './SelectLocation.module.scss'
-import classNames from "classnames"
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
@@ -21,16 +20,18 @@ const SelectLocation = () => {
     const dispatch = useAppDispatch()
     const location: CurrentLocation | null = useAppSelector(currentLocationSelector)
 
+    const deferredQuery = useDeferredValue(searchValue)
+
     useEffect(() => {
-        if (searchValue) {
-            getCoordinateLocation(searchValue)
+        if (deferredQuery) {
+            getCoordinateLocation(deferredQuery)
                 .then(locations => {
                     if ("results" in locations) {
                         setSearchRes(locations.results)
                     }
                 })
         }
-    }, [searchValue])
+    }, [deferredQuery])
 
     useEffect(() => {
         if (location) {
@@ -67,13 +68,13 @@ const SelectLocation = () => {
         setSearchValue((event.target as HTMLInputElement).value)
     }
 
-    const selectLocation = (event: React.MouseEvent<HTMLDivElement>) => {
+    const selectLocation = useCallback((event: React.MouseEvent<HTMLDivElement>) => {
         const location = (event.target as HTMLDivElement).dataset.location?.split(',')
         if (Array.isArray(location)) {
             dispatch(setCurrentLocation({lat: +location?.[0], lon: +location?.[1], city: location?.[2], timezone: location?.[3], country: location?.[4]}))
             clearFind()
         }
-    }
+    }, [searchRes])
     
     document.body.onclick = (event) => {
         if (!(event.target as HTMLElement).closest('#closeSearch')) {
@@ -88,10 +89,10 @@ const SelectLocation = () => {
         setActiveStyleSearch(false)
     }
 
-    const renderResults = () => {
+    const renderResults = useMemo(() => {
+        
         return searchRes.map(location => {
             const {latitude, longitude, name, timezone, country, country_code, id} = location
-
             if (latitude && longitude && name && timezone && country && country_code && id) {
                 return <div 
                         className={styles.search__result} 
@@ -101,12 +102,8 @@ const SelectLocation = () => {
                             {`${country}, ${name}, ${country_code}`}
                     </div>
             }
-            
         })
-        
-    }
-
-    const results = renderResults()
+    }, [searchRes, selectLocation])
 
     return (
         <form className={styles.search} id="select" onClick={((event) => startSearchLocation(event)) }>
@@ -137,7 +134,7 @@ const SelectLocation = () => {
 
                         <div className={styles.search__wrapper}>
                             <div className={styles.search__results} data-type="results">
-                                {results}
+                                {renderResults}
                             </div>
                         </div>
                     </div>
