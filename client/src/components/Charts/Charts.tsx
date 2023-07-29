@@ -127,6 +127,7 @@ const Charts = () => {
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
+
                 windChart.data.datasets[1].datalabels!.anchor = "end"
 
                 windChart.data = windChartConfig.data
@@ -195,7 +196,7 @@ const Charts = () => {
                 </Container>
             </div>
             <div className={styles.chart__inner}>
-                <Container>
+              <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
                         <CurrentWind />

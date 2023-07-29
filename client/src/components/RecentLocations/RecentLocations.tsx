@@ -52,7 +52,7 @@ const RecentLocations = () => {
             })
         )
     }
-
+    
     return (
         <div className={styles.recent_locations} id="recent">
             <Container>
