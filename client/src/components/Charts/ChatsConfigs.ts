@@ -43,7 +43,7 @@ const chartConfigs = () => {
                 padding: {
                     top: 35,
                     left: 0,
-                    right: 0
+                    right: 0,
                 },
             },
             scales: {
@@ -114,7 +114,7 @@ const chartConfigs = () => {
                         // anchor: "end",
                     },
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-                    grouped: true
+                    grouped: true,
                 },
             ],
         },
@@ -130,7 +130,7 @@ const chartConfigs = () => {
                 padding: {
                     top: 35,
                     left: 0,
-                    right: 0
+                    right: 0,
                 },
             },
             scales: {
@@ -395,11 +395,11 @@ const chartConfigs = () => {
             layout: {
                 padding: {
                     // top: 35,
-                    bottom: 0
+                    bottom: 0,
                 },
                 margin: {
-                    bottom: 0
-                }
+                    bottom: 0,
+                },
             },
             interaction: {
                 mode: "index",

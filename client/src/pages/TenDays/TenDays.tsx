@@ -1,4 +1,4 @@
-import Backgroud from "components/Background/Background"
+import Background from "components/Background/Background"
 import RecentLocations from "components/RecentLocations/RecentLocations"
 import SelectLocation from "components/SelectLocation/SelectLocation"
 import SideBar from "components/SideBar/SideBar"
@@ -11,12 +11,12 @@ const TenDays = () => {
             <Header>
                 <SideBar />
             </Header>
-            <Backgroud>
+            <Background>
                 <>
                     <SelectLocation />
                     <RecentLocations />
                 </>
-            </Backgroud>
+            </Background>
             <TenDaysWeather />
         </>
     )

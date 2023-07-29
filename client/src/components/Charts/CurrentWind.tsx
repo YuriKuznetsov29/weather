@@ -1,22 +1,17 @@
-import { useAppSelector } from 'app/hooks'
-import { currentWetherSelector, selectDay } from 'app/selectors'
-import { getTimeWithUtcOffset, getWindDirectionLong } from 'helpers/transformData'
-import { ReactComponent as Arrow } from './arrow-up-bold.svg'
+import { useAppSelector } from "app/hooks"
+import { currentWetherSelector, selectDay } from "app/selectors"
+import { getTimeWithUtcOffset, getWindDirectionLong } from "helpers/transformData"
+import { ReactComponent as Arrow } from "./arrow-up-bold.svg"
 
-import styles from './Charts.module.scss'
+import styles from "./Charts.module.scss"
 
 const CurrentWind = () => {
-
     const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
 
     const renderCurrentWind = () => {
         if (weather && selectedDay === "today") {
-            const {
-                dailyWind, 
-                dailyWindDir, 
-                utcOffset, 
-            } = weather.currentWeather
+            const { dailyWind, dailyWindDir, utcOffset } = weather.currentWeather
 
             const { hour } = getTimeWithUtcOffset(utcOffset)
             const directionName = getWindDirectionLong(dailyWindDir[hour])
@@ -27,7 +22,12 @@ const CurrentWind = () => {
                         км/ч
                     </div>
                     <div className={styles.windDir}>
-                        <Arrow className={styles.arrow} width='50px' height='50px' style={{transform: `rotate(${dailyWindDir[hour]}deg)`}} />
+                        <Arrow
+                            className={styles.arrow}
+                            width="50px"
+                            height="50px"
+                            style={{ transform: `rotate(${dailyWindDir[hour]}deg)` }}
+                        />
                         <div className={styles.windDirNote}>Сейчас • {directionName}</div>
                     </div>
                 </div>
@@ -37,11 +37,7 @@ const CurrentWind = () => {
 
     const content = renderCurrentWind()
 
-    return (
-        <>
-            {content}
-        </>
-    )
+    return <>{content}</>
 }
 
-export default CurrentWind;
+export default CurrentWind

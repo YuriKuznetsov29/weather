@@ -5,7 +5,6 @@ import { userSelector } from "app/selectors"
 
 import styles from "./Locations.module.scss"
 
-
 const Locations = () => {
     const { savedLocations } = useAppSelector(userSelector)
 

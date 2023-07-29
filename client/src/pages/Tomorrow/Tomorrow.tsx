@@ -1,5 +1,5 @@
 import Charts from "components/Charts/Charts"
-import Backgroud from "components/Background/Background"
+import Background from "components/Background/Background"
 import CurrentWeather from "components/CurrentWeather/CurrentWeather"
 import Precipitations from "components/Precipitations/Precipitations"
 import RecentLocations from "components/RecentLocations/RecentLocations"
@@ -12,12 +12,12 @@ const Tomorrow = () => (
         <Header>
             <SideBar />
         </Header>
-        <Backgroud>
+        <Background>
             <>
                 <SelectLocation />
                 <RecentLocations />
             </>
-        </Backgroud>
+        </Background>
         <CurrentWeather />
         <Precipitations />
         <Charts />

@@ -17,7 +17,7 @@ interface LocationProps {
 
 const Location = memo(({ location, redirect }: LocationProps) => {
     const [data, setData] = useState<WeatherData | null>(null)
-    
+
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
 
