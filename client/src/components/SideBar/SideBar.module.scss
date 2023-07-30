@@ -24,7 +24,7 @@
     position: relative;
     width: 400px;
     height: 100%;
-    padding: 20px 15px;
+    padding: 35px 15px;
     background-color: #ebebeb;
     animation: navAnimation .2s linear;
 }
@@ -40,10 +40,10 @@
 
 .close {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 10px;
+    right: 10px;
     color: black;
-    font-size: 35px;
+    font-size: 30px;
     font-weight: 800;
     transition: 0.5s;
     &:hover {
@@ -85,11 +85,4 @@
 
 .active_bar {
     display: flex;
-}
-
-@media(max-width: 650px) {
-
-    .nav {
-        width: 100%;
-    }
 }

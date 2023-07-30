@@ -101,15 +101,15 @@ const SignUpForm = () => {
                             component="div"
                             name="password"
                         />
+                        <div className={styles.error}>
+                            {loadStatus === "loading" ? (
+                                <Spinner smallSize={true} />
+                            ) : (
+                                serverError && <div>{serverError}</div>
+                            )}
+                        </div>
                     </div>
 
-                    {serverError ? (
-                        <div>{serverError}</div>
-                    ) : (
-                        <div style={{ visibility: "hidden" }}>Error</div>
-                    )}
-
-                    {loadStatus === "loading" && <Spinner smallSize={true} />}
                     <Button type="submit" disabled={loadStatus === "loading" ? true : false}>
                         Войти
                     </Button>

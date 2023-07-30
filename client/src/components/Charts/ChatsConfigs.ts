@@ -11,7 +11,7 @@ const CHART_COLORS = {
 }
 
 let arrow = document.createElement("img")
-arrow.src = "arrow-up-bold.svg"
+arrow.src = "arrow-down-bold.svg"
 
 interface LineProps {
     options: ChartOptions<"line">
