@@ -60,7 +60,7 @@
 }
 
 .lastInput {
-    margin-bottom: 0px;
+    margin-bottom: 40px;
 }
 
 .label {
@@ -83,7 +83,7 @@
 }
 
 .fieldErrorLats {
-    bottom: -20px;
+    bottom: 20px;
 }
 
 .sun {
@@ -91,4 +91,13 @@
     width: 128px;
     height: 128px;
     cursor: pointer;
+}
+
+.error {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

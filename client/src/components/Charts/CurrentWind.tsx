@@ -1,7 +1,7 @@
 import { useAppSelector } from "app/hooks"
 import { currentWetherSelector, selectDay } from "app/selectors"
 import { getTimeWithUtcOffset, getWindDirectionLong } from "helpers/transformData"
-import { ReactComponent as Arrow } from "./arrow-up-bold.svg"
+import { ReactComponent as Arrow } from "./arrow-down-bold.svg"
 
 import styles from "./Charts.module.scss"
 
