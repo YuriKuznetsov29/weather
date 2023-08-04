@@ -1,16 +1,16 @@
-import { useAppSelector } from "app/hooks"
-import { currentWetherSelector, selectDay } from "app/selectors"
-import { getTimeWithUtcOffset, getWindDirectionLong } from "helpers/transformData"
-import { ReactComponent as Arrow } from "./arrow-down-bold.svg"
+import { useAppSelector } from 'app/redux/hooks'
+import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import { getTimeWithUtcOffset, getWindDirectionLong } from 'helpers/transformData'
+import { ReactComponent as Arrow } from './arrow-down-bold.svg'
 
-import styles from "./Charts.module.scss"
+import styles from './Charts.module.scss'
 
 const CurrentWind = () => {
     const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
 
     const renderCurrentWind = () => {
-        if (weather && selectedDay === "today") {
+        if (weather && selectedDay === 'today') {
             const { dailyWind, dailyWindDir, utcOffset } = weather.currentWeather
 
             const { hour } = getTimeWithUtcOffset(utcOffset)

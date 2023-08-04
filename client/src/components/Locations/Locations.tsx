@@ -1,9 +1,9 @@
-import Container from "components/Container/Container"
-import Location from "components/RecentLocations/Location"
-import { useAppSelector } from "app/hooks"
-import { userSelector } from "app/selectors"
+import Container from 'shared/ui/Container/Container'
+import Location from 'components/RecentLocations/Location'
+import { useAppSelector } from 'app/redux/hooks'
+import { userSelector } from 'app/redux/selectors'
 
-import styles from "./Locations.module.scss"
+import styles from './Locations.module.scss'
 
 const Locations = () => {
     const { savedLocations } = useAppSelector(userSelector)

@@ -1,20 +1,20 @@
-import { useCallback, useDeferredValue, useEffect, useMemo, useState } from "react"
-import Container from "components/Container/Container"
-import { NavigationArrow, MagnifyingGlass } from "@phosphor-icons/react"
-import { useAppDispatch, useAppSelector } from "app/hooks"
-import { CurrentLocation, setCurrentLocation } from "app/slices/locationSlice"
-import { loadWeather } from "app/slices/weatherSlice"
-import { getCoordinateLocation, getLocation } from "services/getData"
-import { currentLocationSelector } from "app/selectors"
-import { storage } from "services/storage"
-import classNames from "classnames"
+import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react'
+import Container from 'shared/ui/Container/Container'
+import { NavigationArrow, MagnifyingGlass } from '@phosphor-icons/react'
+import { useAppDispatch, useAppSelector } from 'app/redux/hooks'
+import { CurrentLocation, setCurrentLocation } from 'app/redux/slices/locationSlice'
+import { loadWeather } from 'app/redux/slices/weatherSlice'
+import { getCoordinateLocation, getLocation } from 'services/getData'
+import { currentLocationSelector } from 'app/redux/selectors'
+import { storage } from 'services/storage'
+import classNames from 'classnames'
 
-import styles from "./SelectLocation.module.scss"
+import styles from './SelectLocation.module.scss'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
     const [activeStyleSearch, setActiveStyleSearch] = useState(false)
-    const [searchValue, setSearchValue] = useState("")
+    const [searchValue, setSearchValue] = useState('')
     const [searchRes, setSearchRes] = useState([])
 
     const dispatch = useAppDispatch()
@@ -25,7 +25,7 @@ const SelectLocation = () => {
     useEffect(() => {
         if (deferredQuery) {
             getCoordinateLocation(deferredQuery).then((locations) => {
-                if ("results" in locations) {
+                if ('results' in locations) {
                     setSearchRes(locations.results)
                 }
             })
@@ -36,7 +36,7 @@ const SelectLocation = () => {
         if (location) {
             const { lat, lon, timezone, city, country } = location
             dispatch(loadWeather({ lat: lat, lon: lon, timezone: timezone }))
-            storage("currentLocation", {
+            storage('currentLocation', {
                 lat: lat,
                 lon: lon,
                 city: city,
@@ -67,10 +67,10 @@ const SelectLocation = () => {
     }
 
     const startSearchLocation = (event: React.MouseEvent<HTMLFormElement>) => {
-        if ((event.target as HTMLElement).dataset.type === "inputLocation") {
+        if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
             setActiveSearch(true)
             setActiveStyleSearch(true)
-        } else if ((event.target as HTMLElement).dataset.type === "getLocation") {
+        } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
         }
     }
@@ -81,7 +81,7 @@ const SelectLocation = () => {
 
     const selectLocation = useCallback(
         (event: React.MouseEvent<HTMLDivElement>) => {
-            const location = (event.target as HTMLDivElement).dataset.location?.split(",")
+            const location = (event.target as HTMLDivElement).dataset.location?.split(',')
             if (Array.isArray(location)) {
                 dispatch(
                     setCurrentLocation({
@@ -99,13 +99,13 @@ const SelectLocation = () => {
     )
 
     document.body.onclick = (event) => {
-        if (!(event.target as HTMLElement).closest("#closeSearch")) {
+        if (!(event.target as HTMLElement).closest('#closeSearch')) {
             clearFind()
         }
     }
 
     const clearFind = () => {
-        setSearchValue("")
+        setSearchValue('')
         setSearchRes([])
         setActiveSearch(false)
         setActiveStyleSearch(false)

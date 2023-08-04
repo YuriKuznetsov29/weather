@@ -1,21 +1,21 @@
-import { ChartOptions, ChartData } from "chart.js"
-import { LineAnnotationOptions } from "chartjs-plugin-annotation"
+import { ChartOptions, ChartData } from 'chart.js'
+import { LineAnnotationOptions } from 'chartjs-plugin-annotation'
 const CHART_COLORS = {
-    red: "rgb(255, 99, 132)",
-    orange: "rgb(255, 159, 64)",
-    yellow: "rgb(255, 205, 86)",
-    green: "rgb(75, 192, 192)",
-    blue: "rgb(54, 162, 235)",
-    purple: "rgb(153, 102, 255)",
-    grey: "rgb(201, 203, 207)",
+    red: 'rgb(255, 99, 132)',
+    orange: 'rgb(255, 159, 64)',
+    yellow: 'rgb(255, 205, 86)',
+    green: 'rgb(75, 192, 192)',
+    blue: 'rgb(54, 162, 235)',
+    purple: 'rgb(153, 102, 255)',
+    grey: 'rgb(201, 203, 207)',
 }
 
-let arrow = document.createElement("img")
-arrow.src = "arrow-down-bold.svg"
+let arrow = document.createElement('img')
+arrow.src = 'arrow-down-bold.svg'
 
 interface LineProps {
-    options: ChartOptions<"line">
-    data: ChartData<"line">
+    options: ChartOptions<'line'>
+    data: ChartData<'line'>
 }
 
 const chartConfigs = () => {
@@ -24,14 +24,14 @@ const chartConfigs = () => {
             labels: [],
             datasets: [
                 {
-                    label: "Temperature",
-                    fill: "start",
+                    label: 'Temperature',
+                    fill: 'start',
                     backgroundColor: CHART_COLORS.blue,
                     borderColor: CHART_COLORS.red,
                     tension: 0.1,
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                     datalabels: {
-                        align: "end",
+                        align: 'end',
                         // anchor: 'end'
                     },
                 },
@@ -85,10 +85,10 @@ const chartConfigs = () => {
 
     const windChartConfig = {
         data: {
-            labels: [""],
+            labels: [''],
             datasets: [
                 {
-                    type: "line" as const,
+                    type: 'line' as const,
                     borderColor: CHART_COLORS.orange,
                     // color: "#fff",
                     tension: 0.1,
@@ -103,11 +103,11 @@ const chartConfigs = () => {
                     data: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
                 },
                 {
-                    type: "bar" as const,
-                    label: "Wind",
+                    type: 'bar' as const,
+                    label: 'Wind',
                     // fill: "start",
                     backgroundColor: CHART_COLORS.blue,
-                    color: "#fff",
+                    color: '#fff',
                     tension: 0.1,
                     pointHitRadius: 10,
                     datalabels: {
@@ -171,34 +171,34 @@ const chartConfigs = () => {
 
     const horizontConfig: LineAnnotationOptions = {
         // type: "line",
-        borderColor: "black",
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "Горизонт",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: 'Горизонт',
             display: true,
             // font: {
             //     weight: 400,
             // },
         },
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: 0.07,
         yMin: 0.07,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 95,
         xMin: 95,
     }
 
     const sunriseConfig = {
         // type: "line",
-        borderColor: "black",
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "6:00",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: '6:00',
             display: true,
 
             font: {
@@ -206,115 +206,115 @@ const chartConfigs = () => {
                 weight: 400,
             },
         },
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.9,
         yMin: -0.9,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 20,
         xMin: 20,
     }
 
     const annotation3 = {
-        type: "line",
-        borderColor: "black",
+        type: 'line',
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "Рассвет",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: 'Рассвет',
             display: true,
             font: {
                 // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.8,
         yMin: -0.8,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 20,
         xMin: 20,
     }
 
     const annotation4 = {
-        type: "line",
-        borderColor: "black",
+        type: 'line',
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "Истинный полдень",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: 'Истинный полдень',
             display: true,
             font: {
                 // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.8,
         yMin: -0.8,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 48,
         xMin: 48,
     }
 
     const trueNoonConfig = {
-        type: "line",
-        borderColor: "black",
+        type: 'line',
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "12:00",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: '12:00',
             display: true,
             font: {
                 // family: "'Open Sans', 'Times New Roman', 'Serif'",
                 weight: 400,
             },
         },
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.9,
         yMin: -0.9,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 48,
         xMin: 48,
     }
 
     const sunsetConfig = {
-        type: "line",
-        borderColor: "black",
+        type: 'line',
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "18:00",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: '18:00',
             display: true,
             font: {
                 weight: 400,
             },
         },
 
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.9,
         yMin: -0.9,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 75,
         xMin: 75,
     }
 
     const annotation5 = {
-        type: "line",
-        borderColor: "black",
+        type: 'line',
+        borderColor: 'black',
         borderWidth: 0,
         label: {
-            backgroundColor: "rgba(0, 0, 0, 0.0)",
-            color: "#000",
-            content: "Закат",
+            backgroundColor: 'rgba(0, 0, 0, 0.0)',
+            color: '#000',
+            content: 'Закат',
             display: true,
             font: {
                 // family: "'Open Sans', 'Times New Roman', 'Serif'",
@@ -322,37 +322,37 @@ const chartConfigs = () => {
             },
         },
 
-        yScaleID: "y",
+        yScaleID: 'y',
         yMax: -0.8,
         yMin: -0.8,
 
-        xScaleID: "x",
+        xScaleID: 'x',
         xMax: 75,
         xMin: 75,
     }
 
     const sunChartConfig = {
-        type: "line",
+        type: 'line',
 
         data: {
-            labels: [""],
+            labels: [''],
             datasets: [
                 {
-                    type: "line" as const,
-                    label: "Sunrise / Sunset",
+                    type: 'line' as const,
+                    label: 'Sunrise / Sunset',
                     fill: false,
                     backgroundColor: CHART_COLORS.yellow,
                     borderColor: CHART_COLORS.orange,
                     borderWidth: 2,
-                    color: "#fff",
+                    color: '#fff',
                     tension: 0.1,
                     pointStyle: false,
                 },
                 {
-                    type: "line" as const,
-                    label: "Sunrise / Sunset",
+                    type: 'line' as const,
+                    label: 'Sunrise / Sunset',
                     fill: {
-                        target: "origin",
+                        target: 'origin',
                         above: CHART_COLORS.yellow,
                         below: CHART_COLORS.purple,
                     },
@@ -360,29 +360,29 @@ const chartConfigs = () => {
                     borderColor: CHART_COLORS.orange,
                     borderWidth: 2,
                     pointHitRadius: 0,
-                    color: "#fff",
+                    color: '#fff',
                     tension: 0.1,
                     pointRadius: 0,
                 },
                 {
-                    type: "line" as const,
-                    label: "Sunrise / Sunset",
+                    type: 'line' as const,
+                    label: 'Sunrise / Sunset',
                     data: [],
                     fill: false,
                     backgroundColor: CHART_COLORS.yellow,
                     borderColor: CHART_COLORS.grey,
                     borderWidth: 2,
-                    color: "#fff",
+                    color: '#fff',
                     tension: 0.1,
                     pointStyle: false,
                 },
                 {
-                    type: "line" as const,
-                    label: "Sunrise / Sunset",
+                    type: 'line' as const,
+                    label: 'Sunrise / Sunset',
                     fill: false,
-                    backgroundColor: "rgba(0, 0, 0, 0.0)",
-                    borderColor: "rgba(0, 0, 0, 0.0)",
-                    color: "#fff",
+                    backgroundColor: 'rgba(0, 0, 0, 0.0)',
+                    borderColor: 'rgba(0, 0, 0, 0.0)',
+                    color: '#fff',
                     tension: 0.1,
                     borderWidth: 2,
                     pointStyle: [0] as number[] | HTMLImageElement[],
@@ -402,7 +402,7 @@ const chartConfigs = () => {
                 },
             },
             interaction: {
-                mode: "index",
+                mode: 'index',
                 intersect: false,
             },
             hover: { mode: null },

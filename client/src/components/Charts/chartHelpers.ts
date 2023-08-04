@@ -2,10 +2,10 @@ export function culkSunPosition(sunrise: string, sunset: string, curtime: string
     const sOnDay = 24 * 60 * 60
     const allSteps = 96
 
-    const curtimeS = +curtime.split(":")[0] * 60 * 60 + +curtime.split(":")[1] * 60
+    const curtimeS = +curtime.split(':')[0] * 60 * 60 + +curtime.split(':')[1] * 60
 
-    const sunriseS = +sunrise.split(":")[0] * 60 * 60 + +sunrise.split(":")[1] * 60
-    const sunsetS = +sunset.split(":")[0] * 60 * 60 + +sunset.split(":")[1] * 60
+    const sunriseS = +sunrise.split(':')[0] * 60 * 60 + +sunrise.split(':')[1] * 60
+    const sunsetS = +sunset.split(':')[0] * 60 * 60 + +sunset.split(':')[1] * 60
 
     const morningStep = (sunriseS / allSteps) * 4
     const dayStep = ((sunsetS - sunriseS) / allSteps) * 2
@@ -21,11 +21,11 @@ export function culkSunPosition(sunrise: string, sunset: string, curtime: string
 }
 
 export function createSunImg() {
-    let sun = document.createElement("img")
+    let sun = document.createElement('img')
     if (document.documentElement.clientWidth <= 650) {
-        sun.src = "smallSun.svg"
+        sun.src = 'smallSun.svg'
     } else {
-        sun.src = "sun.svg"
+        sun.src = 'sun.svg'
     }
     return sun
 }
@@ -37,7 +37,7 @@ export function sinusCalk() {
     const step = Math.PI / 48
 
     for (let i = -Math.PI / 2; i < 1.5 * Math.PI; i += step) {
-        labels.push("" + i.toFixed(10))
+        labels.push('' + i.toFixed(10))
         sin.push(Math.sin(i).toFixed(10))
     }
 
@@ -46,7 +46,7 @@ export function sinusCalk() {
 
 export function calkTrueNoon(offset: number, lon: number): string {
     const trueNoon = 12 + (offset / 3600 - lon / 15)
-    return Math.floor(trueNoon) + ":" + ((trueNoon % 1) * 0.6 * 100).toFixed()
+    return Math.floor(trueNoon) + ':' + ((trueNoon % 1) * 0.6 * 100).toFixed()
 }
 
 export function calkDayDuration(sunrise: string, sunset: string, hour: number, minutes: string) {
@@ -67,9 +67,9 @@ export function calkDayDuration(sunrise: string, sunset: string, hour: number, m
 }
 
 export function checkTimesOfDay(sunrise: string, sunset: string, time: string): boolean {
-    const sunriseMod = Number(sunrise.match(/[^:]/g)?.join(""))
-    const sunsetMod = Number(sunset.match(/[^:]/g)?.join(""))
-    const timeMod = Number(time.match(/[^:]/g)?.join(""))
+    const sunriseMod = Number(sunrise.match(/[^:]/g)?.join(''))
+    const sunsetMod = Number(sunset.match(/[^:]/g)?.join(''))
+    const timeMod = Number(time.match(/[^:]/g)?.join(''))
 
     if (timeMod > sunriseMod && timeMod < sunsetMod) {
         return true

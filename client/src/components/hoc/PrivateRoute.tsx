@@ -1,6 +1,6 @@
-import { useAppSelector } from "app/hooks"
-import { authStatusSelector } from "app/selectors"
-import { Navigate } from "react-router-dom"
+import { useAppSelector } from 'app/redux/hooks'
+import { authStatusSelector } from 'app/redux/selectors'
+import { Navigate } from 'react-router-dom'
 
 interface PrivateRouteProps {
     children: JSX.Element

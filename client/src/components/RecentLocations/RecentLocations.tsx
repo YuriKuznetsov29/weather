@@ -1,30 +1,30 @@
-import Container from "components/Container/Container"
-import { ReactElement, useCallback, useEffect, useMemo, useState } from "react"
-import { useAppSelector } from "app/hooks"
-import { currentLocationSelector } from "app/selectors"
-import { CurrentLocation } from "app/slices/locationSlice"
-import { storage } from "services/storage"
-import Location from "./Location"
+import Container from 'shared/ui/Container/Container'
+import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
+import { useAppSelector } from 'app/redux/hooks'
+import { currentLocationSelector } from 'app/redux/selectors'
+import { CurrentLocation } from 'app/redux/slices/locationSlice'
+import { storage } from 'services/storage'
+import Location from './Location'
 
-import styles from "./RecentLocations.module.scss"
+import styles from './RecentLocations.module.scss'
 
 const RecentLocations = () => {
     const [locationElement, setLocationElement] = useState<ReactElement[]>([])
 
     const currLocation: CurrentLocation | null = useAppSelector(currentLocationSelector)
-    const [locations, setLocations] = useState<CurrentLocation[]>(storage("recentLocations") || [])
+    const [locations, setLocations] = useState<CurrentLocation[]>(storage('recentLocations') || [])
 
     useEffect(() => {
         if (locations.length > 0) {
             addLocation()
-        } else if (currLocation && !storage("recentLocations")) {
+        } else if (currLocation && !storage('recentLocations')) {
             setLocations([currLocation])
         }
     }, [currLocation])
 
     useEffect(() => {
         if (locations.length > 0) {
-            storage("recentLocations", locations)
+            storage('recentLocations', locations)
             renderLocations()
         }
     }, [locations])
@@ -52,7 +52,7 @@ const RecentLocations = () => {
             })
         )
     }
-    
+
     return (
         <div className={styles.recent_locations} id="recent">
             <Container>

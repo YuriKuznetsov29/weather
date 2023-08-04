@@ -1,7 +1,7 @@
-import SignUpForm from "./SignUpForm"
-import SignInForm from "./SignInForm"
-import { useAppSelector } from "app/hooks"
-import { signInSelector, signUpSelector } from "app/selectors"
+import SignUpForm from './SignUpForm'
+import SignInForm from './SignInForm'
+import { useAppSelector } from 'app/redux/hooks'
+import { signInSelector, signUpSelector } from 'app/redux/selectors'
 
 const Form = () => {
     const signInState = useAppSelector(signInSelector)

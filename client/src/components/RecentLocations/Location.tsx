@@ -1,14 +1,14 @@
-import { CurrentLocation } from "app/slices/locationSlice"
-import { setCurrentLocation } from "app/slices/locationSlice"
-import { getWetherImage } from "helpers/transformData"
-import { getWetherDaily } from "services/getData"
-import { useAppDispatch } from "app/hooks"
-import { memo, useEffect, useState } from "react"
-import { WeatherData } from "helpers/transformData"
-import { Thermometer } from "@phosphor-icons/react"
-import { useNavigate } from "react-router-dom"
+import { CurrentLocation } from 'app/redux/slices/locationSlice'
+import { setCurrentLocation } from 'app/redux/slices/locationSlice'
+import { getWetherImage } from 'helpers/transformData'
+import { getWetherDaily } from 'services/getData'
+import { useAppDispatch } from 'app/redux/hooks'
+import { memo, useEffect, useState } from 'react'
+import { WeatherData } from 'helpers/transformData'
+import { Thermometer } from '@phosphor-icons/react'
+import { useNavigate } from 'react-router-dom'
 
-import styles from "./RecentLocations.module.scss"
+import styles from './RecentLocations.module.scss'
 
 interface LocationProps {
     location: CurrentLocation
@@ -46,8 +46,8 @@ const Location = memo(({ location, redirect }: LocationProps) => {
 
     const selectRecent = (event: React.MouseEvent<HTMLDivElement>) => {
         const location = (
-            (event.target as HTMLDivElement).closest("[data-type=recentItem]") as HTMLDivElement
-        ).dataset.recentlocation?.split(",")
+            (event.target as HTMLDivElement).closest('[data-type=recentItem]') as HTMLDivElement
+        ).dataset.recentlocation?.split(',')
 
         if (Array.isArray(location)) {
             dispatch(
@@ -60,7 +60,7 @@ const Location = memo(({ location, redirect }: LocationProps) => {
                 })
             )
             if (redirect) {
-                navigate("/")
+                navigate('/')
             }
         }
     }

@@ -1,6 +1,6 @@
-@import "../../styles/variables";
-@import "../../styles/loading";
-@import "../../styles/mixins";
+@import '../../styles/variables';
+@import '../../styles/loading';
+@import '../../styles/mixins';
 
 .precipitation {
     font-size: 14px;
@@ -65,7 +65,6 @@
 }
 
 @media (max-width: 1200px) {
-
     .precipitation {
         font-size: 12px;
     }

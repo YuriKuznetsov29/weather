@@ -1,6 +1,6 @@
-import Header from "components/Header/Header"
-import SideBar from "components/SideBar/SideBar"
-import SingInForm from "../../components/Form/SignInForm"
+import Header from 'components/Header/Header'
+import SideBar from 'widgets/SideBar/SideBar'
+import SingInForm from '../../components/Form/SignInForm'
 
 const SignIn = () => {
     return (

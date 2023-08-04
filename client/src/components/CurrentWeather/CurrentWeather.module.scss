@@ -1,13 +1,12 @@
-@import "../../styles/variables";
-@import "../../styles/mixins";
-@import "../../styles/loading";
+@import '../../styles/variables';
+@import '../../styles/mixins';
+@import '../../styles/loading';
 
 .currentWeather {
     margin: 20px 0;
 }
 
 .currentWeather__wrapper {
-    
     display: flex;
     justify-content: space-between;
     color: #000;
@@ -55,8 +54,8 @@
     @include shadow-text;
 }
 
-
-.currentWeather__data_name, .currentWeather__data_value  {
+.currentWeather__data_name,
+.currentWeather__data_value {
     margin: 10px 0;
 }
 
@@ -64,21 +63,22 @@
     color: $subtitle-color;
 }
 
-@media(max-width: 650px) {
-    .currentWeather__data_temp, .code_icon {
+@media (max-width: 650px) {
+    .currentWeather__data_temp,
+    .code_icon {
         font-size: 100px;
     }
     .celsius {
         font-size: 60px;
     }
-
 }
 
-@media(max-width: 450px) {
+@media (max-width: 450px) {
     .currentWeather__wrapper {
         font-size: 14px;
     }
-    .currentWeather__data_temp, .code_icon {
+    .currentWeather__data_temp,
+    .code_icon {
         font-size: 60px;
     }
 

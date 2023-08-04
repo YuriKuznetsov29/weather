@@ -1,4 +1,4 @@
-@import "../../styles/mixins";
+@import '../../styles/mixins';
 
 .temperature {
     @include shadow-text;
@@ -27,5 +27,4 @@
     .arrow {
         font-size: 22px;
     }
-
 }

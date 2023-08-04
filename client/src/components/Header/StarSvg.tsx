@@ -1,11 +1,11 @@
-import { userSelector, currentLocationSelector } from "app/selectors"
-import { useAppSelector, useAppDispatch } from "app/hooks"
-import { CurrentLocation } from "app/slices/locationSlice"
-import { saveLocations } from "app/slices/loginSlice"
-import { useNavigate } from "react-router-dom"
-import { authStatusSelector } from "app/selectors"
+import { userSelector, currentLocationSelector } from 'app/redux/selectors'
+import { useAppSelector, useAppDispatch } from 'app/redux/hooks'
+import { CurrentLocation } from 'app/redux/slices/locationSlice'
+import { saveLocations } from 'app/redux/slices/loginSlice'
+import { useNavigate } from 'react-router-dom'
+import { authStatusSelector } from 'app/redux/selectors'
 
-import styles from "./Header.module.scss"
+import styles from './Header.module.scss'
 
 const StarSvg = () => {
     const navigate = useNavigate()
@@ -18,7 +18,7 @@ const StarSvg = () => {
     const checkInclude = () => {
         if (currentLocation && savedLocations) {
             return Boolean(
-                savedLocations.find((location) => location.city === currentLocation.city)
+                savedLocations.find((location: CurrentLocation) => location.city === currentLocation.city)
             )
         }
         return false
@@ -32,7 +32,7 @@ const StarSvg = () => {
                 : savedLocations.concat([currentLocation])
             dispatch(saveLocations({ userId, savedLocations: newLocations as CurrentLocation[] }))
         } else {
-            navigate("/signIn")
+            navigate('/signIn')
         }
     }
 

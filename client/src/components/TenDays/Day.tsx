@@ -1,9 +1,9 @@
-import Container from "components/Container/Container"
-import { getWetherImage, getWindDirection } from "helpers/transformData"
-import { days, months, weatherDescription } from "helpers/constants"
-import { memo, useState } from "react"
+import Container from 'shared/ui/Container/Container'
+import { getWetherImage, getWindDirection } from 'helpers/transformData'
+import { days, months, weatherDescription } from 'helpers/constants'
+import { memo, useState } from 'react'
 
-import styles from "./TenDaysWeather.module.scss"
+import styles from './TenDaysWeather.module.scss'
 
 interface DayProps {
     sunrise: string
@@ -78,7 +78,7 @@ const Day = ({
                     </div>
                     <div className={styles.currentWeather__values}>
                         <div className={styles.day__data_value}>
-                            {wind} км/ч {getWindDirection(windDir)}{" "}
+                            {wind} км/ч {getWindDirection(windDir)}{' '}
                         </div>
                         <div className={styles.day__data_value}>{moi} %</div>
                         <div className={styles.day__data_value}>{uvIndex}</div>

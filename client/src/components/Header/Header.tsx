@@ -1,12 +1,12 @@
-import { useEffect, useState, useContext } from "react"
-import { List } from "@phosphor-icons/react"
-import Container from "components/Container/Container"
-import { useAppSelector } from "app/hooks"
-import { currentCity } from "app/selectors"
-import StarSvg from "./StarSvg"
-import { BarContext } from "components/SideBar/BarContext"
+import { useEffect, useState, useContext } from 'react'
+import { List } from '@phosphor-icons/react'
+import Container from 'shared/ui/Container/Container'
+import { useAppSelector } from 'app/redux/hooks'
+import { currentCity } from 'app/redux/selectors'
+import StarSvg from './StarSvg'
+import { BarContext } from 'widgets/SideBar/BarContext'
 
-import styles from "./Header.module.scss"
+import styles from './Header.module.scss'
 
 interface HeaderProps {
     children: JSX.Element

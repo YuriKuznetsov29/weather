@@ -1,4 +1,4 @@
-import { Line, Chart } from "react-chartjs-2"
+import { Line, Chart } from 'react-chartjs-2'
 import {
     Chart as ChartJS,
     LineController,
@@ -10,21 +10,21 @@ import {
     Legend,
     BarController,
     BarElement,
-} from "chart.js"
-import ChartDataLabels from "chartjs-plugin-datalabels"
-import annotationPlugin from "chartjs-plugin-annotation"
-import chartConfigs from "./ChatsConfigs"
-import { useAppSelector } from "app/hooks"
-import { currentWetherSelector, selectDay } from "app/selectors"
-import { useEffect, useRef, useState } from "react"
-import Container from "components/Container/Container"
-import { getTimeWithUtcOffset } from "helpers/transformData"
-import { ChartData, ChartOptions } from "chart.js"
-import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk } from "./chartHelpers"
-import DayParameters from "./DayParameters"
-import CurrentWind from "./CurrentWind"
+} from 'chart.js'
+import ChartDataLabels from 'chartjs-plugin-datalabels'
+import annotationPlugin from 'chartjs-plugin-annotation'
+import chartConfigs from './ChatsConfigs'
+import { useAppSelector } from 'app/redux/hooks'
+import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import { useEffect, useRef, useState } from 'react'
+import Container from 'shared/ui/Container/Container'
+import { getTimeWithUtcOffset } from 'helpers/transformData'
+import { ChartData, ChartOptions } from 'chart.js'
+import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk } from './chartHelpers'
+import DayParameters from './DayParameters'
+import CurrentWind from './CurrentWind'
 
-import styles from "./Charts.module.scss"
+import styles from './Charts.module.scss'
 
 ChartJS.register(
     annotationPlugin,
@@ -50,17 +50,17 @@ const {
     horizontConfig,
 } = chartConfigs()
 
-ChartJS.defaults.color = "#000"
+ChartJS.defaults.color = '#000'
 ChartJS.defaults.font.size = 16
-ChartJS.defaults.plugins.datalabels!.align = "end"
+ChartJS.defaults.plugins.datalabels!.align = 'end'
 
 const Charts = () => {
     const [sunAdaptiveChart, setSunAdaptiveChart] = useState({})
     const [adaptiveChart, setAdaptiveChart] = useState({})
 
-    const tempRef = useRef<ChartJS<"line", number[], string>>(null)
+    const tempRef = useRef<ChartJS<'line', number[], string>>(null)
     const windRef = useRef<ChartJS>(null)
-    const sunRef = useRef<ChartJS<"line", number[], string>>(null)
+    const sunRef = useRef<ChartJS<'line', number[], string>>(null)
 
     const weather = useAppSelector(currentWetherSelector)
     const selectedDay = useAppSelector(selectDay)
@@ -88,7 +88,7 @@ const Charts = () => {
                 height: `${windowWidth * 0.5}px`,
                 width: `${windowWidth - 30}px`,
             })
-            setAdaptiveChart({ height: "300px", width: "800px" })
+            setAdaptiveChart({ height: '300px', width: '800px' })
         }
     }
 
@@ -103,15 +103,15 @@ const Charts = () => {
                 sunrise,
                 sunset,
                 lon,
-            } = selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
+            } = selectedDay === 'today' ? weather.currentWeather : weather.tomorrowWeather
 
             // temperature
             const tempChart = tempRef.current
             if (tempChart) {
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
-                tempChart.data = tempChartConfig.data as ChartData<"line", number[], string>
-                tempChart.update("active")
+                tempChart.data = tempChartConfig.data as ChartData<'line', number[], string>
+                tempChart.update('active')
             } else {
                 tempChartConfig.data.labels = dailyTime
                 tempChartConfig.data.datasets[0].data = dailyTemp
@@ -127,15 +127,14 @@ const Charts = () => {
             windChartConfig.options.elements.point.rotation = dailyWindDir
             const windChart = windRef.current
             if (windChart) {
-
-                windChart.data.datasets[1].datalabels!.anchor = "end"
+                windChart.data.datasets[1].datalabels!.anchor = 'end'
 
                 windChart.data = windChartConfig.data
-                windChart.update("active")
+                windChart.update('active')
             }
 
             //sun
-            if (selectedDay === "today") {
+            if (selectedDay === 'today') {
                 const { time } = getTimeWithUtcOffset(utcOffset)
                 const [labels, sin] = sinusCalk()
                 const sunPosition = culkSunPosition(sunrise, sunset, time)
@@ -153,7 +152,7 @@ const Charts = () => {
                 ;(sunDatasets[1].data as string[]) = sin.slice(0, sunPosition + 1)
                 ;(sunDatasets[2].data as number[]) = new Array(labels.length).fill(0) // горизонт
                 ;(sunDatasets[3].data as string[]) = sin
-                    .map((el) => +el + 0.2 + "")
+                    .map((el) => +el + 0.2 + '')
                     .slice(0, sunPosition + 1)
                 if (sunPosition > 3) {
                     sunDatasets[3].pointStyle = []
@@ -163,8 +162,8 @@ const Charts = () => {
                 }
                 const sunChart = sunRef.current
                 if (sunChart) {
-                    sunChart.data = sunChartConfig.data as ChartData<"line", number[], string>
-                    sunChart.update("active")
+                    sunChart.data = sunChartConfig.data as ChartData<'line', number[], string>
+                    sunChart.update('active')
                 }
             }
         }
@@ -196,7 +195,7 @@ const Charts = () => {
                 </Container>
             </div>
             <div className={styles.chart__inner}>
-              <Container>
+                <Container>
                     <>
                         <div className={styles.chartTitle}>Ветер</div>
                         <CurrentWind />
@@ -220,7 +219,7 @@ const Charts = () => {
                     </>
                 </Container>
             </div>
-            {selectedDay === "today" && (
+            {selectedDay === 'today' && (
                 <div className={styles.chart__inner}>
                     <Container>
                         <>
@@ -232,9 +231,9 @@ const Charts = () => {
                                             <Chart
                                                 ref={sunRef}
                                                 type="line"
-                                                data={sunChartConfig.data as ChartData<"line">}
+                                                data={sunChartConfig.data as ChartData<'line'>}
                                                 options={
-                                                    sunChartConfig.options as unknown as ChartOptions<"line">
+                                                    sunChartConfig.options as unknown as ChartOptions<'line'>
                                                 }
                                                 redraw={true}
                                             />

@@ -1,10 +1,10 @@
-import Container from "components/Container/Container"
-import DayNightTemp from "components/DayNightTemp/DayNightTemp"
-import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from "helpers/transformData"
-import { months, weatherDescription } from "helpers/constants"
+import Container from 'shared/ui/Container/Container'
+import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
+import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/transformData'
+import { months, weatherDescription } from 'helpers/constants'
 
-import styles from "./CurrentWeather.module.scss"
-import { memo } from "react"
+import styles from './CurrentWeather.module.scss'
+import { memo } from 'react'
 
 interface TodayProps {
     weather: CurrentWeather

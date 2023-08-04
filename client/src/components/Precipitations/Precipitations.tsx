@@ -1,9 +1,9 @@
-import { useAppSelector } from "app/hooks"
-import { currentWetherSelector, selectDay } from "app/selectors"
-import Container from "components/Container/Container"
-import DropSvg from "./DropSvg"
+import { useAppSelector } from 'app/redux/hooks'
+import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import Container from 'shared/ui/Container/Container'
+import DropSvg from './DropSvg'
 
-import styles from "./Precipitations.module.scss"
+import styles from './Precipitations.module.scss'
 
 const Precipitations = () => {
     const weather = useAppSelector(currentWetherSelector)
@@ -12,7 +12,7 @@ const Precipitations = () => {
     const renderPrecipitations = () => {
         if (weather) {
             const { dailyPrecipitation, dailyPrecipitationSum, dailyPrecipitationProb, dailyTime } =
-                selectedDay === "today" ? weather.currentWeather : weather.tomorrowWeather
+                selectedDay === 'today' ? weather.currentWeather : weather.tomorrowWeather
 
             const itemsArr = dailyPrecipitation.map((pecipitation, i) => {
                 return (
@@ -46,7 +46,7 @@ const Precipitations = () => {
                                 {itemsArr}
                             </div>
                             <div className={styles.general}>
-                                Общий суточный объем{" "}
+                                Общий суточный объем{' '}
                                 <div className={styles.generalValue}>{dailyPrecipitationSum}мм</div>
                             </div>
                         </>

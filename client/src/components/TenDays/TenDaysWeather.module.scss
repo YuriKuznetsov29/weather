@@ -1,7 +1,6 @@
-@import "../../styles/variables";
+@import '../../styles/variables';
 
 .days_container {
-    
     position: relative;
     &:after {
         content: '';
@@ -24,7 +23,6 @@
     &:hover {
         cursor: pointer;
         background-color: #ccc;
-
     }
 }
 
@@ -59,13 +57,14 @@
     align-items: center;
 }
 
-.high_temp, .low_temp {
+.high_temp,
+.low_temp {
     // font-size: 26px;
     margin-left: 30px;
 }
 
 .low_temp {
- color: $subtitle-color;
+    color: $subtitle-color;
 }
 
 .additionalData_wrapper {
@@ -76,7 +75,8 @@
     font-size: 26px;
 }
 
-.day__data_name, .day__data_value {
+.day__data_name,
+.day__data_value {
     padding: 5px 0;
     font-size: 20px;
 }
@@ -117,7 +117,7 @@
     display: flex;
 }
 
-@media(max-width: 650px) {
+@media (max-width: 650px) {
     .icon {
         font-size: 50px;
     }
@@ -127,7 +127,8 @@
         font-size: 16px;
     }
 
-    .day__data_name, .day__data_value {
+    .day__data_name,
+    .day__data_value {
         font-size: 16px;
     }
 
@@ -138,5 +139,4 @@
     .day__dailyTempWrapper {
         overflow-x: scroll;
     }
-
 }

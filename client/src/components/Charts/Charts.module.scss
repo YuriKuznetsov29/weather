@@ -1,6 +1,6 @@
-@import "../../styles/variables";
-@import "../../styles/loading";
-@import "../../styles/mixins";
+@import '../../styles/variables';
+@import '../../styles/loading';
+@import '../../styles/mixins';
 
 .chart__inner {
     margin-top: 50px;
@@ -61,12 +61,11 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
-
 }
 
 .windValue {
     font-size: 120px;
-    color: #36A2EB;
+    color: #36a2eb;
 }
 
 .windDir {
@@ -88,7 +87,6 @@
     .chartWrapper {
         overflow-x: scroll;
     }
-
 }
 
 @media (max-width: 450px) {

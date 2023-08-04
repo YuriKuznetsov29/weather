@@ -1,11 +1,11 @@
-import Container from "components/Container/Container"
-import { useAppSelector } from "app/hooks"
-import { currentWetherSelector, selectDay } from "app/selectors"
-import TodayWeather from "./TodayWeather"
-import TomorrowWether from "./TomorrowWether"
-import { getTimeWithUtcOffset } from "helpers/transformData"
+import Container from 'shared/ui/Container/Container'
+import { useAppSelector } from 'app/redux/hooks'
+import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import TodayWeather from './TodayWeather'
+import TomorrowWether from './TomorrowWether'
+import { getTimeWithUtcOffset } from 'helpers/transformData'
 
-import styles from "./CurrentWeather.module.scss"
+import styles from './CurrentWeather.module.scss'
 
 const CurrentWeather = () => {
     const weather = useAppSelector(currentWetherSelector)
@@ -16,9 +16,9 @@ const CurrentWeather = () => {
             const { utcOffset } = weather.currentWeather
             const date = getTimeWithUtcOffset(utcOffset)
 
-            if (selectedDay === "today") {
+            if (selectedDay === 'today') {
                 return <TodayWeather weather={weather.currentWeather} date={date} />
-            } else if (selectedDay === "tomorrow") {
+            } else if (selectedDay === 'tomorrow') {
                 return <TomorrowWether weather={weather.tomorrowWeather} />
             }
         } else {

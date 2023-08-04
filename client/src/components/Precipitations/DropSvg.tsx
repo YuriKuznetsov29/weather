@@ -1,4 +1,4 @@
-import styles from "./Precipitations.module.scss"
+import styles from './Precipitations.module.scss'
 
 interface PrecipitationsPercent {
     [key: string]: number
@@ -12,14 +12,14 @@ interface DropSvgProps {
 const DropSvg = ({ pecipitation, i }: DropSvgProps) => {
     function calckPrecipitationInHour(quantity: number) {
         const precipPercent: PrecipitationsPercent = {
-            "0.1": 0,
-            "0.9": 20,
-            "1": 30,
-            "2": 55,
-            "3": 65,
-            "4": 80,
-            "5": 90,
-            "6": 100,
+            '0.1': 0,
+            '0.9': 20,
+            '1': 30,
+            '2': 55,
+            '3': 65,
+            '4': 80,
+            '5': 90,
+            '6': 100,
         }
         quantity =
             quantity > 1 ? (quantity >= 6 ? 6 : Math.round(quantity)) : quantity > 0.1 ? 0.9 : 0.1

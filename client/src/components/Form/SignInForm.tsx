@@ -1,16 +1,15 @@
-import Button from "components/Button/Button"
-import { X, Eye, EyeSlash } from "@phosphor-icons/react"
-import Input from "components/Input/Input"
-import { useAppDispatch, useAppSelector } from "app/hooks"
-import { setSignInState, signIn } from "app/slices/loginSlice"
-import { useState, ChangeEvent, useEffect } from "react"
-import { Formik, Field, Form, ErrorMessage } from "formik"
-import * as Yup from "yup"
-import { authStatusSelector, serverErrorsSelector, statusSelector } from "app/selectors"
-import { useLocation, useNavigate } from "react-router-dom"
-import Spinner from "components/Spinner/Spinner"
+import Button from 'shared/ui/Button/Button'
+import { Eye, EyeSlash } from '@phosphor-icons/react'
+import { useAppDispatch, useAppSelector } from 'app/redux/hooks'
+import { signIn } from 'app/redux/slices/loginSlice'
+import { useState, useEffect } from 'react'
+import { Formik, Field, Form, ErrorMessage } from 'formik'
+import * as Yup from 'yup'
+import { authStatusSelector, serverErrorsSelector, statusSelector } from 'app/redux/selectors'
+import { useLocation, useNavigate } from 'react-router-dom'
+import Spinner from 'shared/ui/Spinner/Spinner'
 
-import styles from "./Form.module.scss"
+import styles from './Form.module.scss'
 
 interface Values {
     email: string
@@ -18,14 +17,14 @@ interface Values {
 }
 
 const SignupSchema = Yup.object().shape({
-    email: Yup.string().email("Неправильный формат email").required("Введите Email"),
+    email: Yup.string().email('Неправильный формат email').required('Введите Email'),
     password: Yup.string()
-        .min(8, "Пароль не должен быть короче 8 символов")
-        .required("Введите пароль"),
+        .min(8, 'Пароль не должен быть короче 8 символов')
+        .required('Введите пароль'),
 })
 
 const SignUpForm = () => {
-    const [showPassword, setShowPassword] = useState("password")
+    const [showPassword, setShowPassword] = useState('password')
 
     const dispatch = useAppDispatch()
     const auth = useAppSelector(authStatusSelector)
@@ -34,13 +33,13 @@ const SignUpForm = () => {
 
     const navigate = useNavigate()
     const location = useLocation()
-    const fromPage = location.state?.from?.pathname || "/"
+    const fromPage = location.state?.from?.pathname || '/'
 
     const toggleShowPassword = () => {
-        if (showPassword === "password") {
-            setShowPassword("text")
+        if (showPassword === 'password') {
+            setShowPassword('text')
         } else {
-            setShowPassword("password")
+            setShowPassword('password')
         }
     }
 
@@ -52,11 +51,11 @@ const SignUpForm = () => {
 
     return (
         <div className={styles.background_form}>
-            <img className={styles.sun} src="sun.svg" alt="sun" onClick={() => navigate("/")} />
+            <img className={styles.sun} src="sun.svg" alt="sun" onClick={() => navigate('/')} />
             <Formik
                 initialValues={{
-                    email: "",
-                    password: "",
+                    email: '',
+                    password: '',
                 }}
                 validationSchema={SignupSchema}
                 onSubmit={(values: Values) => {
@@ -90,7 +89,7 @@ const SignUpForm = () => {
                             placeholder="введите пароль"
                         />
                         <div className={styles.passwordEye} onClick={toggleShowPassword}>
-                            {showPassword === "password" ? (
+                            {showPassword === 'password' ? (
                                 <EyeSlash size={22} color="#000" />
                             ) : (
                                 <Eye size={22} color="#000" />
@@ -102,7 +101,7 @@ const SignUpForm = () => {
                             name="password"
                         />
                         <div className={styles.error}>
-                            {loadStatus === "loading" ? (
+                            {loadStatus === 'loading' ? (
                                 <Spinner smallSize={true} />
                             ) : (
                                 serverError && <div>{serverError}</div>
@@ -110,7 +109,7 @@ const SignUpForm = () => {
                         </div>
                     </div>
 
-                    <Button type="submit" disabled={loadStatus === "loading" ? true : false}>
+                    <Button type="submit" disabled={loadStatus === 'loading' ? true : false}>
                         Войти
                     </Button>
                 </Form>

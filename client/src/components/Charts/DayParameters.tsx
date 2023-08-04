@@ -1,9 +1,9 @@
-import { useAppSelector } from "app/hooks"
-import { currentWetherSelector } from "app/selectors"
-import { getTimeWithUtcOffset } from "helpers/transformData"
-import { calkDayDuration, checkTimesOfDay } from "./chartHelpers"
+import { useAppSelector } from 'app/redux/hooks'
+import { currentWetherSelector } from 'app/redux/selectors'
+import { getTimeWithUtcOffset } from 'helpers/transformData'
+import { calkDayDuration, checkTimesOfDay } from './chartHelpers'
 
-import styles from "./Charts.module.scss"
+import styles from './Charts.module.scss'
 
 const DayParameters = () => {
     const weather = useAppSelector(currentWetherSelector)
@@ -28,7 +28,7 @@ const DayParameters = () => {
                     </div>
                     {timesOfDay && (
                         <div className={styles.additionalData_value}>
-                            Время до захода {beforeSunsetHour !== 0 && `${beforeSunsetHour} ч`}{" "}
+                            Время до захода {beforeSunsetHour !== 0 && `${beforeSunsetHour} ч`}{' '}
                             {beforeSunsetMin} мин
                         </div>
                     )}

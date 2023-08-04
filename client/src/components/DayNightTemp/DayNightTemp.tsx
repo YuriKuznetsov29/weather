@@ -1,4 +1,4 @@
-import styles from "./DayNightTemp.module.scss"
+import styles from './DayNightTemp.module.scss'
 
 interface DayNightTempProps {
     dayTemp: number
