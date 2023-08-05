@@ -1,4 +1,4 @@
-export function culkSunPosition(sunrise: string, sunset: string, curtime: string): number {
+export function calkSunPosition(sunrise: string, sunset: string, curtime: string): number {
     const sOnDay = 24 * 60 * 60
     const allSteps = 96
 

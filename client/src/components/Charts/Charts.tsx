@@ -20,7 +20,7 @@ import { useEffect, useRef, useState } from 'react'
 import Container from 'shared/ui/Container/Container'
 import { getTimeWithUtcOffset } from 'helpers/transformData'
 import { ChartData, ChartOptions } from 'chart.js'
-import { createSunImg, culkSunPosition, calkTrueNoon, sinusCalk } from './chartHelpers'
+import { createSunImg, calkSunPosition, calkTrueNoon, sinusCalk } from './chartHelpers'
 import DayParameters from './DayParameters'
 import CurrentWind from './CurrentWind'
 
@@ -137,7 +137,7 @@ const Charts = () => {
             if (selectedDay === 'today') {
                 const { time } = getTimeWithUtcOffset(utcOffset)
                 const [labels, sin] = sinusCalk()
-                const sunPosition = culkSunPosition(sunrise, sunset, time)
+                const sunPosition = calkSunPosition(sunrise, sunset, time)
                 const sun = createSunImg()
                 const trueNoon = calkTrueNoon(utcOffset, lon)
                 const shift = sunPosition < 24 || sunPosition > 72 ? 2 : 0

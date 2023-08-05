@@ -58,5 +58,10 @@
         "@types/react": "^18.2.7",
         "@types/react-dom": "^18.2.4",
         "prettier": "3.0.1"
+    },
+    "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+      }
     }
 }
