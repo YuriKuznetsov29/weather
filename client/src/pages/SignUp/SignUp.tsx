@@ -1,6 +1,6 @@
-import Header from 'components/Header/Header'
+import Header from 'widgets/Header/Header'
 import SideBar from 'widgets/SideBar/SideBar'
-import SignUpForm from 'components/Form/SignUpForm'
+import SignUpForm from 'widgets/Form/SignUpForm'
 
 const SignUp = () => {
     return (

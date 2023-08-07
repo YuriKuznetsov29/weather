@@ -2,7 +2,7 @@ import Container from 'shared/ui/Container/Container'
 import { getTimeWithUtcOffset } from 'helpers/transformData'
 import { days, months, weatherDescription } from 'helpers/constants'
 import { TomorrowWeather, getWetherImage } from 'helpers/transformData'
-import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
+import DayNightTemp from 'widgets/DayNightTemp/DayNightTemp'
 
 import styles from './CurrentWeather.module.scss'
 

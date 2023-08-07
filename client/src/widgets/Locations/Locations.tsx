@@ -1,5 +1,5 @@
 import Container from 'shared/ui/Container/Container'
-import Location from 'components/RecentLocations/Location'
+import Location from 'widgets/RecentLocations/Location'
 import { useAppSelector } from 'app/redux/hooks'
 import { userSelector } from 'app/redux/selectors'
 

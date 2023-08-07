@@ -1,7 +1,7 @@
 import styles from './Button.module.scss'
 
 interface ButtonProps {
-    children: React.ReactNode
+    children: string
     onClick?: React.MouseEventHandler
     type?: 'button' | 'submit' | 'reset' | undefined
     addStyles?: {}

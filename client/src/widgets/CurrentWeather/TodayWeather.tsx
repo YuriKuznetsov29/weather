@@ -1,5 +1,5 @@
 import Container from 'shared/ui/Container/Container'
-import DayNightTemp from 'components/DayNightTemp/DayNightTemp'
+import DayNightTemp from 'widgets/DayNightTemp/DayNightTemp'
 import { getWetherImage, getTimeWithUtcOffset, CurrentWeather } from 'helpers/transformData'
 import { months, weatherDescription } from 'helpers/constants'
 

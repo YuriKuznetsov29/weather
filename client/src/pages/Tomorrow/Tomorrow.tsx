@@ -1,11 +1,11 @@
-import Charts from 'components/Charts/Charts'
+import Charts from 'widgets/Charts/Charts'
 import Background from 'widgets/Background/Background'
-import CurrentWeather from 'components/CurrentWeather/CurrentWeather'
-import Precipitations from 'components/Precipitations/Precipitations'
-import RecentLocations from 'components/RecentLocations/RecentLocations'
-import SelectLocation from 'components/SelectLocation/SelectLocation'
+import CurrentWeather from 'widgets/CurrentWeather/CurrentWeather'
+import Precipitations from 'widgets/Precipitations/Precipitations'
+import RecentLocations from 'widgets/RecentLocations/RecentLocations'
+import SelectLocation from 'widgets/SelectLocation/SelectLocation'
 import SideBar from 'widgets/SideBar/SideBar'
-import Header from 'components/Header/Header'
+import Header from 'widgets/Header/Header'
 
 const Tomorrow = () => (
     <>
