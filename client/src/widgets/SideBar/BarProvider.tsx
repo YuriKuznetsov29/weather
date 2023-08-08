@@ -3,10 +3,11 @@ import { BarContext } from './BarContext'
 
 interface BarProviderProps {
     children: ReactNode
+    initialState?: boolean
 }
 
-const BarProvider = ({ children }: BarProviderProps) => {
-    const [barState, setBarState] = useState(false)
+const BarProvider = ({ children, initialState }: BarProviderProps) => {
+    const [barState, setBarState] = useState(initialState || false)
 
     const stateChange = (): void => {
         setBarState((prev) => !prev)

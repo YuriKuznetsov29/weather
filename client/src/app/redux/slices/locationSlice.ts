@@ -8,11 +8,11 @@ export type CurrentLocation = {
     country: string
 }
 
-type RecentLocations = {
+export type RecentLocations = {
     locations: CurrentLocation[]
 }
 
-type LocationSlice = {
+export type LocationSlice = {
     currentLocation: CurrentLocation | null
     recentLocations: RecentLocations | null
 }

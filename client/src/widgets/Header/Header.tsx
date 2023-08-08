@@ -9,7 +9,7 @@ import { BarContext } from 'widgets/SideBar/BarContext'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
-    children: JSX.Element
+    children?: JSX.Element
     background?: boolean
 }
 

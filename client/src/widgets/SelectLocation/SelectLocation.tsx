@@ -10,6 +10,7 @@ import { storage } from 'services/storage'
 import classNames from 'classnames'
 
 import styles from './SelectLocation.module.scss'
+import Input from 'shared/ui/Input/Input'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
@@ -140,8 +141,8 @@ const SelectLocation = () => {
                         })}
                         weight="thin"
                     />
-                    <input
-                        className={classNames(`${styles.search__input}`, {
+                    <Input
+                        inputClassName={classNames(`${styles.search__input}`, {
                             [styles.search__active]: activeStyleSearch,
                         })}
                         type="text"
@@ -149,7 +150,7 @@ const SelectLocation = () => {
                         value={searchValue}
                         data-type="inputLocation"
                         onInput={(event) => searchLocation(event)}
-                    ></input>
+                    ></Input>
 
                     <div className={styles.search__resultsWrapper}>
                         <div className={styles.search__wrapper}>

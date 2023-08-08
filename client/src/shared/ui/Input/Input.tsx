@@ -1,24 +1,29 @@
-import styles from './Input.module.scss'
 import { ChangeEvent } from 'react'
 
 interface InputProps {
-    label: string
+    label?: string
+    inputClassName?: string
+    labelClassName?: string
     type: string
     placeholder: string
-    value: string
-    onChange?: (e: ChangeEvent<HTMLInputElement>) => void
+    value?: string
+    dataType?: string
+    onChange?: (event: ChangeEvent<HTMLInputElement>) => void
+    onInput?: (event: ChangeEvent<HTMLInputElement>) => void
 }
 
-const Input = ({ label, type, placeholder, value, onChange }: InputProps) => {
+const Input = ({ label, labelClassName, inputClassName, type, placeholder, value, dataType, onChange, onInput }: InputProps) => {
     return (
         <>
-            <label className={styles.label}>{label}</label>
+            {label && <label className={labelClassName}>{label}</label>}
             <input
-                className={styles.input}
+                className={inputClassName}
                 value={value}
                 type={type}
+                data-type={dataType}
                 placeholder={placeholder}
                 onChange={onChange}
+                onInput={onInput}
             ></input>
         </>
     )
