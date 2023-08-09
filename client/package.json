@@ -75,6 +75,7 @@
     "@types/react-dom": "^18.2.4",
     "babel-plugin-named-exports-order": "^0.0.2",
     "eslint-plugin-storybook": "^0.6.13",
+    "fetch-mock-jest": "^1.5.1",
     "loki": "^0.32.0",
     "prettier": "3.0.1",
     "prop-types": "^15.8.1",

@@ -1,9 +1,7 @@
-import axios from 'axios'
-
 export const useHttp = async (url: string) => {
     try {
-        const response = await axios(url)
-        return response.data
+        const data = await fetch(url)
+        return await data.json()
     } catch (error) {
         throw error
     }

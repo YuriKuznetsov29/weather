@@ -122,6 +122,7 @@ const SelectLocation = () => {
                         key={id}
                         data-type="setLocation"
                         data-location={`${latitude},${longitude},${name},${timezone},${country}`}
+                        data-testid="locationItem"
                         onClick={(event) => selectLocation(event)}
                     >
                         {`${country}, ${name}, ${country_code}`}
@@ -148,7 +149,8 @@ const SelectLocation = () => {
                         type="text"
                         placeholder="Поиск"
                         value={searchValue}
-                        data-type="inputLocation"
+                        dataType="inputLocation"
+                        dataTestid="inputTest"
                         onInput={(event) => searchLocation(event)}
                     ></Input>
 
