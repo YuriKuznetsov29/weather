@@ -1,5 +1,6 @@
 import { ChartOptions, ChartData } from 'chart.js'
 import { LineAnnotationOptions } from 'chartjs-plugin-annotation'
+import { createSunImg } from './chartHelpers'
 const CHART_COLORS = {
     red: 'rgb(255, 99, 132)',
     orange: 'rgb(255, 159, 64)',
