@@ -1,4 +1,4 @@
-import { weatherDayClasses, weathernightClasses } from "./constants"
+import { weatherDayClasses, weathernightClasses } from './constants'
 
 export const getWindDirection = (dir: number): string => {
     if ((dir >= 337.5 && dir <= 360) || (dir > 0 && dir < 22.5)) {
@@ -40,15 +40,14 @@ export const getWindDirectionLong = (dir: number): string => {
     } else return ''
 }
 
-
 export const getLastDate = () => {
     const date = new Date()
     date.setDate(date.getDate() + 15)
-    return date.toLocaleDateString().replace(/(\d{2})\.(\d{2})\.(\d{4})/g, "$3-$2-$1")
+    return date.toLocaleDateString().replace(/(\d{2})\.(\d{2})\.(\d{4})/g, '$3-$2-$1')
 }
 
 export const getCurrentDate = () => {
-    return new Date().toLocaleDateString().replace(/(\d{2})\.(\d{2})\.(\d{4})/g, "$3-$2-$1")
+    return new Date().toLocaleDateString().replace(/(\d{2})\.(\d{2})\.(\d{4})/g, '$3-$2-$1')
 }
 
 export function getTimeWithUtcOffset(offset: number) {
@@ -168,11 +167,18 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 dailyTemp: res.hourly.temperature_2m.slice(0, 24),
                 dailyMoi: res.hourly.relativehumidity_2m.slice(0, 24),
                 dailyPrecipitation: res.hourly.precipitation.slice(0, 24),
-                dailyPrecipitationSum: (res.hourly.precipitation.slice(0, 24).reduce((acc: number, curr: number) => acc + curr)).toFixed(1),
+                dailyPrecipitationSum: res.hourly.precipitation
+                    .slice(0, 24)
+                    .reduce((acc: number, curr: number) => acc + curr)
+                    .toFixed(1),
                 dailyPrecipitationProb: res.hourly.precipitation_probability.slice(0, 24),
-                dailyWind: res.hourly.windspeed_10m.slice(0, 24).map((el: number) => Math.round(el)),
+                dailyWind: res.hourly.windspeed_10m
+                    .slice(0, 24)
+                    .map((el: number) => Math.round(el)),
                 dailyWindDir: res.hourly.winddirection_10m.slice(0, 24),
-                dailyPressure: res.hourly.pressure_msl.slice(0, 24).map((el: number) => Math.round(el)),
+                dailyPressure: res.hourly.pressure_msl
+                    .slice(0, 24)
+                    .map((el: number) => Math.round(el)),
                 dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
                 utcOffset: res.utc_offset_seconds,
                 currentTempRound: Math.round(res.hourly.temperature_2m[hour]),
@@ -191,17 +197,26 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 sunset: res.daily.sunset[1].slice(-5),
                 weathercode: res.daily.weathercode[1],
                 dailyTemp: res.hourly.temperature_2m.slice(24, 48),
-                dailyWind: res.hourly.windspeed_10m.slice(24, 48).map((el: number) => Math.round(el)),
+                dailyWind: res.hourly.windspeed_10m
+                    .slice(24, 48)
+                    .map((el: number) => Math.round(el)),
                 dailyWindDir: res.hourly.winddirection_10m.slice(24, 48),
                 tempMax: Math.round(res.daily.temperature_2m_max[1]),
                 tempMin: Math.round(res.daily.temperature_2m_min[1]),
                 dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)),
                 utcOffset: res.utc_offset_seconds,
                 lon: res.longitude,
-                dailyMoi: Math.round(res.hourly.relativehumidity_2m.slice(24, 48).reduce((acc: number, curr: number) => curr + acc) / 24),
+                dailyMoi: Math.round(
+                    res.hourly.relativehumidity_2m
+                        .slice(24, 48)
+                        .reduce((acc: number, curr: number) => curr + acc) / 24
+                ),
                 uvIndex: res.daily.uv_index_max[1],
                 dailyPrecipitation: res.hourly.precipitation.slice(24, 48),
-                dailyPrecipitationSum: (res.hourly.precipitation.slice(24, 48).reduce((acc: number, curr: number) => acc + curr)).toFixed(1),
+                dailyPrecipitationSum: res.hourly.precipitation
+                    .slice(24, 48)
+                    .reduce((acc: number, curr: number) => acc + curr)
+                    .toFixed(1),
                 dailyPrecipitationProb: res.hourly.precipitation_probability.slice(24, 48),
             },
             tenDaysWeather: {
@@ -217,17 +232,33 @@ export const transformWeatherData = async (data: any): Promise<WeatherData> => {
                 wind: res.daily.windspeed_10m_max,
                 windDir: res.daily.winddirection_10m_dominant,
                 uvIndex: res.daily.uv_index_max,
-                moi: res.hourly.relativehumidity_2m.map((el: number, i:number, arr: number[]) => Math.round(arr.splice(0, 24).reduce((acc: number, curr: number) => curr + acc)/24)),
-                dailyTemp: res.hourly.temperature_2m.map((el: number, i:number, arr: number[]) => arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)),
-                hourlyWeatherCode: res.hourly.weathercode.map((el: number, i:number, arr: number[]) => arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)),
-                dailyTime: res.hourly.time.slice(0, 24).map((el: string) => el.slice(-5)).filter((el: number, i: number) => i % 2 === 0),
-
+                moi: res.hourly.relativehumidity_2m.map((el: number, i: number, arr: number[]) =>
+                    Math.round(
+                        arr.splice(0, 24).reduce((acc: number, curr: number) => curr + acc) / 24
+                    )
+                ),
+                dailyTemp: res.hourly.temperature_2m.map((el: number, i: number, arr: number[]) =>
+                    arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)
+                ),
+                hourlyWeatherCode: res.hourly.weathercode.map(
+                    (el: number, i: number, arr: number[]) =>
+                        arr.splice(0, 24).filter((el: number, i: number) => i % 2 === 0)
+                ),
+                dailyTime: res.hourly.time
+                    .slice(0, 24)
+                    .map((el: string) => el.slice(-5))
+                    .filter((el: number, i: number) => i % 2 === 0),
             },
         }
     })
 }
 
-export function getWetherImage(sunrise: string, sunset: string, code: number, offset: number): string {
+export function getWetherImage(
+    sunrise: string,
+    sunset: string,
+    code: number,
+    offset: number
+): string {
     const { modTime } = getTimeWithUtcOffset(offset)
     const sunriseMod = +sunrise.slice(0, 2) + (+sunrise.slice(3, 5) * (10 / 6)) / 100
     const sunsetMod = +sunset.slice(0, 2) + (+sunset.slice(3, 5) * (10 / 6)) / 100

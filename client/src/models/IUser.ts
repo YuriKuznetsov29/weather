@@ -1,8 +1,7 @@
-import { CurrentLocation } from "app/slices/locationSlice"
+import { CurrentLocation } from 'app/redux/slices/locationSlice'
 
 export interface IUser {
     email: string
-    // isActivated: boolean
     userId: string
     savedLocations: CurrentLocation[]
 }
