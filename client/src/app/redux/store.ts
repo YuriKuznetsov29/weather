@@ -1,7 +1,7 @@
 import { configureStore, ThunkAction, Action, combineReducers } from '@reduxjs/toolkit'
 import { weatherReducer } from './slices/weatherSlice'
 import { locationsReducer } from './slices/locationSlice'
-import { loginReducer } from './slices/loginSlice'
+import { loginReducer } from 'modules/Authorization'
 
 const rootReducer = combineReducers({
     weather: weatherReducer,

@@ -1,12 +1,24 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useHttp } from 'hooks/useHttp'
 import { getCurrentDate, getLastDate, transformWeatherData } from '../helpers/transformData'
+import { CurrentLocation } from 'modules/Locations'
 
 export function getLocation() {
     return useHttp('https://api.ipgeolocation.io/ipgeo?apiKey=17a8d753063e4a20a9531fe3638de576')
 }
 
-export function getCoordinateLocation(city: string = 'москва') {
+export interface LocationCoordinates {
+    results: { 
+        latitude : number, 
+        longitude : number, 
+        name: string, 
+        timezone: string, 
+        country: string 
+    } []
+    
+}
+
+export function getCoordinateLocation(city: string = 'москва'): Promise<LocationCoordinates> {
     return useHttp(
         `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5&language=ru`
     )

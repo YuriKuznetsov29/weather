@@ -1,0 +1,1 @@
+export type {CurrentLocation} from './store/locationSlice'	
