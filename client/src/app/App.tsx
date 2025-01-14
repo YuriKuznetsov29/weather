@@ -14,6 +14,7 @@ import { TenDaysAsync } from 'pages/TenDays/TenDays.async'
 import { TomorrowAsync } from 'pages/Tomorrow/Tomorrow.async'
 import Page404 from 'pages/Page404/Page404'
 import Spinner from 'shared/ui/Spinner/Spinner'
+import toast from 'react-hot-toast';
 
 const router = createHashRouter([
     {
@@ -77,16 +78,29 @@ function App() {
                 .then((res) => res.city)
                 .then((city) => {
                     getCoordinateLocation(city).then((location) => {
-                        const { latitude, longitude, name, timezone, country } = location.results[0]
-                        dispatch(
-                            setCurrentLocation({
-                                lat: latitude,
-                                lon: longitude,
-                                city: name,
-                                timezone: timezone,
-                                country: country,
-                            })
-                        )
+                        if (location.results) {
+                            const { latitude, longitude, name, timezone, country } = location.results[0]
+                            dispatch(
+                                setCurrentLocation({
+                                    lat: latitude,
+                                    lon: longitude,
+                                    city: name,
+                                    timezone: timezone,
+                                    country: country,
+                                })
+                            )
+                        } else {
+                            dispatch(
+                                setCurrentLocation({
+                                    lat: 55.75222,
+                                    lon: 37.61556,
+                                    city: 'Москва',
+                                    timezone: 'Europe/Moscow',
+                                    country: 'Россия',
+                                })
+                            )
+                            toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
+                        }
                     })
                 })
         }

@@ -8,9 +8,9 @@ import { getCoordinateLocation, getLocation } from 'services/getData'
 import { currentLocationSelector } from 'app/redux/selectors'
 import { storage } from 'services/storage'
 import classNames from 'classnames'
-
-import styles from './SelectLocation.module.scss'
+import toast from 'react-hot-toast';
 import Input from 'shared/ui/Input/Input'
+import styles from './SelectLocation.module.scss'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
@@ -52,6 +52,10 @@ const SelectLocation = () => {
             .then((res) => res.city)
             .then((city) => {
                 getCoordinateLocation(city).then((location) => {
+                    if (!location.results) {
+                        toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
+                        return
+                    }
                     const { latitude, longitude, name, timezone, country } = location.results[0]
                     dispatch(
                         setCurrentLocation({

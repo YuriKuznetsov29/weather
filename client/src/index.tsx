@@ -5,6 +5,7 @@ import { store } from './app/redux/store'
 import App from 'app/App'
 import BarProvider from 'widgets/SideBar/BarProvider'
 import ErrorBoundary from 'app/providers/ErrorBoundary/ErrorBoundary'
+import { Toaster } from 'react-hot-toast';
 import './styles/index.scss'
 
 const container = document.getElementById('root')!
@@ -18,6 +19,7 @@ root.render(
                     <App />
                 </BarProvider>
             </Provider>
+            <Toaster/>
         </ErrorBoundary>
     </React.StrictMode>
 )
