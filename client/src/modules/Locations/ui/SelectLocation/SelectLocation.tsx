@@ -10,13 +10,15 @@ import { storage } from 'services/storage'
 import classNames from 'classnames'
 import toast from 'react-hot-toast';
 import Input from 'shared/ui/Input/Input'
+import { getCurrentLocation } from '../../api/getCurrentLocation'
+import { ILocation } from '../../../../services/getData'
 import styles from './SelectLocation.module.scss'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
     const [activeStyleSearch, setActiveStyleSearch] = useState(false)
     const [searchValue, setSearchValue] = useState('')
-    const [searchRes, setSearchRes] = useState([])
+    const [searchRes, setSearchRes] = useState<ILocation[]>([])
 
     const dispatch = useAppDispatch()
     const location: CurrentLocation | null = useAppSelector(currentLocationSelector)
@@ -47,29 +49,29 @@ const SelectLocation = () => {
         }
     }, [location])
 
-    const getCurrentLocation = () => {
-        getLocation()
-            .then((res) => res.city)
-            .then((city) => {
-                getCoordinateLocation(city).then((location) => {
-                    if (!location.results) {
-                        toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
-                        return
-                    }
-                    const { latitude, longitude, name, timezone, country } = location.results[0]
-                    dispatch(
-                        setCurrentLocation({
-                            lat: latitude,
-                            lon: longitude,
-                            city: name,
-                            timezone: timezone,
-                            country: country,
-                        })
-                    )
-                    clearFind()
-                })
-            })
-    }
+    // const getCurrentLocation = () => {
+    //     getLocation()
+    //         .then((res) => res.city)
+    //         .then((city) => {
+    //             getCoordinateLocation(city).then((location) => {
+    //                 if (!location.results) {
+    //                     toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
+    //                     return
+    //                 }
+    //                 const { latitude, longitude, name, timezone, country } = location.results[0]
+    //                 dispatch(
+    //                     setCurrentLocation({
+    //                         lat: latitude,
+    //                         lon: longitude,
+    //                         city: name,
+    //                         timezone: timezone,
+    //                         country: country,
+    //                     })
+    //                 )
+    //                 clearFind()
+    //             })
+    //         })
+    // }
 
     const startSearchLocation = (event: React.MouseEvent<HTMLFormElement>) => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {
@@ -77,6 +79,7 @@ const SelectLocation = () => {
             setActiveStyleSearch(true)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
             getCurrentLocation()
+            clearFind()
         }
     }
 

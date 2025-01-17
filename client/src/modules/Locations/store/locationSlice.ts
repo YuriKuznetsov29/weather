@@ -43,7 +43,7 @@ const locationSlice = createSlice({
             .addCase(getCurrentLocation.rejected, (state) => {
                 state.loading = false
             })
-            .addCase(getCurrentLocation.fulfilled, (state, action) => {
+            .addCase(getCurrentLocation.fulfilled, (state, action: PayloadAction<CurrentLocation>) => {
                 state.currentLocation = action.payload
                 state.loading = false
             })

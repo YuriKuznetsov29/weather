@@ -8,7 +8,7 @@ import { WeatherData } from 'helpers/transformData'
 import { Thermometer } from '@phosphor-icons/react'
 import { useNavigate } from 'react-router-dom'
 
-import styles from './RecentLocations.module.scss'
+import styles from './Location.module.scss'
 
 interface LocationProps {
     location: CurrentLocation

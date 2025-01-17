@@ -27,7 +27,7 @@ const SelectLocation = () => {
         if (deferredQuery) {
             getCoordinateLocation(deferredQuery).then((locations) => {
                 if ('results' in locations) {
-                    setSearchRes(locations.results)
+                    // setSearchRes(locations.results)
                 }
             })
         }

@@ -7,15 +7,18 @@ export function getLocation() {
     return useHttp('https://api.ipgeolocation.io/ipgeo?apiKey=17a8d753063e4a20a9531fe3638de576')
 }
 
+export interface ILocation {
+    latitude : number, 
+    longitude : number, 
+    name: string, 
+    timezone: string, 
+    country: string 
+    country_code: string
+    id: string
+}
+
 export interface LocationCoordinates {
-    results: { 
-        latitude : number, 
-        longitude : number, 
-        name: string, 
-        timezone: string, 
-        country: string 
-    } []
-    
+    results: ILocation []
 }
 
 export function getCoordinateLocation(city: string = 'москва'): Promise<LocationCoordinates> {

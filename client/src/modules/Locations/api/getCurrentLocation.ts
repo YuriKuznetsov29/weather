@@ -17,15 +17,11 @@ createAsyncThunk<CurrentLocation, void, { rejectValue: string }>('locations/getC
             const location = await getCoordinateLocation(city)
             if (!location.results) {
                 toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.')
-                 return rejectWithValue('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.')
+                return rejectWithValue('error')
             }
 
             const { latitude, longitude, name, timezone, country } = location.results[0]
 
-            if (!latitude || !longitude || !name || !timezone || !country) {
-                return rejectWithValue('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.')
-            }
-            
             return ({
                 lat: latitude,
                 lon: longitude,
@@ -36,10 +32,10 @@ createAsyncThunk<CurrentLocation, void, { rejectValue: string }>('locations/getC
         } 
         
         toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
-        return rejectWithValue('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.')
+        return rejectWithValue('error')
     } catch (error) {
         console.log(error)
-        return rejectWithValue('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.')
+        return rejectWithValue('error')
     }
 
 })
