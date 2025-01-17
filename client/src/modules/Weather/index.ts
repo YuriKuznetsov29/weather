@@ -1,0 +1,1 @@
+export {CurrentWeatherAsync as CurrentWeather} from './ui/CurrentWeather/CurrentWeather.async'
