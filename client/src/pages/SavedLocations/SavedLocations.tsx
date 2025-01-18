@@ -1,7 +1,7 @@
-import SideBar from 'widgets/SideBar/SideBar'
-import Header from 'widgets/Header/Header'
-import Locations from 'widgets/Locations/Locations'
-import PrivateRoute from 'widgets/hoc/PrivateRoute'
+import SideBar from 'components/SideBar/SideBar'
+import Header from 'components/Header/Header'
+import { Locations } from 'modules/Locations'
+import PrivateRoute from 'components/hoc/PrivateRoute'
 
 const SavedLocatons = () => (
     <PrivateRoute>

@@ -1,9 +1,9 @@
 import { Charts } from 'modules/Charts'
-import Background from 'widgets/Background/Background'
+import Background from 'components/Background/Background'
 import { CurrentWeather, Precipitations } from 'modules/Weather'
-import {RecentLocations, SelectLocation} from 'modules/Locations'
-import SideBar from 'widgets/SideBar/SideBar'
-import Header from 'widgets/Header/Header'
+import { RecentLocations, SelectLocation } from 'modules/Locations'
+import SideBar from 'components/SideBar/SideBar'
+import Header from 'components/Header/Header'
 
 const Tomorrow = () => (
     <>

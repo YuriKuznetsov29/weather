@@ -1,7 +1,6 @@
 import Button from 'shared/ui/Button/Button'
 import { Eye, EyeSlash } from '@phosphor-icons/react'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks'
-import { signIn } from 'app/redux/slices/loginSlice'
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { useState, useEffect } from 'react'
 import { Formik, Field, Form, ErrorMessage } from 'formik'
 import * as Yup from 'yup'
@@ -9,6 +8,7 @@ import { useLocation, useNavigate } from 'react-router-dom'
 import Spinner from 'shared/ui/Spinner/Spinner'
 import { authStatusSelector, serverErrorsSelector, statusSelector } from '../../store/selectors'
 import styles from './Form.module.scss'
+import { signIn } from 'modules/Authorization/api/signIn'
 
 interface Values {
     email: string

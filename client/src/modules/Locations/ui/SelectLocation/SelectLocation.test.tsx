@@ -2,7 +2,7 @@ import SelectLocation from './SelectLocation'
 import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { Provider } from 'react-redux'
-import { store } from 'app/redux/store'
+import { store } from 'app/providers/StoreProvider/config/store'
 
 const response = {
     results: [

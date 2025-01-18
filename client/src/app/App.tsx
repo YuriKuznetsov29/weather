@@ -1,10 +1,8 @@
 import ErrorPage from 'pages/ErrorPage/ErrorPage'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
-import { useAppDispatch } from 'app/redux/hooks'
-import { checkAuth } from 'app/redux/slices/loginSlice'
+import { useAppDispatch } from 'app/providers/StoreProvider/config/hooks'
 import { storage } from 'services/storage'
-import { setCurrentLocation } from 'app/redux/slices/locationSlice'
 import { getLocation, getCoordinateLocation } from 'services/getData'
 import { MainAsync } from 'pages/Main/Main.async'
 import { SavedLocationsAsync } from 'pages/SavedLocations/SavedLocations.async'
@@ -14,7 +12,9 @@ import { TenDaysAsync } from 'pages/TenDays/TenDays.async'
 import { TomorrowAsync } from 'pages/Tomorrow/Tomorrow.async'
 import Page404 from 'pages/Page404/Page404'
 import Spinner from 'shared/ui/Spinner/Spinner'
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'
+import { checkAuth } from 'modules/Authorization/api/checkAuth'
+import { setCurrentLocation } from 'modules/Locations/store/locationSlice'
 
 const router = createHashRouter([
     {
@@ -79,7 +79,8 @@ function App() {
                 .then((city) => {
                     getCoordinateLocation(city).then((location) => {
                         if (location.results) {
-                            const { latitude, longitude, name, timezone, country } = location.results[0]
+                            const { latitude, longitude, name, timezone, country } =
+                                location.results[0]
                             dispatch(
                                 setCurrentLocation({
                                     lat: latitude,
@@ -99,7 +100,9 @@ function App() {
                                     country: 'Россия',
                                 })
                             )
-                            toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
+                            toast.error(
+                                'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
+                            )
                         }
                     })
                 })

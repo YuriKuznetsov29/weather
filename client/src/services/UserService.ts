@@ -1,8 +1,8 @@
 import $api from '../http/index'
 import { AxiosResponse } from 'axios'
-import { CurrentLocation } from 'app/redux/slices/locationSlice'
 import { AuthResponse } from 'models/response/AuthResponse'
 import { UserResponse } from 'models/response/UserResponse'
+import { CurrentLocation } from 'modules/Locations'
 
 export default class UserService {
     static async saveLocations(

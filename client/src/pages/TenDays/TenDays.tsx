@@ -1,7 +1,7 @@
-import Background from 'widgets/Background/Background'
-import {RecentLocations, SelectLocation} from 'modules/Locations'
-import SideBar from 'widgets/SideBar/SideBar'
-import Header from 'widgets/Header/Header'
+import Background from 'components/Background/Background'
+import { RecentLocations, SelectLocation } from 'modules/Locations'
+import SideBar from 'components/SideBar/SideBar'
+import Header from 'components/Header/Header'
 import { TenDaysWeather } from 'modules/Weather'
 
 const TenDays = () => {

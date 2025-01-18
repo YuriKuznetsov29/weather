@@ -1,3 +1,5 @@
 export type { CurrentLocation } from './store/locationSlice'
 export { SelectLocationAsync as SelectLocation } from './ui/SelectLocation/SelectLocation.async'
 export { RecentLocationsAsync as RecentLocations } from './ui/RecentLocations/RecentLocations.async'
+export { LocationsAsync as Locations } from './ui/Locations/Locations.async'
+export { locationsReducer } from './store/locationSlice'

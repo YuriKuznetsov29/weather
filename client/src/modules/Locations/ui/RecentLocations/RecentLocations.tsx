@@ -1,11 +1,11 @@
 import Container from 'shared/ui/Container/Container'
 import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
-import { useAppSelector } from 'app/redux/hooks'
-import { CurrentLocation } from 'app/redux/slices/locationSlice'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { storage } from 'services/storage'
-import Location from '../../../../components/Location/Location'
+import Location from '../Location/Location'
 import { currentLocationSelector } from '../../store/selectors'
 import styles from './RecentLocations.module.scss'
+import { CurrentLocation } from 'modules/Locations/store/locationSlice'
 
 const RecentLocations = () => {
     const [locationElement, setLocationElement] = useState<ReactElement[]>([])

@@ -1,5 +1,5 @@
-import Header from 'widgets/Header/Header'
-import SideBar from 'widgets/SideBar/SideBar'
+import Header from 'components/Header/Header'
+import SideBar from 'components/SideBar/SideBar'
 import { SignInForm } from 'modules/Authorization'
 const SignIn = () => {
     return (

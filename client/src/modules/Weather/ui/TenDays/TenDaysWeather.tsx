@@ -1,5 +1,5 @@
 import { getTimeWithUtcOffset } from 'helpers/transformData'
-import { useAppSelector } from 'app/redux/hooks'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { currentWetherSelector } from '../../store/selectors'
 import Day from './Day'
 

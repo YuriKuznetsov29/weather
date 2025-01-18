@@ -1,3 +1,7 @@
 import { StoryFn } from '@storybook/react'
-import BarProvider from 'widgets/SideBar/BarProvider'
-export const withSidebar = (Story: StoryFn) => <BarProvider initialState={true}><Story /></BarProvider>
+import SideBarProvider from 'app/providers/SideBarProvider/ui/SideBarProvider'
+export const withSidebar = (Story: StoryFn) => (
+    <SideBarProvider initialState={true}>
+        <Story />
+    </SideBarProvider>
+)

@@ -1,6 +1,6 @@
 import SignUpForm from './SignUpForm/SignUpForm'
 import SignInForm from './SignInForm/SignInForm'
-import { useAppSelector } from 'app/redux/hooks'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { signInSelector, signUpSelector } from '../store/selectors'
 
 const Form = () => {

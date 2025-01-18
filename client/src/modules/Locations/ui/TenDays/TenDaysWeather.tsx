@@ -1,7 +1,7 @@
 import { getTimeWithUtcOffset } from 'helpers/transformData'
-import { useAppSelector } from 'app/redux/hooks'
-import { currentWetherSelector } from 'app/redux/selectors'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import Day from './Day'
+import { currentWetherSelector } from 'modules/Weather/store/selectors'
 
 const TenDaysWeather = () => {
     const weather = useAppSelector(currentWetherSelector)

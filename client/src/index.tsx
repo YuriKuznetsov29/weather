@@ -1,12 +1,11 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
-import { Provider } from 'react-redux'
-import { store } from './app/redux/store'
 import App from 'app/App'
-import BarProvider from 'widgets/SideBar/BarProvider'
+import SideBarProvider from 'app/providers/SideBarProvider/ui/SideBarProvider'
 import ErrorBoundary from 'app/providers/ErrorBoundary/ErrorBoundary'
-import { Toaster } from 'react-hot-toast';
+import { Toaster } from 'react-hot-toast'
 import './styles/index.scss'
+import { StoreProvider } from 'app/providers/StoreProvider/ui/StoreProvider'
 
 const container = document.getElementById('root')!
 const root = createRoot(container)
@@ -14,12 +13,12 @@ const root = createRoot(container)
 root.render(
     <React.StrictMode>
         <ErrorBoundary>
-            <Provider store={store}>
-                <BarProvider>
+            <StoreProvider>
+                <SideBarProvider>
                     <App />
-                </BarProvider>
-            </Provider>
-            <Toaster/>
+                </SideBarProvider>
+            </StoreProvider>
+            <Toaster />
         </ErrorBoundary>
     </React.StrictMode>
 )

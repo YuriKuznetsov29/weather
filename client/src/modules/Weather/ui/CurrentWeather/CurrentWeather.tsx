@@ -1,5 +1,5 @@
 import Container from 'shared/ui/Container/Container'
-import { useAppSelector } from 'app/redux/hooks'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { currentWetherSelector, selectDay } from '../../store/selectors'
 import TodayWeather from '../TodayWeather/TodayWeather'
 import TomorrowWether from '../TomorowWeather/TomorrowWether'

@@ -1,4 +1,4 @@
-import { CurrentLocation } from 'app/redux/slices/locationSlice'
+import { CurrentLocation } from 'modules/Locations'
 
 export interface IUser {
     email: string

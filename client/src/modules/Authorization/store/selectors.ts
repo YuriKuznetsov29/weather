@@ -1,4 +1,4 @@
-import { RootState } from "app/redux/store"
+import { RootState } from 'app/providers/StoreProvider/config/store'
 
 export const signUpSelector = (state: RootState) => state.login.signUpState
 export const signInSelector = (state: RootState) => state.login.signInState

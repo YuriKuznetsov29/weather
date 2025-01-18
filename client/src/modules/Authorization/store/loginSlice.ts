@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { IUser } from '../../../models/IUser'
-import { CurrentLocation } from 'app/redux/slices/locationSlice'
 import { signUp } from '../api/signUp'
 import { signIn } from '../api/signIn'
 import { signOut } from '../api/signOut'
 import { checkAuth } from '../api/checkAuth'
 import { saveLocations } from '../api/saveLocations'
+import { CurrentLocation } from 'modules/Locations'
 
 export interface RequestSavedLocationsData {
     userId: string

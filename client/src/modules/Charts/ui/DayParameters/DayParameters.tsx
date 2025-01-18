@@ -1,8 +1,7 @@
-import { useAppSelector } from 'app/redux/hooks'
-import { currentWetherSelector } from 'app/redux/selectors'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { getTimeWithUtcOffset } from 'helpers/transformData'
 import { calkDayDuration, checkTimesOfDay } from '../../helpers/chartHelpers'
-
+import { currentWetherSelector } from 'modules/Weather/store/selectors'
 import styles from './Charts.module.scss'
 
 const DayParameters = () => {

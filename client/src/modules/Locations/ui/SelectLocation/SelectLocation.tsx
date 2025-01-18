@@ -1,18 +1,18 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react'
 import Container from 'shared/ui/Container/Container'
 import { NavigationArrow, MagnifyingGlass } from '@phosphor-icons/react'
-import { useAppDispatch, useAppSelector } from 'app/redux/hooks'
-import { CurrentLocation, setCurrentLocation } from 'app/redux/slices/locationSlice'
-import { loadWeather } from 'app/redux/slices/weatherSlice'
 import { getCoordinateLocation, getLocation } from 'services/getData'
 import { currentLocationSelector } from '../../store/selectors'
 import { storage } from 'services/storage'
 import classNames from 'classnames'
-import toast from 'react-hot-toast';
+import toast from 'react-hot-toast'
 import Input from 'shared/ui/Input/Input'
 import { getCurrentLocation } from '../../api/getCurrentLocation'
 import { ILocation } from '../../../../services/getData'
 import styles from './SelectLocation.module.scss'
+import { loadWeather } from 'modules/Weather/store/weatherSlice'
+import { CurrentLocation, setCurrentLocation } from 'modules/Locations/store/locationSlice'
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
@@ -48,30 +48,6 @@ const SelectLocation = () => {
             })
         }
     }, [location])
-
-    // const getCurrentLocation = () => {
-    //     getLocation()
-    //         .then((res) => res.city)
-    //         .then((city) => {
-    //             getCoordinateLocation(city).then((location) => {
-    //                 if (!location.results) {
-    //                     toast.error('Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.');
-    //                     return
-    //                 }
-    //                 const { latitude, longitude, name, timezone, country } = location.results[0]
-    //                 dispatch(
-    //                     setCurrentLocation({
-    //                         lat: latitude,
-    //                         lon: longitude,
-    //                         city: name,
-    //                         timezone: timezone,
-    //                         country: country,
-    //                     })
-    //                 )
-    //                 clearFind()
-    //             })
-    //         })
-    // }
 
     const startSearchLocation = (event: React.MouseEvent<HTMLFormElement>) => {
         if ((event.target as HTMLElement).dataset.type === 'inputLocation') {

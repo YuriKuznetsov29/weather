@@ -14,8 +14,7 @@ import {
 import ChartDataLabels from 'chartjs-plugin-datalabels'
 import annotationPlugin from 'chartjs-plugin-annotation'
 import chartConfigs from '../../constants/ChatsConfigs'
-import { useAppSelector } from 'app/redux/hooks'
-import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { useEffect, useRef, useState } from 'react'
 import Container from 'shared/ui/Container/Container'
 import { getTimeWithUtcOffset } from 'helpers/transformData'
@@ -25,6 +24,7 @@ import DayParameters from '../DayParameters/DayParameters'
 import CurrentWind from '../CurrentWind/CurrentWind'
 
 import styles from './Charts.module.scss'
+import { currentWetherSelector, selectDay } from 'modules/Weather/store/selectors'
 
 ChartJS.register(
     annotationPlugin,
