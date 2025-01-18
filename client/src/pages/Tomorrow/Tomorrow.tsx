@@ -1,7 +1,6 @@
 import Charts from 'widgets/Charts/Charts'
 import Background from 'widgets/Background/Background'
-import { CurrentWeather } from 'modules/Weather'
-import Precipitations from 'widgets/Precipitations/Precipitations'
+import { CurrentWeather, Precipitations } from 'modules/Weather'
 import {RecentLocations, SelectLocation} from 'modules/Locations'
 import SideBar from 'widgets/SideBar/SideBar'
 import Header from 'widgets/Header/Header'

@@ -1,6 +1,6 @@
 import Container from 'shared/ui/Container/Container'
 import { useAppSelector } from 'app/redux/hooks'
-import { currentWetherSelector, selectDay } from 'app/redux/selectors'
+import { currentWetherSelector, selectDay } from '../../store/selectors'
 import TodayWeather from '../TodayWeather/TodayWeather'
 import TomorrowWether from '../TomorowWeather/TomorrowWether'
 import { getTimeWithUtcOffset } from 'helpers/transformData'
