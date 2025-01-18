@@ -1,4 +1,4 @@
-import Charts from 'widgets/Charts/Charts'
+import { Charts } from 'modules/Charts'
 import Background from 'widgets/Background/Background'
 import { CurrentWeather, Precipitations } from 'modules/Weather'
 import {RecentLocations, SelectLocation} from 'modules/Locations'

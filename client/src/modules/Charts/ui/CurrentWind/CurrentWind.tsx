@@ -1,7 +1,7 @@
 import { useAppSelector } from 'app/redux/hooks'
 import { currentWetherSelector, selectDay } from 'app/redux/selectors'
 import { getTimeWithUtcOffset, getWindDirectionLong } from 'helpers/transformData'
-import { ReactComponent as Arrow } from './arrow-down-bold.svg'
+import { ReactComponent as Arrow } from '../../assets/arrow-down-bold.svg'
 
 import styles from './Charts.module.scss'
 
