@@ -1,34 +1,15 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getWetherDaily } from 'services/DataService/getData'
+import { createSlice } from '@reduxjs/toolkit'
 import { WeatherData } from 'helpers/transformData'
+import { loadWeather } from '../api/loadWeather'
 
-export const loadWeather = createAsyncThunk<
-    WeatherData,
-    RequestWetherData,
-    { state: { weather: WeatherSlice } }
->(
-    'weather/load-weather',
-    ({ lat, lon, timezone, day }: RequestWetherData) => {
-        return getWetherDaily(lat, lon, timezone, day)
-    },
-    {
-        condition: (_, { getState }) => {
-            const { status } = getState().weather
-            if (status === 'loading') {
-                return false
-            }
-        },
-    }
-)
-
-interface RequestWetherData {
+export interface RequestWetherData {
     lat: string | number
     lon: string | number
     timezone: string
     day?: string
 }
 
-type WeatherSlice = {
+export type WeatherSlice = {
     currentWeatherData: WeatherData | null
     day: Days
     status: 'idle' | 'loading' | 'finished' | 'error'

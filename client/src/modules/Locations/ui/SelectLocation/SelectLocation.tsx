@@ -3,16 +3,18 @@ import Container from 'shared/ui/Container/Container'
 import { NavigationArrow, MagnifyingGlass } from '@phosphor-icons/react'
 import { getCoordinateLocation, getLocation } from 'services/DataService/getData'
 import { currentLocationSelector } from '../../store/selectors'
-import { storage } from 'services/storage'
+import { storage } from 'shared/lib/storage'
 import classNames from 'classnames'
 import toast from 'react-hot-toast'
 import Input from 'shared/ui/Input/Input'
 import { getCurrentLocation } from '../../api/getCurrentLocation'
 import styles from './SelectLocation.module.scss'
-import { loadWeather } from 'modules/Weather/store/weatherSlice'
+import { loadWeather } from 'modules/Weather/api/loadWeather'
 import { CurrentLocation, setCurrentLocation } from 'modules/Locations/store/locationSlice'
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider/config/hooks'
 import { ILocation } from 'services/DataService/types/locationCoordinates'
+import { weatherDataStatus } from 'modules/Weather'
+import { useNavigate } from 'react-router-dom'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)
@@ -21,17 +23,24 @@ const SelectLocation = () => {
     const [searchRes, setSearchRes] = useState<ILocation[]>([])
 
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
+
     const location: CurrentLocation | null = useAppSelector(currentLocationSelector)
+    const weatherLoadingStatus = useAppSelector(weatherDataStatus)
 
     const deferredQuery = useDeferredValue(searchValue)
 
     useEffect(() => {
         if (deferredQuery) {
-            getCoordinateLocation(deferredQuery).then((locations) => {
-                if ('results' in locations) {
-                    setSearchRes(locations.results)
-                }
-            })
+            getCoordinateLocation(deferredQuery)
+                .then((locations) => {
+                    if ('results' in locations) {
+                        setSearchRes(locations.results)
+                    }
+                })
+                .catch(() => {
+                    setSearchRes([])
+                })
         }
     }, [deferredQuery])
 
@@ -54,7 +63,7 @@ const SelectLocation = () => {
             setActiveSearch(true)
             setActiveStyleSearch(true)
         } else if ((event.target as HTMLElement).dataset.type === 'getLocation') {
-            getCurrentLocation()
+            dispatch(getCurrentLocation())
             clearFind()
         }
     }
@@ -114,6 +123,11 @@ const SelectLocation = () => {
             }
         })
     }, [searchRes, selectLocation])
+
+    if (weatherLoadingStatus === 'error') {
+        console.error('Произошла ошибка при загрузке данных погоды.')
+        navigate('/error')
+    }
 
     return (
         <form className={styles.search} id="select" onClick={(event) => startSearchLocation(event)}>

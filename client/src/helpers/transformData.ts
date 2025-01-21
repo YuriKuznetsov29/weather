@@ -42,7 +42,7 @@ export const getWindDirectionLong = (dir: number): string => {
 
 export const getLastDate = () => {
     const date = new Date()
-    date.setDate(date.getDate() + 15)
+    date.setDate(date.getDate() + 10)
     return date.toLocaleDateString().replace(/(\d{2})\.(\d{2})\.(\d{4})/g, '$3-$2-$1')
 }
 
@@ -153,7 +153,7 @@ export interface WeatherData {
 }
 
 export const transformWeatherData = async (data: any): Promise<WeatherData> => {
-    return data.then((res: any) => {
+    return data.then(({ data: res }: any) => {
         const { hour } = getTimeWithUtcOffset(res.utc_offset_seconds)
         return {
             currentWeather: {

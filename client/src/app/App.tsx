@@ -1,8 +1,8 @@
 import ErrorPage from 'pages/ErrorPage/ErrorPage'
 import { RouterProvider, createHashRouter } from 'react-router-dom'
 import { Suspense, useEffect } from 'react'
-import { useAppDispatch } from 'app/providers/StoreProvider/config/hooks'
-import { storage } from 'services/storage'
+import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider/config/hooks'
+import { storage } from 'shared/lib/storage'
 import { getLocation, getCoordinateLocation } from 'services/DataService/getData'
 import { MainAsync } from 'pages/Main/Main.async'
 import { SavedLocationsAsync } from 'pages/SavedLocations/SavedLocations.async'
@@ -48,6 +48,11 @@ const router = createHashRouter([
         errorElement: <ErrorPage />,
     },
     {
+        path: '/error',
+        element: <ErrorPage />,
+        errorElement: <ErrorPage />,
+    },
+    {
         path: '*',
         element: <Page404 />,
         errorElement: <ErrorPage />,
@@ -76,21 +81,43 @@ function App() {
         } else {
             getLocation()
                 .then((res) => res.city)
+                .catch(() => {
+                    toast.error(
+                        'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
+                    )
+                    return 'Москва'
+                })
                 .then((city) => {
-                    getCoordinateLocation(city).then((location) => {
-                        if (location.results) {
-                            const { latitude, longitude, name, timezone, country } =
-                                location.results[0]
-                            dispatch(
-                                setCurrentLocation({
-                                    lat: latitude,
-                                    lon: longitude,
-                                    city: name,
-                                    timezone: timezone,
-                                    country: country,
-                                })
-                            )
-                        } else {
+                    getCoordinateLocation(city)
+                        .then((location) => {
+                            if (location.results) {
+                                const { latitude, longitude, name, timezone, country } =
+                                    location.results[0]
+                                dispatch(
+                                    setCurrentLocation({
+                                        lat: latitude,
+                                        lon: longitude,
+                                        city: name,
+                                        timezone: timezone,
+                                        country: country,
+                                    })
+                                )
+                            } else {
+                                dispatch(
+                                    setCurrentLocation({
+                                        lat: 55.75222,
+                                        lon: 37.61556,
+                                        city: 'Москва',
+                                        timezone: 'Europe/Moscow',
+                                        country: 'Россия',
+                                    })
+                                )
+                                toast.error(
+                                    'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
+                                )
+                            }
+                        })
+                        .catch(() => {
                             dispatch(
                                 setCurrentLocation({
                                     lat: 55.75222,
@@ -100,11 +127,8 @@ function App() {
                                     country: 'Россия',
                                 })
                             )
-                            toast.error(
-                                'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
-                            )
-                        }
-                    })
+                            toast.error('Произошла ошибка при определении текущего местоположения.')
+                        })
                 })
         }
     }, [])

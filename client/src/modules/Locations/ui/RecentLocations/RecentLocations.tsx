@@ -1,7 +1,7 @@
 import Container from 'shared/ui/Container/Container'
 import { ReactElement, useCallback, useEffect, useMemo, useState } from 'react'
 import { useAppSelector } from 'app/providers/StoreProvider/config/hooks'
-import { storage } from 'services/storage'
+import { storage } from 'shared/lib/storage'
 import Location from '../Location/Location'
 import { currentLocationSelector } from '../../store/selectors'
 import styles from './RecentLocations.module.scss'

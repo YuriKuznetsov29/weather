@@ -15,6 +15,7 @@ interface LocationProps {
 
 const Location = memo(({ location, redirect }: LocationProps) => {
     const [data, setData] = useState<WeatherData | null>(null)
+    const [isLoading, setIsLoading] = useState(true)
 
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
@@ -22,7 +23,14 @@ const Location = memo(({ location, redirect }: LocationProps) => {
     const { lat, lon, city, timezone, country } = location
 
     useEffect(() => {
-        getWetherDaily(lat, lon, timezone).then((res) => setData(res))
+        getWetherDaily(lat, lon, timezone)
+            .then((res) => {
+                setData(res)
+            })
+            .catch(() => {
+                setData(null)
+            })
+            .finally(() => setIsLoading(false))
     }, [])
 
     function adaptiveContent(city: string, country: string) {
@@ -92,15 +100,19 @@ const Location = memo(({ location, redirect }: LocationProps) => {
                 </div>
             )
         } else {
-            return (
-                <div className={styles.smallLoading}>
-                    <div className={styles.smallGradient}></div>
-                </div>
-            )
+            return null
         }
     }
 
     const content = renderLocation()
+
+    if (isLoading) {
+        return (
+            <div className={styles.smallLoading}>
+                <div className={styles.smallGradient}></div>
+            </div>
+        )
+    }
 
     return <>{content}</>
 })

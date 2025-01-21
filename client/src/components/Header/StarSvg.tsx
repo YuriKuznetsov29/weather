@@ -6,6 +6,7 @@ import { authStatusSelector, userSelector } from 'modules/Authorization/store/se
 import { currentLocationSelector } from 'modules/Locations/store/selectors'
 import { CurrentLocation } from 'modules/Locations'
 import { saveLocations } from 'modules/Authorization/api/saveLocations'
+import toast from 'react-hot-toast'
 
 const StarSvg = () => {
     const navigate = useNavigate()
@@ -27,14 +28,19 @@ const StarSvg = () => {
     }
 
     const saveCurrentLocation = () => {
-        console.log(savedLocations)
         if (Array.isArray(savedLocations) && auth && currentLocation) {
             const newLocations = checkInclude()
                 ? savedLocations.filter((location) => location.city !== currentLocation.city)
                 : savedLocations.concat([currentLocation])
             dispatch(saveLocations({ userId, savedLocations: newLocations as CurrentLocation[] }))
+            if (checkInclude()) {
+                toast.success('Локация удалена.')
+            } else {
+                toast.success('Локация сохранена.')
+            }
         } else {
             navigate('/signIn')
+            toast('Войдите или зарегистрируйтесь, чтобы сохранять локации.')
         }
     }
 

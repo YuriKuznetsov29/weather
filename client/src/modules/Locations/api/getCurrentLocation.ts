@@ -27,13 +27,16 @@ export const getCurrentLocation = createAsyncThunk<CurrentLocation, void, { reje
                     timezone: timezone,
                     country: country,
                 } as CurrentLocation
+            } else {
+                toast.error(
+                    'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
+                )
+                return rejectWithValue('error')
             }
-
+        } catch (error) {
             toast.error(
                 'Произошла ошибка при определении текущего местоположения. Пожалуйста воспользуйтесь поиском.'
             )
-            return rejectWithValue('error')
-        } catch (error) {
             console.log(error)
             return rejectWithValue('error')
         }
