@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { AxiosError } from "axios"
-import { AuthService } from "services/AuthService"
+import { AuthService } from "services/AuthService/AuthService"
 
 interface RequestAuthData {
     email: string

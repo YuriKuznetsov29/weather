@@ -1,6 +1,6 @@
 import { Dispatch, createAsyncThunk } from '@reduxjs/toolkit'
 import toast from 'react-hot-toast'
-import { getCoordinateLocation, getLocation } from 'services/getData'
+import { getCoordinateLocation, getLocation } from 'services/DataService/getData'
 import { CurrentLocation } from '../store/locationSlice'
 
 export const getCurrentLocation = createAsyncThunk<CurrentLocation, void, { rejectValue: string }>(

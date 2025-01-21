@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import axios from "axios"
-import { API_URL } from "http/index"
-import { AuthResponse } from "models/response/AuthResponse"
+import { API_URL } from "services/http/index"
+import { AuthResponse } from "services/AuthService/types/AuthResponse"
 
 export const checkAuth = createAsyncThunk('login/checkAuth', async () => {
     try {

@@ -1,30 +1,21 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import { useHttp } from 'hooks/useHttp'
-import { getCurrentDate, getLastDate, transformWeatherData } from '../helpers/transformData'
+import { getCurrentDate, getLastDate, transformWeatherData } from '../../helpers/transformData'
 import { CurrentLocation } from 'modules/Locations'
+import { LocationCoordinates } from './types/locationCoordinates'
+import $api from 'services/http'
+import axios from 'axios'
 
 export function getLocation() {
     return useHttp('https://api.ipgeolocation.io/ipgeo?apiKey=17a8d753063e4a20a9531fe3638de576')
 }
 
-export interface ILocation {
-    latitude : number, 
-    longitude : number, 
-    name: string, 
-    timezone: string, 
-    country: string 
-    country_code: string
-    id: string
-}
-
-export interface LocationCoordinates {
-    results: ILocation []
-}
-
-export function getCoordinateLocation(city: string = 'москва'): Promise<LocationCoordinates> {
-    return useHttp(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5&language=ru`
-    )
+export async function getCoordinateLocation(city: string = 'москва'): Promise<LocationCoordinates> {
+    const data = await axios.get(`https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5&language=ru`)
+    return data.data
+    // return useHttp(
+    //     `https://geocoding-api.open-meteo.com/v1/search?name=${city}&count=5&language=ru`
+    // )
 }
 
 export function getWetherDaily(

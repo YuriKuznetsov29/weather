@@ -1,5 +1,5 @@
 import { getWetherImage } from 'helpers/transformData'
-import { getWetherDaily } from 'services/getData'
+import { getWetherDaily } from 'services/DataService/getData'
 import { useAppDispatch } from 'app/providers/StoreProvider/config/hooks'
 import { memo, useEffect, useState } from 'react'
 import { WeatherData } from 'helpers/transformData'

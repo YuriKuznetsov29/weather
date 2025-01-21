@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { IUser } from '../../../models/IUser'
+import { IUser } from '../../../services/UserService/types/IUser'
 import { signUp } from '../api/signUp'
 import { signIn } from '../api/signIn'
 import { signOut } from '../api/signOut'

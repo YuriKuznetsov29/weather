@@ -1,6 +1,6 @@
 import $api from '../http/index'
 import { AxiosResponse } from 'axios'
-import { AuthResponse } from 'models/response/AuthResponse'
+import { AuthResponse } from 'services/AuthService/types/AuthResponse'
 
 export class AuthService {
     static async signIn(

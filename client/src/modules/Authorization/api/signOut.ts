@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
-import { AuthService } from "services/AuthService"
+import { AuthService } from "services/AuthService/AuthService"
 
 export const signOut = createAsyncThunk('login/signOut', async () => {
     try {

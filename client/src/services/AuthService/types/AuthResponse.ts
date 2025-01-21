@@ -1,4 +1,4 @@
-import { IUser } from '../IUser'
+import { IUser } from '../../UserService/types/IUser'
 
 export interface AuthResponse {
     accessToken: string

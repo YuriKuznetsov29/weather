@@ -1,18 +1,18 @@
 import { useCallback, useDeferredValue, useEffect, useMemo, useState } from 'react'
 import Container from 'shared/ui/Container/Container'
 import { NavigationArrow, MagnifyingGlass } from '@phosphor-icons/react'
-import { getCoordinateLocation, getLocation } from 'services/getData'
+import { getCoordinateLocation, getLocation } from 'services/DataService/getData'
 import { currentLocationSelector } from '../../store/selectors'
 import { storage } from 'services/storage'
 import classNames from 'classnames'
 import toast from 'react-hot-toast'
 import Input from 'shared/ui/Input/Input'
 import { getCurrentLocation } from '../../api/getCurrentLocation'
-import { ILocation } from '../../../../services/getData'
 import styles from './SelectLocation.module.scss'
 import { loadWeather } from 'modules/Weather/store/weatherSlice'
 import { CurrentLocation, setCurrentLocation } from 'modules/Locations/store/locationSlice'
 import { useAppDispatch, useAppSelector } from 'app/providers/StoreProvider/config/hooks'
+import { ILocation } from 'services/DataService/types/locationCoordinates'
 
 const SelectLocation = () => {
     const [activeSearch, setActiveSearch] = useState(false)

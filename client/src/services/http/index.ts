@@ -1,11 +1,11 @@
 import axios from 'axios'
-import { AuthResponse } from 'models/response/AuthResponse'
+import { AuthResponse } from 'services/AuthService/types/AuthResponse'
 
 export const API_URL = `http://webdev.batgen.ru:8080/api`
 
 //84.38.183.52
 
-const $api = axios.create({
+export const $api = axios.create({
     withCredentials: true,
     baseURL: API_URL,
 })

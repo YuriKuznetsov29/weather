@@ -1,6 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { RequestSavedLocationsData } from "../store/loginSlice"
-import UserService from "services/UserService"
+import UserService from "services/UserService/UserService"
 import { AxiosError } from "axios"
 
 export const saveLocations = createAsyncThunk(
