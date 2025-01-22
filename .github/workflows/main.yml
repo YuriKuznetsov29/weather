@@ -1,0 +1,6 @@
+name: linting, testing, building
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
