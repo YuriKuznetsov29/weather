@@ -11,7 +11,11 @@ jobs:
             # - uses: actions/checkout@v3
             - name: stop docker container
               run: docker stop weather
+            - name: remove docker container
+              run: docker rm -f weather
+            - name: pull changes
+              run: cd && cd weather && git pull
             - name: build project
               run: cd && cd weather && docker build -t weather .
             - name: run docker container
-              run: docker run --restart=always -d  -p 8080:8080 weather
+              run: docker run --restart=always -d --name weather -p 8080:8080 weather
