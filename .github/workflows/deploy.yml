@@ -8,6 +8,6 @@ jobs:
     build_job:
         runs-on: self-hosted
         steps:
-            - uses: actions/checkout@v3
+            # - uses: actions/checkout@v3
             - name: test
               run: echo Hello, world!
