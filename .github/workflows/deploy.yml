@@ -1,0 +1,12 @@
+name: deployment
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+jobs:
+      build_job:
+        runs-on: self-hosted
+         steps:
+            - name: test
+            run: echo Hello, world!
