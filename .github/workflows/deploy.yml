@@ -9,5 +9,9 @@ jobs:
         runs-on: self-hosted
         steps:
             # - uses: actions/checkout@v3
-            - name: test
-              run: echo Hello, world!
+            - name: stop docker container
+              run: docker stop weather
+            - name: build project
+              run: cd client && docker build -t weather .
+            - name: run docker container
+              run: docker run --restart=always -d  -p 8080:8080 weather
