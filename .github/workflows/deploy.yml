@@ -12,6 +12,6 @@ jobs:
             - name: stop docker container
               run: docker stop weather
             - name: build project
-              run: cd weather && docker build -t weather .
+              run: cd && cd weather && docker build -t weather .
             - name: run docker container
               run: docker run --restart=always -d  -p 8080:8080 weather
