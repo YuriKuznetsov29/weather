@@ -20,8 +20,9 @@ jobs:
             - name: install modules
               run: cd client && npm install
             - name: unit testing
-              if: always()
+              # if: always()
               run: cd client && npm run test
+      build_job:
         runs-on: self-hosted
          steps:
             - name: test
