@@ -41,6 +41,7 @@
     background-color: #f3f3f3;
     overflow: hidden;
     opacity: 0.7;
+    position: relative;
 }
 
 .smallGradient {
@@ -48,14 +49,17 @@
     height: 100%;
     background: linear-gradient(to left, #fff, #f3f3f3 100%);
     animation: smallTranslate 1.5s infinite linear;
+    position: absolute;
+    left: -30px;
+    top: 0;
 }
 
 @keyframes smallTranslate {
     from {
-        transform: translateX(0);
+        left: -30px;
     }
     to {
-        transform: translateX(170px);
+        left: 100%;
     }
 }
 
