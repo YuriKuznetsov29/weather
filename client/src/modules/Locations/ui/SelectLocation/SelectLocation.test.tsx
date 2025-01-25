@@ -26,7 +26,7 @@ const response: Response = {
             country_id: 2017370,
             country: 'Россия',
             admin1: 'Москва',
-        },
+        } as unknown as ILocation,
         {
             id: 5202009,
             name: 'Москва',
@@ -46,7 +46,7 @@ const response: Response = {
             admin1: 'Пенсильвания',
             admin2: 'Лакаванна',
             admin3: 'Borough of Moscow',
-        },
+        } as unknown as ILocation,
         {
             id: 1220988,
             name: 'Moskva',
@@ -60,7 +60,7 @@ const response: Response = {
             country_id: 1220409,
             country: 'Таджикистан',
             admin1: 'Viloyati Khatlon',
-        },
+        } as unknown as ILocation,
         {
             id: 524900,
             name: 'Москва',
@@ -77,7 +77,7 @@ const response: Response = {
             country: 'Россия',
             admin1: 'Тверская область',
             admin2: 'Пеновский Район',
-        },
+        } as unknown as ILocation,
         {
             id: 1528610,
             name: 'Москва',
@@ -91,7 +91,7 @@ const response: Response = {
             country_id: 1527747,
             country: 'Киргизия',
             admin1: 'Batkenskaya Oblast’',
-        },
+        } as unknown as ILocation,
     ],
     generationtime_ms: 1.1329651,
 };
