@@ -3,8 +3,14 @@ import { render, screen, fireEvent } from '@testing-library/react'
 import '@testing-library/jest-dom/extend-expect'
 import { Provider } from 'react-redux'
 import { store } from 'app/providers/StoreProvider/config/store'
+import { MemoryRouter } from 'react-router-dom'
+import axios from 'axios'
+import { ILocation } from 'services/DataService/types/locationCoordinates'
+import { getCoordinateLocation } from 'services/DataService/getData'
 
-const response = {
+interface Response { results: ILocation[]; generationtime_ms: number }
+
+const response: Response = {
     results: [
         {
             id: 524901,
@@ -88,27 +94,30 @@ const response = {
         },
     ],
     generationtime_ms: 1.1329651,
-}
+};
 
-// (axios as unknown as jest.Mock).mockReturnValue(response);
-// axios as jest.Mocked<typeof axios>
+
+// (axios.get as unknown as jest.Mock).mockReturnValue(response);
+axios as jest.Mocked<typeof axios>
+
+jest.mock('../../../../services/DataService/getData.ts')
 
 // const mockedFetch = jest.mock('node-fetch')
-jest.mock('axios', () => {
-    return {
-        create: jest.fn(() => ({
-            get: () => jest.fn(), //Promise.resolve(response),//jest.fn().mockResolvedValue(response),
-            //   default: jest.fn( () => Promise.resolve(response)),
-            // __esModule: true,
-            // get: jest.fn(() => Promise.resolve({ data: 'data' })),
-            // default: jest.fn(() => Promise.resolve({ data: 'data' })),
-            interceptors: {
-                request: { use: jest.fn(), eject: jest.fn() },
-                response: { use: jest.fn(), eject: jest.fn() },
-            },
-        })),
-    }
-})
+// jest.mock('axios', () => 
+//     return {
+//         create: jest.fn(() => ({
+//             get: () => jest.fn(), //Promise.resolve(response),//jest.fn().mockResolvedValue(response),
+//             //   default: jest.fn( () => Promise.resolve(response)),
+//             // __esModule: true,
+//             // get: jest.fn(() => Promise.resolve({ data: 'data' })),
+//             // default: jest.fn(() => Promise.resolve({ data: 'data' })),
+//             interceptors: {
+//                 request: { use: jest.fn(), eject: jest.fn() },
+//                 response: { use: jest.fn(), eject: jest.fn() },
+//             },
+//         })),
+//     }
+// })
 
 // const mockedAxios = axios as jest.Mocked<typeof axios>;
 // const mockedFetch = fetch as jest.Mocked<typeof fetch>;
@@ -120,9 +129,11 @@ jest.mock('axios', () => {
 describe('Тест поиска городов', () => {
     test('Наличие input', () => {
         render(
-            <Provider store={store}>
-                <SelectLocation />
-            </Provider>
+            <MemoryRouter>
+                <Provider store={store}>
+                    <SelectLocation />
+                </Provider>
+            </MemoryRouter>
         )
         const input = screen.queryByTestId('inputTest')
         expect(input).toBeInTheDocument()
@@ -131,10 +142,14 @@ describe('Тест поиска городов', () => {
         // mockedAxios.get.mockResolvedValue(response)
         // mockedAxios.get.mockImplementationOnce(() => Promise.resolve())
 
+        (getCoordinateLocation as jest.Mock).mockReturnValue(Promise.resolve(response))
+
         render(
-            <Provider store={store}>
-                <SelectLocation />
-            </Provider>
+            <MemoryRouter>
+                <Provider store={store}>
+                    <SelectLocation />
+                </Provider>
+            </MemoryRouter>
         )
         const input = await screen.findByTestId('inputTest')
         fireEvent.input(input, { target: { value: 'Москва' } })
@@ -147,17 +162,24 @@ describe('Асинхронный тест поиска городов', () => {
         // mockedFetch .mockResolvedValue(response);
         // mockedAxios.get.mockImplementationOnce(() => Promise.resolve())
         // mockedFetch.mockReturnValue(response)
-        global.fetch = jest.fn(() =>
-            Promise.resolve({
-                json: async () => Promise.resolve(response),
-            })
-        ) as jest.Mock
+        // global.fetch = jest.fn(() =>
+        //     Promise.resolve({
+        //         json: async () => Promise.resolve(response),
+        //     })
+        // ) as jest.Mock
         // eslint-disable-next-line testing-library/no-unnecessary-act
         // await act(async () => render(<Provider store={store}><SelectLocation /></Provider>))
+        // (axios.get as unknown as jest.Mock).mockReturnValue(response);
+        
+        // mockedAxios.get.mockResolvedValue(response);
+
+        (getCoordinateLocation as jest.Mock).mockReturnValue(Promise.resolve(response))
         render(
-            <Provider store={store}>
-                <SelectLocation />
-            </Provider>
+            <MemoryRouter>
+                <Provider store={store}>
+                    <SelectLocation />
+                </Provider>
+            </MemoryRouter>
         )
         const input = await screen.findByTestId('inputTest')
         fireEvent.input(input, { target: { value: 'Москва' } })
